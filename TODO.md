@@ -10,6 +10,7 @@ see "todo" inside the ipynb
 
 `B_daily = B_monthly.resample('M', method='ffill')` and then use daily data for the fund!
 now i have monthly data for the fund. what if we still use monthly re-weights but keep the data in daily format? then B matrix would have to be replicated 30 times for each row. it is more normal to work with dialy data and by doing so we can see how plots change.
+detta bör göras så att fundret by defn är månatlig. i binarizer kan man välja resample freq. fundera bara igenom vilken ordning det blir dvs det du gjorde i excelfilen med sumproduct, vilken vikt blir var?
 
 
 
@@ -19,7 +20,7 @@ below are some things i want to do but have not prioritized them into "next"
 
 ## notebook -> .py
 
-change from juputer notebook to regular python files. increases performance, sharability (with others + latex). 
+change from juputer notebook to regular python files. increases performance, sharability (with others + latex).
 
 ## network analysis
 
