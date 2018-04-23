@@ -12,14 +12,19 @@ see "todo" inside the ipynb
 now i have monthly data for the fund. what if we still use monthly re-weights but keep the data in daily format? then B matrix would have to be replicated 30 times for each row. it is more normal to work with dialy data and by doing so we can see how plots change.
 
 
+
 # inbox
 
 below are some things i want to do but have not prioritized them into "next"
 
+## notebook -> .py
+
+change from juputer notebook to regular python files. increases performance, sharability (with others + latex). 
+
 ## network analysis
 
 `20-network-analysis-in-python-part-1`
-take course and implement learnings in this project. 
+take course and implement learnings in this project.
 
 ## small thing re plots
 
