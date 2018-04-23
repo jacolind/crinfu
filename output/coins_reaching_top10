@@ -1,0 +1,12 @@
+# based on daily rebalancing, these coins ever reach top 10:
+['Bitcoin', 'Ethereum', 'Ripple', 'Bitcoin Cash', 'EOS', 'Litecoin',
+       'Cardano', 'Stellar', 'NEO', 'IOTA', 'Monero', 'Dash', 'TRON', 'NEM',
+       'Tether', 'Ethereum Classic', 'OmiseGO', 'Lisk', 'Bitcoin Gold',
+       'Steem', 'Bytecoin', 'BitShares', 'DigixDAO', 'Stratis', 'Dogecoin',
+       'Waves', 'Augur', 'Golem', 'PIVX', 'Factom', 'Veritaseum', 'Nxt',
+       'MaidSafeCoin', 'Emercoin', 'Peercoin', 'Feathercoin', 'Counterparty',
+       'Synereo', 'Namecoin', 'BlackCoin', 'Primecoin', 'Omni', 'BitConnect',
+       'Auroracoin', 'Novacoin', 'FedoraCoin', 'Terracoin', 'WorldCoin',
+       'Zetacoin', 'NuShares', 'Startcoin', 'Digitalcoin', 'BitBar', 'PayCoin',
+       'Ixcoin', 'Quark', 'Bullion', 'Megacoin', 'Freicoin', 'Yacoin',
+       'Mincoin', 'FlappyCoin', 'Infinitecoin', 'VPNCoin']
