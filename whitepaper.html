@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <title>whitepaper</title>
+      <style>.markdown-preview:not([data-use-github-style]) { padding: 2em; font-size: 1.2em; color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); overflow: auto; }
+.markdown-preview:not([data-use-github-style]) > :first-child { margin-top: 0px; }
+.markdown-preview:not([data-use-github-style]) h1, .markdown-preview:not([data-use-github-style]) h2, .markdown-preview:not([data-use-github-style]) h3, .markdown-preview:not([data-use-github-style]) h4, .markdown-preview:not([data-use-github-style]) h5, .markdown-preview:not([data-use-github-style]) h6 { line-height: 1.2; margin-top: 1.5em; margin-bottom: 0.5em; color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) h1 { font-size: 2.4em; font-weight: 300; }
+.markdown-preview:not([data-use-github-style]) h2 { font-size: 1.8em; font-weight: 400; }
+.markdown-preview:not([data-use-github-style]) h3 { font-size: 1.5em; font-weight: 500; }
+.markdown-preview:not([data-use-github-style]) h4 { font-size: 1.2em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) h5 { font-size: 1.1em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) h6 { font-size: 1em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) strong { color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) del { color: rgb(124, 135, 156); }
+.markdown-preview:not([data-use-github-style]) a, .markdown-preview:not([data-use-github-style]) a code { color: rgb(82, 139, 255); }
+.markdown-preview:not([data-use-github-style]) img { max-width: 100%; }
+.markdown-preview:not([data-use-github-style]) > p { margin-top: 0px; margin-bottom: 1.5em; }
+.markdown-preview:not([data-use-github-style]) > ul, .markdown-preview:not([data-use-github-style]) > ol { margin-bottom: 1.5em; }
+.markdown-preview:not([data-use-github-style]) blockquote { margin: 1.5em 0px; font-size: inherit; color: rgb(124, 135, 156); border-color: rgb(75, 83, 98); border-width: 4px; }
+.markdown-preview:not([data-use-github-style]) hr { margin: 3em 0px; border-top: 2px dashed rgb(75, 83, 98); background: none; }
+.markdown-preview:not([data-use-github-style]) table { margin: 1.5em 0px; }
+.markdown-preview:not([data-use-github-style]) th { color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) th, .markdown-preview:not([data-use-github-style]) td { padding: 0.66em 1em; border: 1px solid rgb(75, 83, 98); }
+.markdown-preview:not([data-use-github-style]) code { color: rgb(255, 255, 255); background-color: rgb(58, 63, 75); }
+.markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(49, 54, 63); }
+.markdown-preview:not([data-use-github-style]) kbd { color: rgb(255, 255, 255); border-width: 1px 1px 2px; border-style: solid; border-color: rgb(75, 83, 98) rgb(75, 83, 98) rgb(62, 68, 81); border-image: initial; background-color: rgb(58, 63, 75); }
+.markdown-preview[data-use-github-style] { font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif; line-height: 1.6; word-wrap: break-word; padding: 30px; font-size: 16px; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); overflow: scroll; }
+.markdown-preview[data-use-github-style] > :first-child { margin-top: 0px !important; }
+.markdown-preview[data-use-github-style] > :last-child { margin-bottom: 0px !important; }
+.markdown-preview[data-use-github-style] a:not([href]) { color: inherit; text-decoration: none; }
+.markdown-preview[data-use-github-style] .absent { color: rgb(204, 0, 0); }
+.markdown-preview[data-use-github-style] .anchor { position: absolute; top: 0px; left: 0px; display: block; padding-right: 6px; padding-left: 30px; margin-left: -30px; }
+.markdown-preview[data-use-github-style] .anchor:focus { outline: none; }
+.markdown-preview[data-use-github-style] h1, .markdown-preview[data-use-github-style] h2, .markdown-preview[data-use-github-style] h3, .markdown-preview[data-use-github-style] h4, .markdown-preview[data-use-github-style] h5, .markdown-preview[data-use-github-style] h6 { position: relative; margin-top: 1em; margin-bottom: 16px; font-weight: bold; line-height: 1.4; }
+.markdown-preview[data-use-github-style] h1 .octicon-link, .markdown-preview[data-use-github-style] h2 .octicon-link, .markdown-preview[data-use-github-style] h3 .octicon-link, .markdown-preview[data-use-github-style] h4 .octicon-link, .markdown-preview[data-use-github-style] h5 .octicon-link, .markdown-preview[data-use-github-style] h6 .octicon-link { display: none; color: rgb(0, 0, 0); vertical-align: middle; }
+.markdown-preview[data-use-github-style] h1:hover .anchor, .markdown-preview[data-use-github-style] h2:hover .anchor, .markdown-preview[data-use-github-style] h3:hover .anchor, .markdown-preview[data-use-github-style] h4:hover .anchor, .markdown-preview[data-use-github-style] h5:hover .anchor, .markdown-preview[data-use-github-style] h6:hover .anchor { padding-left: 8px; margin-left: -30px; text-decoration: none; }
+.markdown-preview[data-use-github-style] h1:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h2:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h3:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h4:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h5:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h6:hover .anchor .octicon-link { display: inline-block; }
+.markdown-preview[data-use-github-style] h1 tt, .markdown-preview[data-use-github-style] h2 tt, .markdown-preview[data-use-github-style] h3 tt, .markdown-preview[data-use-github-style] h4 tt, .markdown-preview[data-use-github-style] h5 tt, .markdown-preview[data-use-github-style] h6 tt, .markdown-preview[data-use-github-style] h1 code, .markdown-preview[data-use-github-style] h2 code, .markdown-preview[data-use-github-style] h3 code, .markdown-preview[data-use-github-style] h4 code, .markdown-preview[data-use-github-style] h5 code, .markdown-preview[data-use-github-style] h6 code { font-size: inherit; }
+.markdown-preview[data-use-github-style] h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+.markdown-preview[data-use-github-style] h1 .anchor { line-height: 1; }
+.markdown-preview[data-use-github-style] h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+.markdown-preview[data-use-github-style] h2 .anchor { line-height: 1; }
+.markdown-preview[data-use-github-style] h3 { font-size: 1.5em; line-height: 1.43; }
+.markdown-preview[data-use-github-style] h3 .anchor { line-height: 1.2; }
+.markdown-preview[data-use-github-style] h4 { font-size: 1.25em; }
+.markdown-preview[data-use-github-style] h4 .anchor { line-height: 1.2; }
+.markdown-preview[data-use-github-style] h5 { font-size: 1em; }
+.markdown-preview[data-use-github-style] h5 .anchor { line-height: 1.1; }
+.markdown-preview[data-use-github-style] h6 { font-size: 1em; color: rgb(119, 119, 119); }
+.markdown-preview[data-use-github-style] h6 .anchor { line-height: 1.1; }
+.markdown-preview[data-use-github-style] p, .markdown-preview[data-use-github-style] blockquote, .markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol, .markdown-preview[data-use-github-style] dl, .markdown-preview[data-use-github-style] table, .markdown-preview[data-use-github-style] pre { margin-top: 0px; margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] hr { height: 4px; padding: 0px; margin: 16px 0px; background-color: rgb(231, 231, 231); border: 0px none; }
+.markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol { padding-left: 2em; }
+.markdown-preview[data-use-github-style] ul.no-list, .markdown-preview[data-use-github-style] ol.no-list { padding: 0px; list-style-type: none; }
+.markdown-preview[data-use-github-style] ul ul, .markdown-preview[data-use-github-style] ul ol, .markdown-preview[data-use-github-style] ol ol, .markdown-preview[data-use-github-style] ol ul { margin-top: 0px; margin-bottom: 0px; }
+.markdown-preview[data-use-github-style] li > p { margin-top: 16px; }
+.markdown-preview[data-use-github-style] dl { padding: 0px; }
+.markdown-preview[data-use-github-style] dl dt { padding: 0px; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: bold; }
+.markdown-preview[data-use-github-style] dl dd { padding: 0px 16px; margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] blockquote { padding: 0px 15px; color: rgb(119, 119, 119); border-left: 4px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] blockquote > :first-child { margin-top: 0px; }
+.markdown-preview[data-use-github-style] blockquote > :last-child { margin-bottom: 0px; }
+.markdown-preview[data-use-github-style] table { display: block; width: 100%; overflow: auto; word-break: keep-all; }
+.markdown-preview[data-use-github-style] table th { font-weight: bold; }
+.markdown-preview[data-use-github-style] table th, .markdown-preview[data-use-github-style] table td { padding: 6px 13px; border: 1px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] table tr { background-color: rgb(255, 255, 255); border-top: 1px solid rgb(204, 204, 204); }
+.markdown-preview[data-use-github-style] table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
+.markdown-preview[data-use-github-style] img { max-width: 100%; box-sizing: border-box; }
+.markdown-preview[data-use-github-style] .emoji { max-width: none; }
+.markdown-preview[data-use-github-style] span.frame { display: block; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.frame > span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0px 0px; overflow: hidden; border: 1px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] span.frame span img { display: block; float: left; }
+.markdown-preview[data-use-github-style] span.frame span span { display: block; padding: 5px 0px 0px; clear: both; color: rgb(51, 51, 51); }
+.markdown-preview[data-use-github-style] span.align-center { display: block; overflow: hidden; clear: both; }
+.markdown-preview[data-use-github-style] span.align-center > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: center; }
+.markdown-preview[data-use-github-style] span.align-center span img { margin: 0px auto; text-align: center; }
+.markdown-preview[data-use-github-style] span.align-right { display: block; overflow: hidden; clear: both; }
+.markdown-preview[data-use-github-style] span.align-right > span { display: block; margin: 13px 0px 0px; overflow: hidden; text-align: right; }
+.markdown-preview[data-use-github-style] span.align-right span img { margin: 0px; text-align: right; }
+.markdown-preview[data-use-github-style] span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.float-left span { margin: 13px 0px 0px; }
+.markdown-preview[data-use-github-style] span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.float-right > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: right; }
+.markdown-preview[data-use-github-style] code, .markdown-preview[data-use-github-style] tt { padding: 0.2em 0px; margin: 0px; font-size: 85%; background-color: rgba(0, 0, 0, 0.04); border-radius: 3px; }
+.markdown-preview[data-use-github-style] code::before, .markdown-preview[data-use-github-style] tt::before, .markdown-preview[data-use-github-style] code::after, .markdown-preview[data-use-github-style] tt::after { letter-spacing: -0.2em; content: " "; }
+.markdown-preview[data-use-github-style] code br, .markdown-preview[data-use-github-style] tt br { display: none; }
+.markdown-preview[data-use-github-style] del code { text-decoration: inherit; }
+.markdown-preview[data-use-github-style] pre > code { padding: 0px; margin: 0px; font-size: 100%; word-break: normal; white-space: pre; background: transparent; border: 0px; }
+.markdown-preview[data-use-github-style] .highlight { margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] .highlight pre, .markdown-preview[data-use-github-style] pre { padding: 16px; overflow: auto; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border-radius: 3px; }
+.markdown-preview[data-use-github-style] .highlight pre { margin-bottom: 0px; word-break: normal; }
+.markdown-preview[data-use-github-style] pre { word-wrap: normal; }
+.markdown-preview[data-use-github-style] pre code, .markdown-preview[data-use-github-style] pre tt { display: inline; max-width: initial; padding: 0px; margin: 0px; overflow: initial; line-height: inherit; word-wrap: normal; background-color: transparent; border: 0px; }
+.markdown-preview[data-use-github-style] pre code::before, .markdown-preview[data-use-github-style] pre tt::before, .markdown-preview[data-use-github-style] pre code::after, .markdown-preview[data-use-github-style] pre tt::after { content: normal; }
+.markdown-preview[data-use-github-style] kbd { display: inline-block; padding: 3px 5px; font-size: 11px; line-height: 10px; color: rgb(85, 85, 85); vertical-align: middle; background-color: rgb(252, 252, 252); border-width: 1px; border-style: solid; border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(187, 187, 187); border-image: initial; border-radius: 3px; box-shadow: rgb(187, 187, 187) 0px -1px 0px inset; }
+.markdown-preview[data-use-github-style] a { color: rgb(51, 122, 183); }
+.markdown-preview[data-use-github-style] code { color: inherit; }
+.markdown-preview[data-use-github-style] pre.editor-colors { padding: 0.8em 1em; margin-bottom: 1em; font-size: 0.85em; border-radius: 4px; overflow: auto; }
+.scrollbars-visible-always .markdown-preview pre.editor-colors .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors .horizontal-scrollbar { visibility: hidden; }
+.scrollbars-visible-always .markdown-preview pre.editor-colors:hover .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors:hover .horizontal-scrollbar { visibility: visible; }
+.markdown-preview .task-list-item-checkbox { position: absolute; margin: 0.25em 0px 0px -1.4em; }
+.bracket-matcher .region {
+  border-bottom: 1px dotted lime;
+  position: absolute;
+}
+.line-number.bracket-matcher.bracket-matcher {
+  color: #abb2bf;
+  background-color: #3a3f4b;
+}
+
+.spell-check-misspelling .region {
+  border-bottom: 2px dotted rgba(255, 51, 51, 0.75);
+}
+.spell-check-corrections {
+  width: 25em !important;
+}
+
+pre.editor-colors {
+  background-color: #282c34;
+  color: #abb2bf;
+}
+pre.editor-colors .line.cursor-line {
+  background-color: rgba(153, 187, 255, 0.04);
+}
+pre.editor-colors .invisible {
+  color: #abb2bf;
+}
+pre.editor-colors .cursor {
+  border-left: 2px solid #528bff;
+}
+pre.editor-colors .selection .region {
+  background-color: #3e4451;
+}
+pre.editor-colors .bracket-matcher .region {
+  border-bottom: 1px solid #528bff;
+  box-sizing: border-box;
+}
+pre.editor-colors .invisible-character {
+  color: rgba(171, 178, 191, 0.15);
+}
+pre.editor-colors .indent-guide {
+  color: rgba(171, 178, 191, 0.15);
+}
+pre.editor-colors .wrap-guide {
+  background-color: rgba(171, 178, 191, 0.15);
+}
+pre.editor-colors .find-result .region.region.region,
+pre.editor-colors .current-result .region.region.region {
+  border-radius: 2px;
+  background-color: rgba(82, 139, 255, 0.24);
+  transition: border-color 0.4s;
+}
+pre.editor-colors .find-result .region.region.region {
+  border: 2px solid transparent;
+}
+pre.editor-colors .current-result .region.region.region {
+  border: 2px solid #528bff;
+  transition-duration: .1s;
+}
+pre.editor-colors .gutter .line-number {
+  color: #636d83;
+  -webkit-font-smoothing: antialiased;
+}
+pre.editor-colors .gutter .line-number.cursor-line {
+  color: #abb2bf;
+  background-color: #3a3f4b;
+}
+pre.editor-colors .gutter .line-number.cursor-line-no-selection {
+  background-color: transparent;
+}
+pre.editor-colors .gutter .line-number .icon-right {
+  color: #abb2bf;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed.git-line-removed::before {
+  bottom: -3px;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 25px;
+  border-bottom: 1px dotted rgba(224, 82, 82, 0.5);
+  pointer-events: none;
+}
+pre.editor-colors .gutter .line-number.folded,
+pre.editor-colors .gutter .line-number:after,
+pre.editor-colors .fold-marker:after {
+  color: #abb2bf;
+}
+.syntax--comment {
+  color: #5c6370;
+  font-style: italic;
+}
+.syntax--comment .syntax--markup.syntax--link {
+  color: #5c6370;
+}
+.syntax--entity.syntax--name.syntax--type {
+  color: #e5c07b;
+}
+.syntax--entity.syntax--other.syntax--inherited-class {
+  color: #98c379;
+}
+.syntax--keyword {
+  color: #c678dd;
+}
+.syntax--keyword.syntax--control {
+  color: #c678dd;
+}
+.syntax--keyword.syntax--operator {
+  color: #abb2bf;
+}
+.syntax--keyword.syntax--other.syntax--special-method {
+  color: #61afef;
+}
+.syntax--keyword.syntax--other.syntax--unit {
+  color: #d19a66;
+}
+.syntax--storage {
+  color: #c678dd;
+}
+.syntax--storage.syntax--type.syntax--annotation,
+.syntax--storage.syntax--type.syntax--primitive {
+  color: #c678dd;
+}
+.syntax--storage.syntax--modifier.syntax--package,
+.syntax--storage.syntax--modifier.syntax--import {
+  color: #abb2bf;
+}
+.syntax--constant {
+  color: #d19a66;
+}
+.syntax--constant.syntax--variable {
+  color: #d19a66;
+}
+.syntax--constant.syntax--character.syntax--escape {
+  color: #56b6c2;
+}
+.syntax--constant.syntax--numeric {
+  color: #d19a66;
+}
+.syntax--constant.syntax--other.syntax--color {
+  color: #56b6c2;
+}
+.syntax--constant.syntax--other.syntax--symbol {
+  color: #56b6c2;
+}
+.syntax--variable {
+  color: #e06c75;
+}
+.syntax--variable.syntax--interpolation {
+  color: #be5046;
+}
+.syntax--variable.syntax--parameter {
+  color: #abb2bf;
+}
+.syntax--string {
+  color: #98c379;
+}
+.syntax--string > .syntax--source,
+.syntax--string .syntax--embedded {
+  color: #abb2bf;
+}
+.syntax--string.syntax--regexp {
+  color: #56b6c2;
+}
+.syntax--string.syntax--regexp .syntax--source.syntax--ruby.syntax--embedded {
+  color: #e5c07b;
+}
+.syntax--string.syntax--other.syntax--link {
+  color: #e06c75;
+}
+.syntax--punctuation.syntax--definition.syntax--comment {
+  color: #5c6370;
+}
+.syntax--punctuation.syntax--definition.syntax--method-parameters,
+.syntax--punctuation.syntax--definition.syntax--function-parameters,
+.syntax--punctuation.syntax--definition.syntax--parameters,
+.syntax--punctuation.syntax--definition.syntax--separator,
+.syntax--punctuation.syntax--definition.syntax--seperator,
+.syntax--punctuation.syntax--definition.syntax--array {
+  color: #abb2bf;
+}
+.syntax--punctuation.syntax--definition.syntax--heading,
+.syntax--punctuation.syntax--definition.syntax--identity {
+  color: #61afef;
+}
+.syntax--punctuation.syntax--definition.syntax--bold {
+  color: #e5c07b;
+  font-weight: bold;
+}
+.syntax--punctuation.syntax--definition.syntax--italic {
+  color: #c678dd;
+  font-style: italic;
+}
+.syntax--punctuation.syntax--section.syntax--embedded {
+  color: #be5046;
+}
+.syntax--punctuation.syntax--section.syntax--method,
+.syntax--punctuation.syntax--section.syntax--class,
+.syntax--punctuation.syntax--section.syntax--inner-class {
+  color: #abb2bf;
+}
+.syntax--support.syntax--class {
+  color: #e5c07b;
+}
+.syntax--support.syntax--type {
+  color: #56b6c2;
+}
+.syntax--support.syntax--function {
+  color: #56b6c2;
+}
+.syntax--support.syntax--function.syntax--any-method {
+  color: #61afef;
+}
+.syntax--entity.syntax--name.syntax--function {
+  color: #61afef;
+}
+.syntax--entity.syntax--name.syntax--class,
+.syntax--entity.syntax--name.syntax--type.syntax--class {
+  color: #e5c07b;
+}
+.syntax--entity.syntax--name.syntax--section {
+  color: #61afef;
+}
+.syntax--entity.syntax--name.syntax--tag {
+  color: #e06c75;
+}
+.syntax--entity.syntax--other.syntax--attribute-name {
+  color: #d19a66;
+}
+.syntax--entity.syntax--other.syntax--attribute-name.syntax--id {
+  color: #61afef;
+}
+.syntax--meta.syntax--class {
+  color: #e5c07b;
+}
+.syntax--meta.syntax--class.syntax--body {
+  color: #abb2bf;
+}
+.syntax--meta.syntax--method-call,
+.syntax--meta.syntax--method {
+  color: #abb2bf;
+}
+.syntax--meta.syntax--definition.syntax--variable {
+  color: #e06c75;
+}
+.syntax--meta.syntax--link {
+  color: #d19a66;
+}
+.syntax--meta.syntax--require {
+  color: #61afef;
+}
+.syntax--meta.syntax--selector {
+  color: #c678dd;
+}
+.syntax--meta.syntax--separator {
+  color: #abb2bf;
+}
+.syntax--meta.syntax--tag {
+  color: #abb2bf;
+}
+.syntax--underline {
+  text-decoration: underline;
+}
+.syntax--none {
+  color: #abb2bf;
+}
+.syntax--invalid.syntax--deprecated {
+  color: #523d14 !important;
+  background-color: #e0c285 !important;
+}
+.syntax--invalid.syntax--illegal {
+  color: white !important;
+  background-color: #e05252 !important;
+}
+.syntax--markup.syntax--bold {
+  color: #d19a66;
+  font-weight: bold;
+}
+.syntax--markup.syntax--changed {
+  color: #c678dd;
+}
+.syntax--markup.syntax--deleted {
+  color: #e06c75;
+}
+.syntax--markup.syntax--italic {
+  color: #c678dd;
+  font-style: italic;
+}
+.syntax--markup.syntax--heading {
+  color: #e06c75;
+}
+.syntax--markup.syntax--heading .syntax--punctuation.syntax--definition.syntax--heading {
+  color: #61afef;
+}
+.syntax--markup.syntax--link {
+  color: #56b6c2;
+}
+.syntax--markup.syntax--inserted {
+  color: #98c379;
+}
+.syntax--markup.syntax--quote {
+  color: #d19a66;
+}
+.syntax--markup.syntax--raw {
+  color: #98c379;
+}
+.syntax--source.syntax--c .syntax--keyword.syntax--operator {
+  color: #c678dd;
+}
+.syntax--source.syntax--cpp .syntax--keyword.syntax--operator {
+  color: #c678dd;
+}
+.syntax--source.syntax--cs .syntax--keyword.syntax--operator {
+  color: #c678dd;
+}
+.syntax--source.syntax--css .syntax--property-name,
+.syntax--source.syntax--css .syntax--property-value {
+  color: #828997;
+}
+.syntax--source.syntax--css .syntax--property-name.syntax--support,
+.syntax--source.syntax--css .syntax--property-value.syntax--support {
+  color: #abb2bf;
+}
+.syntax--source.syntax--elixir .syntax--source.syntax--embedded.syntax--source {
+  color: #abb2bf;
+}
+.syntax--source.syntax--elixir .syntax--constant.syntax--language,
+.syntax--source.syntax--elixir .syntax--constant.syntax--numeric,
+.syntax--source.syntax--elixir .syntax--constant.syntax--definition {
+  color: #61afef;
+}
+.syntax--source.syntax--elixir .syntax--variable.syntax--definition,
+.syntax--source.syntax--elixir .syntax--variable.syntax--anonymous {
+  color: #c678dd;
+}
+.syntax--source.syntax--elixir .syntax--parameter.syntax--variable.syntax--function {
+  color: #d19a66;
+  font-style: italic;
+}
+.syntax--source.syntax--elixir .syntax--quoted {
+  color: #98c379;
+}
+.syntax--source.syntax--elixir .syntax--keyword.syntax--special-method,
+.syntax--source.syntax--elixir .syntax--embedded.syntax--section,
+.syntax--source.syntax--elixir .syntax--embedded.syntax--source.syntax--empty {
+  color: #e06c75;
+}
+.syntax--source.syntax--elixir .syntax--readwrite.syntax--module .syntax--punctuation {
+  color: #e06c75;
+}
+.syntax--source.syntax--elixir .syntax--regexp.syntax--section,
+.syntax--source.syntax--elixir .syntax--regexp.syntax--string {
+  color: #be5046;
+}
+.syntax--source.syntax--elixir .syntax--separator,
+.syntax--source.syntax--elixir .syntax--keyword.syntax--operator {
+  color: #d19a66;
+}
+.syntax--source.syntax--elixir .syntax--variable.syntax--constant {
+  color: #e5c07b;
+}
+.syntax--source.syntax--elixir .syntax--array,
+.syntax--source.syntax--elixir .syntax--scope,
+.syntax--source.syntax--elixir .syntax--section {
+  color: #828997;
+}
+.syntax--source.syntax--gfm .syntax--markup {
+  -webkit-font-smoothing: auto;
+}
+.syntax--source.syntax--gfm .syntax--link .syntax--entity {
+  color: #61afef;
+}
+.syntax--source.syntax--go .syntax--storage.syntax--type.syntax--string {
+  color: #c678dd;
+}
+.syntax--source.syntax--ini .syntax--keyword.syntax--other.syntax--definition.syntax--ini {
+  color: #e06c75;
+}
+.syntax--source.syntax--java .syntax--storage.syntax--modifier.syntax--import {
+  color: #e5c07b;
+}
+.syntax--source.syntax--java .syntax--storage.syntax--type {
+  color: #e5c07b;
+}
+.syntax--source.syntax--java .syntax--keyword.syntax--operator.syntax--instanceof {
+  color: #c678dd;
+}
+.syntax--source.syntax--java-properties .syntax--meta.syntax--key-pair {
+  color: #e06c75;
+}
+.syntax--source.syntax--java-properties .syntax--meta.syntax--key-pair > .syntax--punctuation {
+  color: #abb2bf;
+}
+.syntax--source.syntax--js .syntax--keyword.syntax--operator {
+  color: #56b6c2;
+}
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--delete,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--in,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--of,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--instanceof,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--new,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--typeof,
+.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--void {
+  color: #c678dd;
+}
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--string.syntax--quoted.syntax--json {
+  color: #e06c75;
+}
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--string.syntax--quoted.syntax--json > .syntax--punctuation.syntax--string {
+  color: #e06c75;
+}
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json,
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--array.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json,
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json > .syntax--punctuation,
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--array.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json > .syntax--punctuation {
+  color: #98c379;
+}
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--constant.syntax--language.syntax--json,
+.syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--array.syntax--json > .syntax--constant.syntax--language.syntax--json {
+  color: #56b6c2;
+}
+.syntax--ng.syntax--interpolation {
+  color: #e06c75;
+}
+.syntax--ng.syntax--interpolation.syntax--begin,
+.syntax--ng.syntax--interpolation.syntax--end {
+  color: #61afef;
+}
+.syntax--ng.syntax--interpolation .syntax--function {
+  color: #e06c75;
+}
+.syntax--ng.syntax--interpolation .syntax--function.syntax--begin,
+.syntax--ng.syntax--interpolation .syntax--function.syntax--end {
+  color: #61afef;
+}
+.syntax--ng.syntax--interpolation .syntax--bool {
+  color: #d19a66;
+}
+.syntax--ng.syntax--interpolation .syntax--bracket {
+  color: #abb2bf;
+}
+.syntax--ng.syntax--pipe,
+.syntax--ng.syntax--operator {
+  color: #abb2bf;
+}
+.syntax--ng.syntax--tag {
+  color: #56b6c2;
+}
+.syntax--ng.syntax--attribute-with-value .syntax--attribute-name {
+  color: #e5c07b;
+}
+.syntax--ng.syntax--attribute-with-value .syntax--string {
+  color: #c678dd;
+}
+.syntax--ng.syntax--attribute-with-value .syntax--string.syntax--begin,
+.syntax--ng.syntax--attribute-with-value .syntax--string.syntax--end {
+  color: #abb2bf;
+}
+.syntax--source.syntax--ruby .syntax--constant.syntax--other.syntax--symbol > .syntax--punctuation {
+  color: inherit;
+}
+.syntax--source.syntax--php .syntax--class.syntax--bracket {
+  color: #abb2bf;
+}
+.syntax--source.syntax--python .syntax--keyword.syntax--operator.syntax--logical.syntax--python {
+  color: #c678dd;
+}
+.syntax--source.syntax--python .syntax--variable.syntax--parameter {
+  color: #d19a66;
+}
+</style>
+  </head>
+  <body class='markdown-preview' data-use-github-style><table data-table-type="yaml-metadata">
+  <thead>
+  <tr>
+  <th>title</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div>Whitepaper</div></td>
+  </tr>
+  </tbody>
+</table>
+
+<h1 id="todo">todo</h1>
+<p>search for <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">todo</code> below to find all todos inside the text. some refer to finding data on google, some on data analysis, some on writing clearly. search for <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">todovip</code> to find the most important stuff.</p>
+<p>sequential plan (as of 2018-07-16)</p>
+<ol>
+<li>make this doc decent enough to start discussion. done.</li>
+<li>jacob talk to sid about v3 to agree on structure and content. first read <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">_structure</code> txt, then read <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">_text</code>. done.</li>
+<li>jacob write text to finalize v3. work in progress.</li>
+<li>talk with simon and hakan about what they will write and how much, discuss it with my TOC in mind.</li>
+<li>III why our product, turn your attention to this first and write it good. it has some connection to simon &amp; hakans text also so sync with them.</li>
+<li>II Why crypto is not developed enough. will be difficult for me to write this and feel good about it.</li>
+<li>see notes_meeting_sid_todos.txt for medium small stuff to fix.</li>
+<li>emphasize more in slides that the required technical skills to participate in the virtual currency market is excluding a large part of the investor base. Our product, which lowers these technical barriers, will increase deamnd for crypto assets.</li>
+<li><hr>
+</li>
+<li>why indexing: simon writes and article and this is low hanging fruit for me so it's easy to write.</li>
+<li>case fro crypto: simon writes and i started writing, so this is simple to write but hard to code.</li>
+<li>"Hold those digital assets that the market believes to have the higher probability of success." include somewhere.</li>
+<li>infoga namnen BLX och BlockchainX</li>
+<li>sid take v3 and turn it into v4. not started.</li>
+</ol>
+<h2 id="ev-f-in">ev få in</h2>
+<blockquote>
+<p>One of the biggest risks for the XBT products according to XBT is the following: "Hundreds of other digital currencies exist, which exposes both Bitcoin and Ethereum to tough competition." This statement underlines the benefits of our certficate, which offers an exposure to the broader cryptocurrency marekt.</p>
+</blockquote>
+<blockquote>
+<p>In XBT Provider own words from prospectus;
+“Konkurrens. I slutet av 2016 fanns cirka 800 kryptovalutor. Därmed finns det potentiellt en stor konkurrens. Om andra kryptovalutor framtas för att nå konkurrensfördelar, kan betydelsen av Bitcoin minska vilket kommer minska värdet av Bitcoincertifikaten, vilket kan komma att negativt påverka Emittentens finanser och orsaka en värdenedgång för Bitcoincertifikaten.“</p>
+</blockquote>
+<h1 id="notes-about-this-text">notes about this text</h1>
+<p>this is not a report. the pitch IRL will be anywhere from 3 to 30 minutes. most often around 5 min. for the deep dive we need a report.</p>
+<ol>
+<li>report. contains a very well structured and quite well written text on almost everything that is relevant our stakeholders. we only include what is crisp enough to publish to the public.</li>
+<li>slidedeck, a selected slice of the report's sections. text is converted into short bullets or only figures. very little text.</li>
+<li>pamphlet. a two pager, to bring to short pitch meetings or interviews.</li>
+</ol>
+<p>the website is like slides. it includes a link to the report (either direct download or signup for report + monthly newsletter).</p>
+<p>we have one set of slides in our slidedeck. before a presentation, the presenter can choose which slides are important. maybe only slide 1-10 and 15-20. this will often be the case. no need to modify the file, just skip ahead in the presentation.</p>
+<p>structure of slides and logical flow of the sales arguments: see separate md file.</p>
+<p>the notation to use on numbers can be found in <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">numbers-notation.txt</code></p>
+<p>((text inside double parentheses might or might not be included. often it is less important.))</p>
+<h2 id="note-to-sid">note to sid</h2>
+<p>most of the headings below are not what they will be. i write  a heading so that i know in my head what content it contains.</p>
+<p>i have included all of the info from your <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">_text</code> that i think is relevant. it is included mostly via the &gt; which is markdown syntax for block quote.</p>
+<h1 id="table-of-contents">Table of contents</h1>
+
+<ul>
+<li><a href="#todo">todo</a><ul>
+<li><a href="#ev-f-in">ev få in</a></li>
+</ul>
+</li>
+<li><a href="#notes-about-this-text">notes about this text</a><ul>
+<li><a href="#note-to-sid">note to sid</a></li>
+</ul>
+</li>
+<li><a href="#table-of-contents">Table of contents</a></li>
+<li><a href="#team">Team</a></li>
+<li><a href="#our-product">Our product</a></li>
+<li><a href="#introduction">((Introduction))</a></li>
+<li><a href="#i-why-indexing">I. Why indexing</a><ul>
+<li><a href="#a-indexing-makes-sense-in-general">(a) indexing makes sense in general</a></li>
+<li><a href="#b-indexing-makes-sense-in-particular-for-cryptocurrencies">(b) indexing makes sense in particular for cryptocurrencies</a></li>
+</ul>
+</li>
+<li><a href="#ii-why-crypto">II. Why crypto</a><ul>
+<li><a href="#the-need">the need</a></li>
+<li><a href="#returns">returns</a></li>
+<li><a href="#what-is-it-a-brief-history-of-virtual-currencies">what is it? a brief history of virtual currencies</a></li>
+<li><a href="#market-in-numbers">market in numbers</a></li>
+<li><a href="#communities">communities</a></li>
+<li><a href="#comparison-to-the-internet">comparison to the internet</a></li>
+<li><a href="#myths-arguments-against-cryptocurrencies">myths  arguments against cryptocurrencies</a><ul>
+<li><a href="#volatile">volatile</a></li>
+<li><a href="#bubble">bubble</a></li>
+<li><a href="#illegal-activity">illegal activity</a></li>
+<li><a href="#more-sections">more sections</a></li>
+<li><a href="#no-intrisic-value">no intrisic value</a></li>
+<li><a href="#it-does-not-work-today">it does not work today</a></li>
+</ul>
+</li>
+<li><a href="#the-case-for-crypto-in-an-institutional-portfolio">The case for crypto in an institutional portfolio</a><ul>
+<li><a href="#portolio-thinking">Portolio thinking</a></li>
+<li><a href="#low-correlations">Low correlations</a></li>
+<li><a href="#performance-reversals">Performance reversals</a></li>
+<li><a href="#expansion-of-the-efficitent-frontier">Expansion of the efficitent frontier</a></li>
+<li><a href="#traditional-portfolio-w-and-wo-blx">Traditional portfolio w and w/o BLX</a></li>
+<li><a href="#traditional-portfolio-w-and-wo-3-to-7-percent-blx-allocation">Traditional portfolio w and w/o 3 to 7 percent BLX allocation</a></li>
+<li><a href="#good-text-from-the-report">good text from the report</a></li>
+</ul>
+</li>
+<li><a href="#virtual-currencies-are-an-emerging-asset-class">Virtual currencies are an emerging asset class</a></li>
+</ul>
+</li>
+<li><a href="#iii-why-our-product">III. Why our product</a><ul>
+<li><a href="#difficult-to-buy">Difficult to buy</a></li>
+<li><a href="#difficult-to-store">Difficult to store</a></li>
+<li><a href="#passive-investing-requires-a-lot-of-activity">Passive investing requires a lot of activity</a></li>
+<li><a href="#solution-a-certificate">Solution: a certificate</a><ul>
+<li><a href="#i-simple">i. Simple</a></li>
+<li><a href="#ii-secure">ii. Secure</a></li>
+<li><a href="#iii-diverse">iii. Diverse</a></li>
+</ul>
+</li>
+<li><a href="#added-benefits">Added benefits</a><ul>
+<li><a href="#lower-taxes">Lower taxes</a></li>
+<li><a href="#chain-events-and-economies-of-scale">Chain events and economies of scale</a></li>
+<li><a href="#increased-invested-capital">Increased invested capital</a></li>
+<li><a href="#increased-trading-volume">Increased trading volume</a></li>
+<li><a href="#more">more?</a></li>
+</ul>
+</li>
+<li><a href="#competition">competition</a></li>
+<li><a href="#product-details">Product details</a><ul>
+<li><a href="#index">Index</a><ul>
+<li><a href="#wieghts">wieghts</a></li>
+</ul>
+</li>
+<li><a href="#sale-of-certificate-a-legal-obligation-to-pay-the-index-value">Sale of certificate = a legal obligation to pay the index value</a></li>
+<li><a href="#hedging">Hedging</a></li>
+<li><a href="#custodian">Custodian</a></li>
+<li><a href="#risks-disclaimer">Risks / disclaimer</a></li>
+<li><a href="#legality">Legality</a></li>
+</ul>
+</li>
+<li><a href="#product-summary">Product summary</a></li>
+</ul>
+</li>
+<li><a href="#our-board">our board</a></li>
+<li><a href="#our-road-map">our road map</a></li>
+<li><a href="#our-ask">our ask</a></li>
+<li><a href="#contact">contact</a></li>
+</ul>
+
+<h1 id="team">Team</h1>
+<p>We're a team of six with diverse backgrounds. Our experience include: investment banking, quantitative trading at prop firms, software development and academic research.</p>
+<p><strong>Leopold</strong>, Chief Executive Officer. Serial entrepreneur and CEO, founded and sold several companies totaling $30+ million in turnover. </p>
+<p><strong>Jacob</strong>, Chief Financial Officer. Experience from the trading floor and investment banking at the largest Nordic bank. Holds three Bachelor degrees: finance, mathematics and statistics.</p>
+<p><strong>Timotheus</strong>, Chief Research Officer. Corporate finance researcher at an investment bank. Holds a PhD in Finance from Stockholm School of Economics.</p>
+<p><strong>Simon</strong>, Chief Trading Officer. Quant trader at a proprietary trading firm. Currently ((knightian unvertanty...)). ((Kokomo)), Master of Science in Industrial Engineering ((soon M Sc math also?)).</p>
+<p>simon, skriv i ok meningar på ((dessa ställen)). gör så att texte när lika kort som dom andr.a</p>
+<p><strong>Håkan</strong>, Chief Data Officer. Experience from building secure databases. Holds a Master of Science in Mathematics from Stockholm University. Also co-authored academic books about blockchain.</p>
+<p><strong>Marco</strong>, Chief Legal Officer. Lawyer at the prestigeus Lindahls law firm. Focus on M&amp;A and GDPR. Mined Ethereum in todo insert date.</p>
+<h1 id="our-product">Our product</h1>
+<p>We will create an index fund for cryptocurrencies.</p>
+<p>It will be an exchange traded certificate on NASDAQ that gives investors a simple and diversified exposure to the cryptocurrency market.</p>
+<p>You can think of it as the cryptocurrency market's equivalent of SP500.</p>
+<h1 id="-introduction-">((Introduction))</h1>
+<blockquote>
+<p>((We believe we're in the early stages of something truly transformative, we believe that several things needs to be built for this to happen and we are set out to build of the infrastructure needed to be part of the disrupting force.))</p>
+</blockquote>
+<h1 id="i-why-indexing">I. Why indexing</h1>
+<h2 id="-a-indexing-makes-sense-in-general">(a) indexing makes sense in general</h2>
+<p><img alt="Money flows from active funds to passive index funds." src="/home/he2/Dropbox/Axlantic/investment/slidedeck/figures/net-flows-1.png"></p>
+<p>todovip write text. sync with simon.</p>
+<p>why it makes sense in general...</p>
+<ul>
+<li>use arguments from simons text or cristian huse or prof damodaran.</li>
+<li>see also freakonomics podcast. <a href="http://freakonomics.com/podcast/stupidest-money/">http://freakonomics.com/podcast/stupidest-money/</a></li>
+<li>it's almost impossible to beat the market in the long run, so most of us are better off buying an index fund than trying to pick stocks.</li>
+<li>according to morningstar 81% of the money flowing into funds (som är hur mkt då?) webt ti vabguard and ishares who specialized in index funds. det betyder ej att 81% av alla fonder som köps är indexfonder! kan vara mer eller mindre!</li>
+</ul>
+<h2 id="-b-indexing-makes-sense-in-particular-for-cryptocurrencies">(b) indexing makes sense in particular for cryptocurrencies</h2>
+
+<p>most people today hold 1-3 coins, even though there are thousands of coins.
+each coin is different. some focus on privacy, some on speed and others on integrating with banks.</p>
+<p>Some early adopters brag about how early they went into Bitcoin and how much profit it has given them. I often tell them "That's a great return, well done! But when did you go buy Ethereum? And at what price point did you buy EOS?". They missed out.</p>
+<p>An investor who aligns themselves with the market would not have to do the research himself and find information about all the new projects, as well as evaluate them. If enough crypto enthusiasts believe a coin is worth investing in, they will, and when the coin has sufficient trading volume and market cap (i.e. when it is mature enough) it will enter our index so that our investors automatically include it in their porftolio. This way the investor is neither too early nor too late - being too early increases risk and being too late reduces return.</p>
+<h1 id="ii-why-crypto">II. Why crypto</h1>
+<h2 id="the-need">the need</h2>
+<p>(från ett abstrakt perspektiv)</p>
+<p>todovip write about the below into a paragraph.</p>
+<ol>
+<li><strong>trust is needed for trade.</strong> if two parties want to transact but do not trust each other, it will be hard to execute the trade. the seller might worry that the payment will not arrive in time. the larger the transaction's value the more trust is needed.</li>
+<li><strong>today we use trusted third parties</strong>. for example house brokers and stock brokers, whom are employed by large corporations with regonizable names and logotypes. their role is to increase confidence of the transacting parties, so that their fears are reduced or eliminated. what these companies consist of is essentially trained people who perform manual checks.</li>
+<li><strong>a blockchain digitize trust</strong>. it does so partly because the data cannot be tampered with - if something is in the blockchain it will stay there. </li>
+<li><strong>digitalization will continue</strong>. the last decade we hav automated many factory jobs with robots and computers. it has increased our effiency and standards of living.</li>
+<li><strong>people's manual work can be replaced with blockchain technology.</strong> there are benefits to replace some of the trusted third party companies with technology instead. these benefits are higher speed, lower cost and fewer errors.</li>
+<li>given the trend of <strong>digitalization</strong>, combined with the fact that <strong>blockchain</strong> can replace some of the manual work done by trusted third parties, the logical conclusion is that we are likely to see an <strong>increased use of blockchain technology</strong>.</li>
+</ol>
+<h2 id="returns">returns</h2>
+<p>equity valuations are near all-time high. yields are at historical low. investors looking for return must turn to other asset classes, such as cryptocurrencies.</p>
+<p><img alt="historical returns for crypto" src="/home/he2/Dropbox/Axlantic/investment/slidedeck/todo include some numbers, maybe in a chart."></p>
+<h2 id="what-is-it-a-brief-history-of-virtual-currencies">what is it? a brief history of virtual currencies</h2>
+<p>todo write about crypto basics and some cool projects.</p>
+<ul>
+<li>Bitcoin: P2P digital cash, a store of value and digital gold.</li>
+<li>Ethereum: A world computer with smart contracts.</li>
+<li>Ripple: Global remittances, fast and cheap.</li>
+<li>Augur: Decentralized prediction market.</li>
+<li>Storj: Rent your hard drive.</li>
+</ul>
+<p>how much should go in here? I'm not sure. we could write something about bitcoin 2008 paper, the price jumps, etc. a brief history of the most important steps, ending with lightning. then describe ethereums goal and the dao hack and ICOs. then mention Ripple Augur Storj in one sentence each.</p>
+<h2 id="market-in-numbers">market in numbers</h2>
+<p>todo include some crypto number, both growth and financial numbers
+ sche&gt; In 2017, more than 16,000 new accounts were registered for trading in crypto based exchange traded products. This can be put in proportion with the 20,000 accounts that were registered during the same period for traditional stock trading. In one day in 2017, Coinbase (a US-based digital asset exchange) accumulated 100,000 new customers to their base of more than 20 million worldwide customers. One can compare this number to the user base of Charles Schwab, one of the largest online brokerage platforms in the world, ​which by the end of 2016 maintained more than 10 million online accounts. ​Safello (a​ Sweden-based digital asset exchange) has more than 80,000 customers as of 2018.</p>
+<p>todo maybe include some info on xbt demand? take the volume graph and present it a format that is much better, the current graph looks like shit.</p>
+<ul>
+<li>1600 different coins</li>
+<li>250 exchanges</li>
+<li>market cap comparisons (in USD trillion)<ul>
+<li>cryptocurrencies 0.250</li>
+<li>gold 7.7</li>
+<li>stocks 73</li>
+<li>all money 90</li>
+<li>global debt 215</li>
+<li>derivatives is not fair to compare</li>
+<li>todo insert source of these number the nwe can use them.</li>
+<li>Bill Gates' fortune is 1/3 of cryptocurrencies market cap.</li>
+</ul>
+</li>
+<li>XBT USD 1.3 billion AUM.</li>
+<li>conclusion of comparisons: it is still tiny, so it's still early phase.</li>
+</ul>
+<h2 id="communities">communities</h2>
+<p>each coin has a community - almost an ideology. or at least a set of beliefs about the world they share. for example:</p>
+<ul>
+<li><strong>bitcoin</strong> is convervative, as changes to the protocol is done only by reaching consensus within the community. the design of bitcoin has roots in austrian economy, so bitcoiners often have similar ideas about economics (at least more homogenous than two random persons).</li>
+<li><strong>ethereum</strong> consists many web developers, partly because ethereums goal of creating a world computer is attractive to them, and partly because ethereum's scripting language "Solidity" resembles the popular web programming langauge "Javascript".</li>
+<li><strong>ripple</strong>... todo sid write something.</li>
+<li><strong>EOS</strong> tries to make trade-offs on decentralization and transaction throughput (korrekt?)</li>
+<li><strong>dogecoin</strong>, a coin that is meant to be funny, it is literally a joke.</li>
+</ul>
+<p>market forces will decide which project is important and which is not. who will win? we don't know. our product is bullish the entire crypto market. our product does not single out any particular project, instead, it holds the project that the market currently thinks will be of the highest value in the future.</p>
+<p>most people today hold 1-3 coins, even though there are thousands of coins. an investor rarely hold only 1-3 stocks. as the cryptocurrency market matures people will probably hold a diversified basket of coins - especially the persons who seek good risk-adjusted returns and doesn't care about the community or identity of a particular coin.</p>
+<h2 id="comparison-to-the-internet">comparison to the internet</h2>
+<p>similarities to internet:</p>
+<ul>
+<li>few people understand the technology</li>
+<li>you don't need to understand how it works in order to use it.</li>
+<li>hard to use (more on this later) but it becomes easier every day</li>
+<li>mostly geeks use it</li>
+<li>mostly geeks know about the potential future use cases</li>
+<li>many different projects exists, each with different goals</li>
+<li>a lot of vc money (include data point)</li>
+</ul>
+<p>todo: write more about this.</p>
+<h2 id="myths-arguments-against-cryptocurrencies">myths  arguments against cryptocurrencies</h2>
+<h3 id="volatile">volatile</h3>
+<p>"it is volatile". yes. here is how volatile it is compared to other asset classes.
+</p>
+<blockquote>
+<p>On a side note it’s worth to mention that the large part of the vol. is attributed mainly from Bitcoin and other cryptocurrencies huge price surge, not capturing downside risk.</p>
+</blockquote>
+<h3 id="bubble">bubble</h3>
+<p>"it might be a bubble". yes we know.</p>
+<ul>
+<li>it is early stage. it is uncertain.</li>
+<li>our downside is capped (a fixed amount of time and money will be spent). but the upside is unlimited (if blockchains revolutionize one industry the ROI will be ridiliously high). [^footnote_about_options]</li>
+<li>that's you should make a small bet early, with small portoflio weights.</li>
+</ul>
+<p>[^footnote_about_options]: it might be a bubble that pops (goes to zero). it might be the beginning of a tech that explodes and disrupts finance, insurande, and other industries (goes to infinity).  employees and investors in axlantic hold a call option. so we love this volatility / risk / uncertainty since the value of a call option increases with volatility.       the same idea expressed in a more theoreical way: a call option increases in value when the volatility (uncertainty) is high.     investing time and money in this company can be considered as an option on the cryptocurrency market. all employees and investors in this company all hold an option, and one reason this option is valuable is precisely because of the volatility - uncertainty - of whether this technology a bubble about to burst or if it is a techn that will disrupt.</p>
+<h3 id="illegal-activity">illegal activity</h3>
+<p>Bitcoin is linked with Silk Road, where the purchase of illegal drugs was possible. This gives Bitcoin a bad reputation that it does not deserve.</p>
+<p>Criminals have use and will always use technology when performing illegal activities. The technology they use can be cars, cell phones, cash, bitcoin, etc.
+We rarely blaim the US dollar or post offices which both facilitate high volume of illegal trades, e.g. guns bought with cash. ((The same logic should apply to other currencies.))</p>
+<p>Researchers estimate todo percent of all bitcoin transactions come from illegal activity, [^source-illegal-btc]
+whereas todo percent of all Cash in USD cash transactions come from illegal acticity. [^source-illegal-cash]</p>
+<p>[^source-illegal-btc]: todo find this.</p>
+<p>[^source-illegal-cash]: todo google and insert a trust worthy source.</p>
+<h3 id="more-sections">more sections</h3>
+<p>todo: read <a href="https://en.bitcoin.it/wiki/Myths">https://en.bitcoin.it/wiki/Myths</a> and include some of these, such as</p>
+<ul>
+<li>1</li>
+<li>2</li>
+<li>7</li>
+<li>17</li>
+<li>33
+but try to make it less bitcoin focues and more crypto focues, if possible.</li>
+</ul>
+<h3 id="no-intrisic-value">no intrisic value</h3>
+<p>above we noted that a blockchain digitize trust, and can be used to replace current intermediaries, so from this use case it has value.</p>
+<p>moreover, it also has value because it's a network in which value can be transfered - the internet is a network where information can be sent.</p>
+<blockquote>
+<p>Another way to think about this is to consider the value of bitcoin the global network, rather than each bitcoin in isolation. The value of an individual telephone is derived from the network it is connected to. If there was no phone network, a telephone would be useless. Similarly the value of an individual bitcoin derives from the global network of bitcoin-enabled merchants, exchanges, wallets, etc... Just like a phone is necessary to transmit vocal information through the network, a bitcoin is necessary to transmit economic information through the network.
+<a href="https://en.bitcoin.it/wiki/Myths#Bitcoin_has_no_intrinsic_value_.28unlike_some_other_things.29">https://en.bitcoin.it/wiki/Myths#Bitcoin_has_no_intrinsic_value_.28unlike_some_other_things.29</a></p>
+</blockquote>
+<h3 id="it-does-not-work-today">it does not work today</h3>
+<p>bitcoin has never been hacked, you can send and recieve transactions instantly world-wide (and they settle in 10 min not T+2). there are problem on how hard it is to use and that only a few take it as means of payment.</p>
+<p>progress is being made, but it's not done yet.
+and it is ok that it not every little detail is solved yet. this was the case both with cars and electricity. [^antonoop-infrastructure-inversion]</p>
+<p>[^antonoop-infrastructure-inversion]:  andreas antonop has a good chapter about infrastructure inversion in his non tech book. at first they say "it is so slow, it cant work, look" because the car tries to work in the current infrastructure of kullersten and horses hit. when you build roads for cars, both the horse and the car can go on that road, however, the car flourishes. that is an example of infrastructure inversion.   another example is using electricity in your home. in the beginning it was only right people and nuts who had it. your house could be burnt down, etc. because the infrastructure was gas pipes... same principle as in the car-horse-example.</p>
+<h2 id="the-case-for-crypto-in-an-institutional-portfolio">The case for crypto in an institutional portfolio</h2>
+<p>todovip: write a bullish section.</p>
+<h3 id="portolio-thinking">Portolio thinking</h3>
+<p>When considering whether or not to invest in an asset, an investor should study the asset not in isolation but rather as a part of the entire portfolio. It does not make sense to exclude Twitter from SP500 simply because the stock is too risky for one's risk preference. Rather, one should compare the SP500 with Twitter included vs the SP500 with Twitter excluded. After comparing the two portfolios sector allocation, risk-return profiles, etc then the investor can make a decision of whether to exclude Twitter or not from his portoflio.</p>
+
+<h3 id="low-correlations">Low correlations</h3>
+<p><img alt="Digital assets and traditional financial assets exhibit low - sometimes negative - correlations. Hence digital assets can be used to diversify a traditional portfolio." src="/home/he2/Dropbox/Axlantic/investment/slidedeck/path to file containg 1 or 2 correlation matrix plots."></p>
+<p>The primary conclusion to draw from this matrix is that
+the correlation between virtual currencies and traditional assets are far below one,
+hence they can be used to diversify a traditional portfolio.
+It seems like the crypto asset class exhibit different return patterns than traditional financial assets such as gold and stocks.</p>
+<p>The secondary conclusion to draw from this matrix is that
+the correlation between different virtual currencies are below one,
+reflecting the fact that these these currencies are different from each other.
+This correlation between assets in BlockchainX is a reason to hold our certificate,
+since a strategy of buying merely Bitcoin and Ethereum would miss out on the other 8 assets
+which are diversifiers thanks to their low (and sometimes negative) correlations.
+Moreover, only buying two assets rather than a basket is sub-optimal due to performance reversals. </p>
+<h3 id="performance-reversals">Performance reversals</h3>
+<p>For a long period Bitcoin outperformed almost all other virtual currencies in the top 10 index.
+During the price drop of Bitcoin in January 2018, three of the top 10 digital assets - EOS, NEO and Stellar - realized positive returns.
+Only twice in 12 months has the top-performing coin repeated the feat of being the best performer in the following month.[^ref-12months]
+These performance reversals clearly demonstrate the benefits of diversification. It also provides a good reason to buy a slice of the market, instead of trying to pick a few virtual currencies and hope they will perform.</p>
+<p>[^ref-12months]: todo: which 12 months? was it the most recent 12 months? or during 2017?</p>
+
+<h3 id="expansion-of-the-efficitent-frontier">Expansion of the efficitent frontier</h3>
+<p>Let's be crystal clear in our analysis of adding virtual currencies to a traditional portfolio. The reason why the correlation matrix matter to an investor is that the correlation structure allows him to enjoy higher risk-adjusted returns. To understand the reason for this, we have to re-visit the argument of Harry Markovitz, who is often accredited with founding portfolio theory by his 1952 paper published in The Journal of Finance, titled "Portfolio Selection".</p>
+<p><img alt="Adding digital assets expands the efficient frontier." src="/home/he2/Dropbox/Axlantic/investment/slidedeck/traditional markovitz efficient frontier plot e.g. Efficient-Portfolio-Frontier"></p>
+<p>This figure is a standard plot in a finance textbook about investments or portoflio theory, but it is fundamental to grasping the argument of why adding a new asset class leaves an investor better off.</p>
+<p>The x-axis is the volatility and the y-axis is the ((expected)) return. Each circle on the graph is an asset. The upper left corner is an ideal place to be, with high returns and low risk. But of course, there is a trade-off between the two so that assets with higher expected return tend to be more risky.</p>
+<p>Buying a single asset on this graph will give you, in expectation, a certain return and volatility. But thanks to diversification it is possible to do better. The efficient frontier is the set of (return, volatility)-points the investor can get if they buy a portfolio of assets. Every single point on the efficient frontier - see the figure's solid line - is a portfolio the investor can have. Note that the efficient frontier is more attractive than single assets, reflecting the fact that portfolios are more attractive than owning a single asset.</p>
+<p>It is the correlation between the assets that allow an investor to be better off when buying a basket of assets rather than a single one. The lower the correlations between the assets, the more this solid line will expand to the upper left corner.</p>
+<p>What happens when we add digital assets to this plot? They are marked in the figure as crosses. Thanks the statistical properties of these assets - namely their returns, volatility and correlation structure - the efficient frontier expands to the left. This expanded efficient frontier is drawn as a dashed line in the figure.</p>
+<p>In conclusion, an investor who adds digital assets to the universe of investable assets will be able to construct a portfolio with higher risk-adjusted returns.</p>
+<h3 id="traditional-portfolio-w-and-w-o-blx">Traditional portfolio w and w/o BLX</h3>
+<p>Let's put the theorical argument above into an example using historical data.</p>
+<p>todo insert path to file after the analysis is done.
+<img alt="">
+todo: insert a table with return, vol and return/vol as well.</p>
+<h3 id="traditional-portfolio-w-and-w-o-3-to-7-percent-blx-allocation">Traditional portfolio w and w/o 3 to 7 percent BLX allocation</h3>
+<p>Due to its superior returns, BLX ends up being qq % of the entire portfolio. This is not what we advice. We suggest a small portoflio weight to BLX. Below we have the same comparison as above, but after rebalancing so that BLX are kept around 5% of the entire portfolio (recall: portfolio thinking above).</p>
+<p>More formally, we have a target weight of 5% with 0.40 tolerance rate so that whenever the weight of BLX goes above 7% it is rebalanced down to 5% and whenever the weight of BLX goes below 3% it is rebalanced up to 5%.
+For simplicity we assume zero trading cost for selling (or buying) BLX and buying (or selling) the traditional portfolio.</p>
+<p>The effect this tolerance based allocation strategy has is shown in the figure.</p>
+<p><img alt="When we use tolarance rebalancing, the wieght of BLX is kept close to the target rate of 5%." src="/home/he2/Dropbox/Axlantic/investment/slidedeck/path to file. it is similar to bitwise area plot, however, we put them side by side to make the comparison easier. the purpose is to pedagogically show what the difference is between using tolerance rebalncing and not. the graph allow us to spend much less time explaining."></p>
+<p><img alt=""></p>
+<p>the number of rebalancings were todo insert number.</p>
+<h3 id="good-text-from-the-report">good text from the report</h3>
+<blockquote>
+<p>This report explores the case for including a small but meaningful
+allocation to cryptoassets in a diversified portfolio. Specifically, it examines
+the impact that a 1%, 5%, and 10% allocation to Bitcoin would have had on
+a traditional 60% equity/40% bond portfolio since Jan. 1, 2014.</p>
+</blockquote>
+<blockquote>
+<p>The potential impact was large: With a 5% allocation, for instance, the
+Sharpe ratio of the portfolio nearly doubled, total returns more than
+doubled, and the maximum drawdown was substantially reduced.</p>
+</blockquote>
+<blockquote>
+<p>The study looked at the period Jan. 1, 2014 through March 31, 2018. This period was chosen because it
+captures two of the worst bear markets in Bitcoin history: The 85% pullback from January 2014 through
+January 2015, and the 64% decline from December 2017 through the conclusion of the study in March</p>
+<ol start="2018">
+<li>The study considered looking at returns since Bitcoin’s inception on publicly available exchanges in
+2010, but the early returns of Bitcoin were so high that they skew the analysis. In 2013, for example,
+Bitcoin’s price rose 5,507% (see table). The chosen start date captures what amounts to the worst
+historical scenario for adding Bitcoin to a portfolio.</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Despite this (intentionally) adverse timing, the study found that a systematic allocation to Bitcoin
+significantly increased the portfolio’s risk-adjusted returns, assuming a diligent rebalancing strategy was in
+place. In fact, a small allocation to Bitcoin achieved this result without increasing the risk profile of the
+portfolio in any meaningful way.</p>
+</blockquote>
+<blockquote>
+<p>The results were remarkable: The “Quarterly Rebalanced Portfolio” captured similar returns as the HODL
+Portfolio (58.51% vs. 67.70%), but did so with less than half the risk (9.0% vs. 19.8%). Quarterly
+rebalancing also massively reduced the maximum drawdown, which fell from -32.68% to just -9.25%.
+This drawdown was actually lower than the maximum drawdown experienced by the Traditional Portfolio
+(which didn’t hold Bitcoin at all).</p>
+</blockquote>
+<blockquote>
+<p>In an effort to better constrain Bitcoin’s weight in the portfolio, the study looked at a Tolerance-Based
+rebalancing strategy using a 50% tolerance. That meant rebalancing the 5% Bitcoin allocation any time it hit 7.5% or 2.5%.</p>
+</blockquote>
+<h2 id="virtual-currencies-are-an-emerging-asset-class">Virtual currencies are an emerging asset class</h2>
+<blockquote>
+<p>In our view, digital assets represent a new emerging asset class, which by construction is not comparable to any asset class previously in existence. We argue that digital assets are a good example of a decoupling phenomenon, just as in case of emerging markets. Thus, they are good diversifiers of risk exposure to traditional asset classes.</p>
+</blockquote>
+<h1 id="iii-why-our-product">III. Why our product</h1>
+<p>In section I we discussed why indexing is a good approach. Evidence suggests trying to beat the market is unprofitable. Almost all investors are better off buying an index fund.</p>
+<p>In section II we argued that cryptocurrencies can disrupt many industries. We also argued there might be room for more growth and substantial future returns, implying that an investor should consider allocating a small part of their portoflio to the crypto market.</p>
+<p>Here in section III we will begin with a question: "What does an individual investor have to do in order to follow a passive investment strategy in the crypto market?". Firstly, we will explain why doing it in practice is almost impossible. Then we discuss how our product solves these problems. In addition, we bring up some added benefits our product provides. Lastly, we take a deep dive into the product details such as how we the index is constructed.</p>
+<h2 id="difficult-to-buy">Difficult to buy</h2>
+<p>Our team have registered accounts at over 20 exchanges. The waiting time to get accepted as a customer was 10 days on average, and the maximum waiting time over 6 months. To register an account and fulfil the KYC requirements, a user must send copies of gas bills, photos of passport and sometimes download a video conferencing app to have a quick video call with the on-boarding team. Patience is a virtue, and the registration process is a real test of patience.</p>
+<p>For an investor with deep pockets, liquidity at one exhange is not sufficient. To avoid moving the market when executing larger trades, you must open up accounts at several exchanges.
+(todo sid ska vi säga typ thousands of usd och försök ok att säga thousands eller ska vi låta bli att säga en siffra?)
+Repeating the registration process is not a fun excercise but a neccessary one ((at least if you have more than a thousand dollars to invest)).</p>
+<p>Different exchanges have different user interfaces. This can make order placing confusing when the customer is used to a certain interface and suddenly the order book is vizualised a different way, or the buy-button is on the left of the screen instead of the right. ((Some exchanges have a maker fee, some a taker fee.)) Obviously this slows down the speed at which trades can be executed and increases the risk of human errors.</p>
+<p>The mere act of buying a single virual currency is is time consuming and hard. Buying a basket of 10 coins increases the diffuculty tenfold.
+todo skriv någon mening till här.
+Most people have bought only 1-3 different virtual currencies, in stark contrast to the case with stocks, and one reason for this is the difficulty of acquiring virtual currencies.</p>
+<p>todo source @leopold on most people bought 1-3 different ones.</p>
+<ul>
+<li>we have regged at &gt;20 exchanges</li>
+<li>long waiting time: avg eaiting time 10 days. max waiting time more than 6 months.</li>
+<li>KYC and AML at all, sending electricity bills and photos of passport or driver's license.</li>
+<li>for an investor with deep pockets, liquidity might be too low at only one exchange. =&gt; need to register at many exchanges. todo: how deep pockets do you need to have? @leopold include a number.</li>
+<li>different user interfaces. the buy button is on the left instead of the right. the order book is vizualied in different ways. so it is slow to buy. and you dont want to make a mistake . fee structures are different.</li>
+<li>The diffuclties above applies even when you want to invest in one single coin, say Bitcoin or Ethereum. But what if you want to hold a basket of 10 coins? The diffuclty increases tenfold. Most people have bought into merely 1-3 different virtual currencies. The diffuclty of buying them is certainly one reason for this. todo source @leopold on most people bought 1-3 different ones.</li>
+<li>different tickers for the same cryptocurrency, todo insert an example other than BTC and XBT.</li>
+</ul>
+<h2 id="difficult-to-store">Difficult to store</h2>
+<p>Traditional financial instruments, like stocks and bonds, are stored at a central securities deposit or custodian such as Euroclear. When buying these assets, the investor can enjoy the storage solution his bank provides, giving him peace of mind. Cryptocurrencies, in contrast, are stored by the owner. Storage of virtual currencies is important and complicated.</p>
+<p>To quantify the importance of storage is easy, as losing the password implies a return of minus 100 percent. Even though users are heavily incentivized to store their digital wealth securely, stories of lost coins are plentiful, which indicates that storage is a very difficult task.</p>
+<p>To quantify how complicated it is to store the digital assets safely, consider that USD 670m worth of cryptocurrencies due to loss or theft in the first quarter of 2018. [^footer-hack-2018q1]
+When the previous exchange Mt. Gox was hacked, 850 thousand bitcoins were stolen - with a BTCUSD price of 6000 this hack was worth USD 5.1 billion. The Mt. Gox story taught everyone an important lesson: do not keep coins on an exchange. If the exchange gets hacked, the digital wealth is gone, so to store coins safely the user must have them in a wallet they control.
+Apart from protecting against against thiefs, all cryptocurrency users must protect against himself. Many bitcoin user have stories of lost coins - one common way to throw away the laptop when the coins were not worth that much and realizing a year later that they threw away thousands of dollars. [^footer-lost]</p>
+<p>History provides a clear conclusion: users are not skilled at storing their own digital wealth.
+Safely storing the digitl assets is hard because the technology is in its infancy. Anyone who has bought and stored cryptocurrencies safely know this. For someone who has not tried it at home, we have tried to provide an explanation in our blog post titled <a href="url to the blogpost">Email and cryptocurrencies - an analogy</a>.</p>
+<p>The storage complications is one good reason for investors to stay away from the crypto market. Institutional investors cannot afford to buy an asset when the risk of loosing it so high.
+((Portfolio managers that are asked why they have not bought cryptocurrencies often state the volatility as a primary reason, but storage is a much larger problem.))
+The technical knowledge needed to safely store coins takes time to acquire, and investors with deep pockets have a high opportunity cost, so they do not invest even though the historical risk-adjusted returns are attractive.</p>
+<p>[^footer-hack-2018q1]: todo sid insert data</p>
+<p>[^footer-lost]: (todo sid footnote from some online article)</p>
+<p>ev få in ngnstans: ((This resposibility have caused paranoia and a few sleep-less ours for some of our team members.))</p>
+<h2 id="passive-investing-requires-a-lot-of-activity">Passive investing requires a lot of activity</h2>
+<p>((Most people have bought only 1-3 different virtual currencies, in stark contrast to the case with stocks. A reason for this the the difficulty of buying and storing virtual currencies.))</p>
+<p>Assume an investor, whom we can call David, is both bullish on the crypto market and believe in a passive investment strategy. What does he have to follow this strategy?</p>
+<p>The passive investor must chose a suitable index to follow. An index is simply a set of rules. Let us decide on an index that contains the 10 largest virtual currencies, weighted by their market capitalization, with monthly rebalancing.</p>
+<p>On the first day, David must take his USD and buy ten different coins. Then, since he does not want to introduce unneccesary counter-party risk, he must move the coins from the exchange to his personal wallets where he controls the private keys. This act is called moving to cold-storage.</p>
+<p>Buying a single coin is difficult, as described above. Buying a basket of 10 different coins increases the difficulty tenfold, because
+not all coins trade on the same exchange, the user must be able to use several different exchanges. Again, each exchange have their own user interfact and trading rules. Moreover, the same virtual currency can have different names different exchanges, for example BTC or XBT.</p>
+<p>Setting up a safe storage solution for one single coin is difficult, as described above. Storing 10 different coins increases the diffuculty tenfold, because
+every coin has its own wallet, so storing a basket of coins requires multiple software applications. Every application has its own password and preferences. Again, loosing the password means the return will be minus 100 percent.</p>
+<p>A month after his first purchase, David must rebalance his portfolio.
+Monthly rebalancing is needed because he wants to own the current market (not the market how it looked a when he made his first purchase). For a passive investor, rebalancing is necessary, and most equity index funds do this automatically (every quarter or so) without any action needed from the investor.
+Rebalancing starts with David transfering the coins from his wallet to the exchange. With several windows open on his screens, he will then proceed with executing the trades needed to rebalance his portfolio. As a final step, he sends the coins to cold-storage.
+Cryptocurrencies are volatile, so the top 10 list might look very different from last month, and the more different it looks the more David needs to trade. As a simplified example, consider how the rebalancing process would look if the only event that occured during a month were that the market capitalization of the virtual currency XRP went from place 11 to 10, while the market capitalization of the virtual currency LTC went from place 10 to 11. David must first move his coins from the LTC wallet to all exchanges that contain both LTC and XRP. To minimize market impact, he should calculate the trading volumes of LTC and XRP on the exchanges that contain both currencies, and then move an appropriate amount to each exchange - because If one exchange has double the volume David will probably want to trade a higher volume on that exchange. When the coins are at the exchange, he can proceed by selling LTC for US dollars, and then buy XRP with these dollars. Lastly, he will send the XRP to his cold-storage. If this was the first time XRP entered the top 10 index, David would most likely not know a lot about this coin or how its wallet software works in practice. In order to know what he is doing, and not make a mistake that might cause him to loose the coise, he should spend hours reading about XRP and trying out the software.</p>
+<p>The process above is a mess. Even though it is a simplified example, there are many steps on the way which requires a lot of research, experience and techincal skills. A mistake can lead the digital wealth to be erased.
+We believe there is a better solution. ((ev infoga fler meningar för att hypea lite.)) Instead of doing all of the above, an investor can buy our certificate.</p>
+<h2 id="solution-a-certificate">Solution: a certificate</h2>
+<p>Our exchange traded product follows an index that tracks the largest cryptocurrencies.
+The certficate can be bought and sold throughout the day on NASDAQ at a price determined by the market.</p>
+<p>The index consist of the 10 largest virtual currencies, weighted by market capitalization. Currently these 10 cover approximately 80% of the total market capitalization (as of 2018-07-17). todo update percentage and date.</p>
+<p>((Our firm is essentially a layer between the underlying virtual currencies and the investor. This layer makes it convinient to buy a slice of the cryptocurrency market.))</p>
+<p>Our product is simple, secure and diverse.</p>
+<h3 id="i-simple">i. Simple</h3>
+<blockquote>
+<p>Registering on and using several cryptocurrency exchanges, storing assets, keeping track of several wallet updates, regular portfolio rebalancing, staying on top of news, forks, air-drops, calculating portfolio performance and doing complicated tax reporting is hard and tiresome.
+BlockchainX resolves all this complexity by being traded on traditional exchanges such as NASDAQ. The certificate tracks the 10 largest coins (by market capitalization) and is rebalanced monthly.</p>
+</blockquote>
+<p>The certificate BlockchainX is traded on traditional exchanges, making it simple to buy and sell.</p>
+<h3 id="ii-secure">ii. Secure</h3>
+<blockquote>
+<p>Securely storing coins is imperative but difficult. Private agents acting as banks is the only option for the few, while the majority seeks for a better solution. Assets are at risk by just making a typo resulting in being hacked or phished. Holding the BlockchainX secures the safety of cryptocurrency holdings, by putting an additional security layer of the ETP between investors and the underlying digital assets.</p>
+</blockquote>
+<blockquote>
+<p>We strongly believe that the great majority is better of with a security layer between the virtal currencies and the investor - like with stocks. you don't lose your ownership in Apple, Tesla or Microsoft if you loose your paper stock note in a fire. This is solved today with mature markets. We feel that the same must happen for cryptocurrencies. we will contribute to make this shift happen, and make the cryptocurrency market more mature.</p>
+</blockquote>
+<h3 id="iii-diverse">iii. Diverse</h3>
+<blockquote>
+<p>Higher risk-adjusted returns thanks to diversification. Over the last 2 years, owning the BlockchainX would provide higher returns and lower volatility than just owning Bitcoin. Holding the top-10 cryptocurrencies ETP offers the diversification benefits to investor public.</p>
+</blockquote>
+<p>Rebalanced monthly.</p>
+<h2 id="added-benefits">Added benefits</h2>
+<p>When comparing buying our certificate BlockchainX, with
+trying to do it yourself via the process of acquiring, storing and rebalancing
+there are several beenfits beyong saving time and increasing security.
+Below we describe some of these added benefit, such as lower taxes and free coins.
+In addition, we provide some arguments why the product expands the investor base and increases trading volume for NASDAQ.</p>
+<h3 id="lower-taxes">Lower taxes</h3>
+<p>According to the Swedish Tax Authority (Skatteverket) it is required to contribute capital gains tax on every single cryptocurrency trade.[^skatteverket-source] It does not matter if the seller of for example BTC recieves USD or XRP, as both crypto-to-fiat and crypto-to-crypto trades are taxable events.
+This rule alone makes it impossible to for an individual investor to follow a monthly rebalanced top 10 index himself, as there will be hundreds of taxable events to keep track on. In addition to being time-consuming, the tax rules makes crypto trading very costly, since the capital gains tax is 30%.</p>
+<p>There is, however, one exception to the tax rule. Companies that are specialised in buying and selling cryptocurrencies are not taxed on every single trade. Thanks to this exemption, firms like Vinter Capital will not be taxed on every single trade. This rule is extremely beneficial to us and our customers. Thus, even if an individual investor could follow a passive strategy himself, our certificate would still be more attractive due to taxation.</p>
+<p>In Sweden, an owner of the BlockchainX certificate can choose to place the certificate in either (a) an account in which the capital gains tax is only taken out when they sell the certificate, or (b) an account called "Investeringssparkonto" (ISK) in which they pay a fixed percentage on the assets under management - currently it less than 0.5%. Mathematically, the tax is either (a) <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">AUM * return * 30%</code>[^assumtion-ret], or (b) <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">AUM * 1.49% * 30%</code>[^isk-percent]. Both alternatives are better than a 30% capital gains tax on every single trade. Hence, the tax rules makes the BlockchainX certificate attractive to many small and large investors.</p>
+<p>[^assumtion-ret]: When return is positive the tax is <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">AUM * return * 30%</code> but when the return is negative the tax is <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">AUM * return * 30% * 2/3</code>. This assymetry is good for the tax authorities and bad for the investors. If an investor makes +5% return on his first trade, and then -5% return on his second trade, he has made a net loss due to the tax assymetry.</p>
+<p>[^skatteverket-source]: todo sid insert relevant url. save the html page for offline access if they change the url.</p>
+<p>[^isk-percent]: For details, read the text on  [Skatteverket.se]<a href="https://skatteverket.se/privat/skatter/vardepapper/investeringssparkontoisk">https://skatteverket.se/privat/skatter/vardepapper/investeringssparkontoisk</a> explaining that the tax is <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">(1% + SLR) * 30%</code> where SLR is a risk-free rate. To be more precise, SLR is the the previous year's "Statslåneränta" which measure the interest rate at which the Swedish government can borrow money. For 2018 the tax is <code style="font-family: Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace;">(1% + 0.49%) * 30% = 0.447%</code></p>
+<h3 id="chain-events-and-economies-of-scale">Chain events and economies of scale</h3>
+<p>todo maybe change the heading to one of these alternatives</p>
+<ul>
+<li>Capitalization on chain events</li>
+<li>Almost free coins</li>
+<li>Corporate actions and economies of scale</li>
+<li>Events and economies of scale</li>
+<li>Almost free coins and economies of scale</li>
+</ul>
+<p>todo sid you can edit this text if you have participated in some air drops.</p>
+<p>Sometimes there are actions a coin owner can take that will almost surely be profitable. Examples of such events are air-drops, staking and hard forks. We can call them <em>chain events</em> and they share some characterics with events that occur for traditional stocks.</p>
+<table>
+<thead>
+<tr>
+<th>Chain event</th>
+<th>Stock event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Air-drops</td>
+<td>Dividends</td>
+</tr>
+<tr>
+<td>Staking</td>
+<td>Stock lending</td>
+</tr>
+<tr>
+<td>Hard fork</td>
+<td>De-merger</td>
+</tr>
+</tbody>
+</table>
+<p><em>Air-drops</em> resembles stock dividends.
+No company needs to pay out dividends, but some choose to - for a variety of reasons. Likewise, no cryptocurrency project needs to air drop, but some chose to. In an air-drop, every holder of that currency recieves some amount of coins "for free". Many cryptocurrencies are led teams who want to market their project and increase the price of their cryptocurrency. To attract buyers, or reward the current owners of their currency, a project might initiate an air-drop. In order to get the "free" coins, actions are required from the coin holder. An example of such an action can be transferring his coins to a wallet before a due date. Thus, air-drops are not free coins, but rather an event in which investors can trade their time for some reward. Whether that trade is worthwhile depends on a combination of factors such as the investors tehcincal skills, how much he has invested as well as how much coins is payed out in the air-drop. A key difference between air-drops and stock dividends are that dividens are payed out automatically without the stock owner having to take much action, whereas a coin holder must follow the news to know that an air-drop is taking place and then take the required actions to capitalize on it.</p>
+<p><em>Staking</em> resembles stock lending.
+When staking a coin, the owner puts an amount of the cryptocurrency in a certain place (e.g. a wallet) for which he earns some reward (e.g. a 1% interest on the coins in that wallet).
+Only some cryptocurrencies allow staking. The Ethereum community is considering adding a way to stake ETH.[^eth-stake] Some coins that do support staking are EOS, Stellar, Cardano, and DASH. In order to stake DASH, the user must own send coins to a wallet that locks them up for a year, and the minimum amount to send is 1000 coins  - which is currenthly worth USD 200k. The reward for staking DASH is [todo sid insert].
+All coins have different ways of staking - the way to stake DASH differs from Cardano - so to stake multiple coins a user must be knowledable and up to date.
+The interest earned on staking cannot be considered free money since it requires work and involves some risk of loosing the coins. Staking is a worthwshile acticity if the reward is attractive enough relative to the risk, and only a minority of users stake their coins.[^minority]
+A difference between stock lending and staking is the purpose for doing it. Stock lending is primarly done to short sell. Staking, on the other hand, can be done for different reasons e.g. DASH stakers can gain political power and secure the network (in a way similar to bitcoin miners).</p>
+<p>[^eth-stake]: todo sid insert source.
+[^minority]: todo sid insert source that it is less than 50% of users.</p>
+<p><em>Hard forks</em> resembles  company de-mergers.
+When a firm de-mergers, it becomes two separate companies. A famous de-merger is when British Telecom spun off its mobile phone business "BT Wireless". Likewise, when a blockchain hard forks, it splits into two separate chains.
+The most famous one is when Bitcoin forked from BTC to BTC and BCH. Another famous example is when Ethereum forked into ETC and ETH, because the community had different opinions of whether the Dao hack should be reversed or not (the ETH chain wanted it reversed but the ETC chain did not).
+When a company de-mergers, the two individual stocks will have different prices and they will sum to either more or less than when they were one entity - the de merger can be said to either increase or decrease the "shareholder value". The same is true for blockchains. In the case of the Bitcoin hard fork, the total value of both coins after the work was higher than before. Everyone who held Bitcoin before the fork was granted equally many BCH as they had in BTC, so that a user who owned BTC 2.44 before the fork had a total of 2.44 BTC + 2.44 BCH after the fork. Due to how the prices evolved, users were better off before the fork than after - one could say that the fork increased "coin holder value". In future hard forks the prices of the coins after the fork has occured is inknown, so the coin holder value might increase or decrease. Still, in both cases the owner will need to take some actions. After the bitcoin fork happened, every user who wanted to claim their BCH had to perform a series of techincall steps (including importing the BTC private key into a BCH compatible wallet). Even today, many early adopters of bitcoin have not got ahold of their BCH, and since those coins are of monetary value the logical conclusion must be that these users lack the technical skills needed to capitalize on the fork. Many of these users can be considered early adopters - nevertheless they would have had higher returns by investing in a fund that posessed the ability to capitalize on the fork.</p>
+<p>In the future there might be other types of chain events that does not exists today. Cryptocurrencies are yet in their infancy, so change is to be expected. All of the mentioned chain events (air-drops, staking and forks) have occured due the communities' choices, and the open source nature of cryptocurrencies makes is likely that new ideas spread and gets implemented. The possible innovation and technolical progress is one reason why virtual currencies is an exciting sphere to be in.</p>
+<blockquote>
+<p>"Whoever has will be given more, and they will have an abundance."</p>
+<p>Matthew 13:12</p>
+</blockquote>
+<p>Economies of scale clearly exists in chain events.
+Vinter capital will utilize its cryptocurrency experts to capitalize on air-drops, staking and forks whenever it is advantagous to do so. Of course it is not guaranteed that these actions will be profitable, or that our firm will be able to do better than a single individual, but it is likely that a professional actor enjoys several advantages over individual users. Two such advantages are more time and capital: A fund can devote more time to the research, and pool capital from many investors in order to make the tradeoff between risk and reward worthwhile.
+((Moreover, Vinter Capital is incentivized to act in the best interest of their customers, since a bad performance might lead to lower asset under management.))</p>
+<h3 id="increased-invested-capital">Increased invested capital</h3>
+<p>Earlier we described the diffuculty in buying and safely storing digial assets. These technolical barriers exclude many investors from participating in the crypto market. Today, mostly small and tech savvy investors have bought cryptocurrencies. An exchange traded product lowers the barriers to trade, which allows for more investors and more capital to enter the market.</p>
+<h3 id="increased-trading-volume">Increased trading volume</h3>
+<p>[comment:] # "slides will have three bullets: Capture more volume. New investors. Old investors. if the plot is included it will be on the right hand column and the bullets will be on the left, and the first bullet might be deleted."</p>
+<p>Current exchange traded notes on Bitcoin and Ethereum only stand for some percentage of all trading volume within the crypto market. BlockchainX will increase this percentage, as shown in the graph.</p>
+<p><img alt="With a top 10 certficiate, more of the crypto market's trading volume can be captured." src="/home/he2/Dropbox/Axlantic/investment/slidedeck/figure plot with Fund captures more volume"></p>
+<p>The buyers of our certificate can be split into two separate groups: those who already own cryptocurrencies and those who currently do not. We can call them "new" and "old" investors.
+New investors will contribute to an <em>increase</em> in the total crypto trading volume when they enter the market via bying our certificate on an exchange.
+Old investors will contribute to <em>shifting</em> trading volume from crypto exchanges (e.g. Kraken) to traditional exchanges (e.g. NASDAQ).
+These distrinct groups - the new and old investors - are interested in the BLX certificate for different reasons. New investors are currernlty sidelined due to the technical diffuclties in buying and storing the digital assets. Old investors, on the other hand, benefit from the simplificy of holding our certificate vs rebalancing himsels, as well as the tax benefits.
+Nonetheless, from the point of view from the traditional financial exchanges, both these groups bring in new revenue to the exchanges.</p>
+<h3 id="more-">more?</h3>
+<h2 id="competition">competition</h2>
+<p><a title="generated 2018-09-01 11:15" href="#">comment</a>: # "here we say that they do, and their + and - vs vinter capital.". one paragrap per cometitor.</p>
+<p>xbt</p>
+<ul>
+<li>launched 2015</li>
+<li>1 ETN per coin, currently bitcoin and ethereum. soon more.</li>
+<li>today ca USD 700m AUM.</li>
+<li>Plans on releasing an a basket of their ETNs. it differs a lot from our index fund on several points. for example, the BlockchainX index is designed to be an index that a passive investor can buy into in order to follow the market, wheras xbt's index is merely a collection of all the ETNs xbt have issued. a major draw back of their approach is that if four coins enter the index on a rebalancing date, they must issue four new ETNs before they can let their basket include these four new coins.</li>
+</ul>
+<p>bitwise</p>
+<ul>
+<li>have a private fund</li>
+<li>US only</li>
+<li>must be accredited investor. must buy min USD 250k. if 1% portfolio allocation to crypto this means entire portfolio value must be USD 25m, not many people.</li>
+<li>decrease technical bar, increase financial bar. net, it arguably shrinks the investor base (althoguh to be precise they attract different investors - rich non tech savvy).</li>
+<li>plan to do etf. this year</li>
+<li>good product and marketing</li>
+<li>inflation in their criteria</li>
+<li>only for institutional.</li>
+</ul>
+<p>coinbase</p>
+<ul>
+<li>one of the largest exchanges</li>
+<li>based in US</li>
+<li>currenlty not in europe. will compete with nasdaq more than with vinter capital.</li>
+<li>only the coins on their own exchange</li>
+<li>business focus is exchange</li>
+<li>is large enough to expand into new areas such as custody, which they are currently doing</li>
+<li>not the best reputation among crypto enthusiasts</li>
+</ul>
+<p>them vs us</p>
+<ul>
+<li>Coinbase's core business som fiat to crypto exchange i.e. people buy ETH with their USD.</li>
+<li>Xbt's core business is issuing ETNs on individual virtual currencies i.e. people buy eth cert for eur.</li>
+<li>To both of them the index business is a secondary leg, which has negative consequences for their product: coinbase only include the coins that exists on their exchange (currently five) and xbt creates am index product by forming a basket of their ETNs. These choices are suboptimal. Their products are not clean because they try toake their secondary business leg to fit into their primary business. By contrasr, Our core business is the index certificate. This makes our focus Lazer sharp, and wilö make it thru better choice for all passive investors.</li>
+</ul>
+<h2 id="product-details">Product details</h2>
+<p>this is the "trading report" written by hakan and simon.</p>
+<p>Here we can describe the product in detail. Such as</p>
+<ul>
+<li>index. below are some example rules.<ul>
+<li>market cap weighted of coins. constraint on liquidity per each exchange.</li>
+<li>index price = coin weigth * coin price</li>
+<li>coin weight = coin market cap / total market cap of the top 10 coins</li>
+<li>coin market cap =</li>
+<li>total market cap = sum of market cap for all coins on coinmarketcap.com</li>
+<li>coin price<ul>
+<li>a few alternatives</li>
+<li>= average of coin price on selected exhcnges, equal weighting</li>
+<li>= average of coin price on selected exhcnges, weighted by order depth per</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>which coins are currently included. ((51 different coins have been in the index over the last 5 years. out of these ,27 are now below top 50. hence a buy and hold strategy - not rebalancing your portfolio once a month as we do - would give the investor at large ris kof picking a coin that in the end becomes a loser.))</li>
+<li>trading &amp; hedging</li>
+</ul>
+<h3 id="index">Index</h3>
+<h4 id="wieghts">wieghts</h4>
+<blockquote>
+<p>Circulating supply is the best approximation of the number of digital assets available to public investors. It is derived by taking the total number of existing assets from the blockchain and subtracting the number of assets verifiably burned, locked, or reserved.</p>
+</blockquote>
+<h3 id="sale-of-certificate-a-legal-obligation-to-pay-the-index-value">Sale of certificate = a legal obligation to pay the index value</h3>
+<h3 id="hedging">Hedging</h3>
+<h3 id="custodian">Custodian</h3>
+<blockquote>
+<p>The ETN will seek to hold its digital assets in cold storage for digital assets where cold storage is available. Currently, we are in monitoring process for the Note’s custodian to keeps custody of the majority of the proposed ETN’s digital assets. For coins not yet available for cold storage by the Custodian but included in the top 10 digital asset group, the proposed ETN will develop a custody solution. Private keys are generated in permanently quarantined offline computers that cannot access the internet. Those private keys can be further encrypted before they are stored. The ETN’s crypto assets are put into cold storage immediately after they are acquired and blockchain transactions necessary to rebalance the portfolio are always signed via offline transactions such that private keys are never entered on an online computer.</p>
+</blockquote>
+<h3 id="risks-disclaimer">Risks / disclaimer</h3>
+<blockquote>
+<p>Interests in the proposed ETN are speculative and involve a significant degree of risk. An investment in the ETN is suitable only for sophisticated investors and requires the financial ability and willingness to accept the high risks and limited liquidity inherent in the Interests. There can be no assurance that the proposed ETN will be successful or that losses will not be incurred by the management team. Each investor in the ETN must have the ability to bear the risk of loss of his or her entire investment.</p>
+<p>Investors in the Note must be prepared to bear such risks for an extended period of time. No assurance can be given that the ETN’s investment objectives will be achieved or that investors will receive a return of their capital. Investors are strongly urged to consult with their professional advisors and to carefully review the risk factors prior to investing. The data in the current proposition is based on information from coinmarketcap.com and the management team cannot be held responsible for mistakes in the original data.</p>
+</blockquote>
+<h3 id="legality">Legality</h3>
+<p>Our team has already performed an initial due diligence showing that the type of ETN proposed is legal and can operate in investors' best interest.</p>
+<p>todo marco add some stuff here?</p>
+<h2 id="product-summary">Product summary</h2>
+<p>todo: write this last.</p>
+<blockquote>
+<p>The times of a single-coin investment  and narrow choices for buyers of virtual currencies are over. It is evident that investors who reap the benefits of diversification are better off compared to the rest of investor public by capturing the full digital assets’ opportunity set. Different digital assets offer different return patterns and respond differently to swings in Bitcoin price. This provides an opportunity for investors to generate better risk-adjusted returns by holding a basket of the largest digital assets within the proposed ETN. Diversification benefits are common knowledge regarding every asset class in the world. Digital assets are no exception.</p>
+</blockquote>
+<blockquote>
+<p>Digital assets exhibit low correlations with SP500 and gold. The main reason why the investments in digital assets are held back today is because of security issues such as handling assets directly as an investor, combined with complicated buying and holding process. The proposed ETN will solve all of these issues, and serve the broad investor community.</p>
+</blockquote>
+<h1 id="our-board">our board</h1>
+<p>  if we have an impressive board, brag with that here.</p>
+<p>todo: first recruit people, then put their names here.</p>
+<h1 id="our-road-map">our road map</h1>
+<p>todo write more here when we are close to the presentation. sid will have opinions here.</p>
+<ol>
+<li>approved by fi</li>
+<li>deal with nasdaq</li>
+<li>launch top 10</li>
+<li>potential products: top 100, etc.</li>
+</ol>
+<h1 id="our-ask">our ask</h1>
+<p>our team have the capacity to byild this product.</p>
+<p>we need SEK 5M to create it and SEK 20M on our balance sheet. For an investment of SEk 25M we are ready to give up todo percent of our equity.</p>
+<h1 id="contact">contact</h1>
+<pre class="editor-colors lang-"><div class="line"><span class="syntax--text syntax--plain syntax--null-grammar"><span>jacob@vinter.capital</span></span></div><div class="line"><span class="syntax--text syntax--plain syntax--null-grammar"><span>leopold@vinter.capital</span></span></div></pre></body>
+</html>
