@@ -1,0 +1,38 @@
+see the plot "trading_rebalancedate.png" having the title
+"how much is traded @ rebalncing date, every month"
+
+this measure is how much money must be traded in and out of position.
+`dw` is shorthand for "delta weight".
+
+example table below.
+on t=2 we sell 5% of a and buy 5% of c.
+on t=3 we sell 5% of a and buy 4% of c and 1% of b.
+on t=4 we buy 10% of a and sell 5% b and 5% c.
+
+t   a	    b	    c
+1	0.90	0.09	0.01
+2	0.85	0.09	0.06
+3	0.80	0.10	0.10
+4	0.90	0.05	0.05
+
+on day t=2 and t=3 we have a y value in the graph of 0.10
+so 10% of AUM is traded (of which half sold and half bought)
+but on t=3 the y goes up to 0.20.
+
+this measure does not capture the fact that it is harder to
+reduce 5% weight in one coin and increse 4% in coin A and 1% in coin B, dvs
+reduce 5% weight in one coin and increase 5% weight in one coin
+
+take another scenario:
+
+t   e    f
+0   1    0
+1   0.9  0.1
+2   0.8  0.1
+
+on t=1 we sell 0.10 of e and buy 0.10 of f. so 20% of AUM is traded.
+on t=2 we sell 0.10 of e and buy 0.10 of f. so 20% of AUM is traded.
+note that on day t=1 f entered the index and on day t=2 it was still in the index
+but increased its weight the same amount again. hence the current measure does
+not capture that fact that when a new coin enters the index it will be harder
+for trading. for that another measure is needed, namely coin switches.
