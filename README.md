@@ -9,6 +9,7 @@ The following files and folders are in use:
 1. naming-conventions-objects.md
 1. transform.py
 1. transform-check.py
+1. bandwitdh.py
 1. plot.py
 1. table.py
 1. output/
@@ -25,6 +26,8 @@ The file "naming-conventions-objects.md" describes what convention are followed 
 
 Read every file in the list above, and read them in that order. The most crucial files are "import.py", "functions.py" and "transform.py".
 
+"bandwitdh.py" is used for creating a bandwitdh rebalanced portfolio with 95% legacy assets and 5% digital assets.
+
 Reading "plot.py" takes the most time, but it is straight forward to understand the plots if you understand how the data was imported and transformed.
 
 A tip to get up to speed extra quickly is to only read the text after `##` which are my way in python of doing a heading. reading only these first will be like getting to know the structure of the code and learn _what_ is done before reading the details and learning _how_ it is done.
@@ -40,16 +43,4 @@ in the files you can search for "todo" and find what needs to be worked on. belo
 - dead coins: out of those ca 50 coins that has been top10, what is their status now? how many are dead? (first, define dead then count the nr of dead.)
 - rollcorr: more thought can be put in here.
 
-it might also be worthwile to let `ret_mat` only contain `tkr_beeninblx` (the tickers that have been in the blx certificate) since it reduces the nr of cols from 1500+ to ca 50. it improves the speed an memory. 
-
-------------------------------------------------------------------
-
-
-## case for crypto in an institutional portfolio
-
-follow these steps to do the data anlaysis
-
-1. familiarize yourself by readng all the current code. this will take an hour or more.
-1. import financial assets market cap. i have only imported price and trading volume.
-1. write a function that does tolerance rebalncing. this will probably be around 10-15 rows
-1. using `ret_mat` you will be able to re-create similar graphs as bitwise have done.
+it might also be worthwile to let `ret_mat` only contain `tkr_beeninblx` (the tickers that have been in the blx certificate) since it reduces the nr of cols from 1500+ to ca 50. it improves the speed an memory.  
