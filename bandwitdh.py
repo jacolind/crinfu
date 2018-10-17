@@ -29,10 +29,8 @@ def invest(df, i, amount, p, A, B, rm_shares=False):
     # value = share price * shares bought 
     A_value = A + '_value'
     B_value = B + '_value'
-    df.iloc[i:, c[A_value]] = (df.iloc[i:, c[A]] * 
-                                   df.iloc[i:, c[A_shares]])
-    df.iloc[i:, c[B_value]] = (df.iloc[i:, c[B]] * 
-                                   df.iloc[i:, c[B_shares]])
+    df.iloc[i:, c[A_value]] = (df.iloc[i:, c[A]] * df.iloc[i:, c[A_shares]])
+    df.iloc[i:, c[B_value]] = (df.iloc[i:, c[B]] * df.iloc[i:, c[B_shares]])
     
     # 3) set ratio of how much value we have in each asset 
     df.iloc[i:, c['ratio']] = (df.iloc[i:, c[A_value]] / 
@@ -42,10 +40,6 @@ def invest(df, i, amount, p, A, B, rm_shares=False):
     if rm_shares:
         del df[A_shares]
         del df[B_shares]
-
-# todo: could make the function more general by accepting input
-# A='BLX' B='B'TRD'. then we could reuse the invest() to create a 60/40 portoflio 
-# based on only two column namely prices of stocks and bonds. 
 
 def rebalance(df, tol, p, i=0, rm_shares=False, rm_cols=False):
     """
@@ -90,7 +84,7 @@ invest(df, i=0, amount=100, p=0.60, A='Stocks', B='Bonds', rm_shares=True)
 rebalance(df, tol=0.05, p=0.60, A='Stocks', B='Bonds', rm_shares=True)
 # invest() create cols and rebalance() change their values by rebalancing.
 # based on new columns that wes create, create portfolio value 
-df['TRD'] = df['Stocks_value'] + df['Bonds_value]
+df['TRD'] = df['Stocks_value'] + df['Bonds_value']
 # delete or rename ratio since it will be used later
 del df['ratio'] 
 
@@ -99,18 +93,21 @@ invest(df, i=0, amount=100, p=w_target, A='BLX', B='TRD')
 w_target = 0.05 
 w_band = 0.02
 rebalance(df, tol=w_band, p=w_target, A='BLX', B='TRD') 
-# create portfolio value for PORT: 5%/95%
-df['PORTF_value'] = df['BLX'] + df['TRD']
-df['BLX_weight'] = df['BLX_value'] / df['PORTF_value']
-df['TRD_weight'] = df['TRD_value'] / df['PORTF_value']
+# create portfolio value for portoflio A 'PFA': 5%/95%
+df['PFA'] = df['BLX_value'] + df['TRD_value'] # must add _value
+df['BLX_weight'] = df['BLX_value'] / df['PFA']
+df['TRD_weight'] = df['TRD_value'] / df['PFA']
 # delete cols we do not need 
 df.drop(['BLX_shares', 'TRD_shares', 
          'BLX_value', 'TRD_value'], inplace=True)
 
 ## see the portfolio 
 
-# plot value over time 
-df[['PORT_value', 'BLX', 'TRD']].plot()
+# plot investent over time 
+df[['PFA', 'BLX', 'TRD']].plot()
+
+# compare return 
+price2return(df[['PFA', 'BLX', 'TRD']])
 
 # see all weights over time 
 print(df['BLX_weight'])
