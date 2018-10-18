@@ -3,6 +3,11 @@
 
 ## define invest and rebalance functions 
 
+
+d = dict([(col, j) for j, col in enumerate(ret_fin_mat.columns)])
+d
+d['Stocks']
+
 def invest(df, i, amount, p, A, B, rm_shares=False):
     """
     Invest a USD amount in p% of asset A and 1-p% in asset B,
@@ -11,8 +16,21 @@ def invest(df, i, amount, p, A, B, rm_shares=False):
     This modifies df, by creating new cols: shares & value & ratio.
     col with shares can be removed. 
     """
+    A_shares = A + '_shares'
+    B_shares = B + '_shares'
+    A_value = A + '_value'
+    B_value = B + '_value'
+    df[A_shares] = 0
+    df[B_shares] = 0
+    df[A_value] = 0
+    df[B_value] = 0
+    df['ratio'] = 0
+    # detta kanske fuckar upp när ma nkör rebalance funktoinen. 
+
+
+    # dictionary of column number and column name
     c = dict([(col, j) for j, col in enumerate(df.columns)])
-    
+
     # prices are from the market, but the nr of shares to own we cancontrol
     
     # 1) reset nr shares of shares you own 
@@ -33,26 +51,31 @@ def invest(df, i, amount, p, A, B, rm_shares=False):
     df.iloc[i:, c[B_value]] = (df.iloc[i:, c[B]] * df.iloc[i:, c[B_shares]])
     
     # 3) set ratio of how much value we have in each asset 
-    df.iloc[i:, c['ratio']] = (df.iloc[i:, c[A_value]] / 
-                               df.iloc[i:, c[A_value]]+df.iloc[i:, c[B_value]])
+    df.iloc[i:, c['ratio']] = (df.iloc[i:, c[A_value]] / df.iloc[i:, c[A_value]]+df.iloc[i:, c[B_value]])
                                
     # remove cols 
     if rm_shares:
         del df[A_shares]
         del df[B_shares]
+    
+    return df
 
-def rebalance(df, tol, p, i=0, rm_shares=False, rm_cols=False):
+def rebalance(df, p, A, B, w_target, w_band, i=0,  rm_shares=False, rm_cols=False):
     """
     Rebalance df whenever the ratio falls outside the tolerance range.
     This modifies df, by adjusting the cols shares & value, based on ratio.
     """
+
     c = dict([(col, j) for j, col in enumerate(df.columns)])
     while True:
+        
+        A_value = A + '_value'
+        B_value = B + '_value'
+        
         # 1) create a mask 
         
         # return true whenever ratio is outside of range 
-        mask = (df['ratio'] >= w_target + w_band) | 
-               (df['ratio'] <= w_target - w_band)
+        mask = (df['ratio'] >= w_target + w_band) | (df['ratio'] <= w_target - w_band)
         # overwrite with false for prior locations (i.e. prior days)
         mask[:i] = False
         
@@ -69,7 +92,7 @@ def rebalance(df, tol, p, i=0, rm_shares=False, rm_cols=False):
         # amount we have in our porftolio now 
         amount = (df.iloc[i, c[A_value]] + df.iloc[i, c[B_value]])
         # invest that amount (this begins investing process again e.g. rebalnce)
-        invest(df, i, amount, p, rm_shares)
+        invest(df=df, i=i, amount=100, p=p, A=A, B=B, rm_shares=False)
     # remove cols 
     if rm_cols:
       # recall A shares is taken care of otherwise 
@@ -80,8 +103,10 @@ def rebalance(df, tol, p, i=0, rm_shares=False, rm_cols=False):
 ## create our bandwidth rebalanced portfolio 
 
 # firstly, create TRD: a 60%/40% stocks/bonds portfolio. tolereance band 5%. 
-invest(df, i=0, amount=100, p=0.60, A='Stocks', B='Bonds', rm_shares=True)
-rebalance(df, tol=0.05, p=0.60, A='Stocks', B='Bonds', rm_shares=True)
+pri_trd_mat = invest(pri_fin_mat, i=0, amount=100, p=0.60, A='Stocks', B='Bonds', rm_shares=False)
+pri_trd_mat.head()
+pri_trd_mat = rebalance(pri_trd_mat, p=0.60, A='Stocks', B='Bonds', w_target=0.60, w_band=0.05, rm_shares=True)
+pri_trd_mat.head()
 # invest() create cols and rebalance() change their values by rebalancing.
 # based on new columns that wes create, create portfolio value 
 df['TRD'] = df['Stocks_value'] + df['Bonds_value']

@@ -37,5 +37,5 @@ volfr_vcc_mat.tail() # check if they dont sum to a too large number
 
 volfr_vcc_mat.tail()
 volfr_vcc_mat['Bitcoin'].plot()
-volfr_vcc_mat[['Bitcoin', 'BLX']].head(500).plot(title='volume_fraction')
-volfr_vcc_mat[['Bitcoin', 'BLX']].tail(500).plot(title='volume_fraction')
+volfr_vcc_mat[['BLX', 'Bitcoin']].head(500).plot(title='volume_fraction')
+volfr_vcc_mat[['BLX', 'Bitcoin']].tail(500).plot(title='volume_fraction')
