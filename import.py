@@ -1,3 +1,4 @@
+###############################################################################
 """
 import data from coins, which has previously been extracted using HH's R script.
 saves the imported objects in memory as pandas dataframes.
