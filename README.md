@@ -36,11 +36,6 @@ Lastly, there is a file called `coins2_20180523_2103.html`. This data analysis w
 
 ## todo
 
-in the files you can search for "todo" and find what needs to be worked on. below is a non-exhaustive list of isses to be fixed. most of them are minor.
+the file `TODO.md` contain an up to date todo list for the project.
 
-- aum start at 100? håkan and simon can fix it.
-- choose colors
-- dead coins: out of those ca 50 coins that has been top10, what is their status now? how many are dead? (first, define dead then count the nr of dead.)
-- rollcorr: more thought can be put in here.
-
-it might also be worthwile to let `ret_mat` only contain `tkr_beeninblx` (the tickers that have been in the blx certificate) since it reduces the nr of cols from 1500+ to ca 50. it improves the speed an memory.  
+in the files you can search for "todo" and find what needs to be worked on. these are often smaller things to be fixed. 
