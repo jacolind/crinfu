@@ -22,17 +22,27 @@ as of 20180908:
 
 graph of passive should be done by ous. take the data from the plot.  just a few lines of python.
 
+TODO add logo to figures folder.
+
+make net-flows-1.png on your own in python to make it look good.
+
+select of make table for historical returns.
+
+todo setup contact@vinter.capital
+
+add details to roadmap
+
+add product details. me / sid / hakan. 
+
 ## First slide
 
-logo
-
-slogan.
-
-> Don't bet - invest.
+![](figures/logo1.png)
 
 # Introduction
 
 ## Team
+
+todo copy from web
 
 \begin{columns}[onlytextwidth]
 
@@ -71,9 +81,11 @@ From active funds to passive funds.
 
 Trying to beat the market is an unprofitable strategy.
 
-1. active cannot collectivley beat the market
-2. sub-groups do not beat their sub-index.
-3. winners do not stay winners. see transition matrix and morningstar plot.
+1. Active investors cannot collectivley beat the market.
+2. Sub-groups do not beat their sub-index.
+3. Winners do not stay winners.
+
+<!-- 1 is logic and math. 2 is empirics, and is intuitive.  3 is empirics, see transition matrix and morningstar plot. -->
 
 ## Markovitz
 
@@ -94,14 +106,14 @@ Trying to beat the market is an unprofitable strategy.
 
 \end{columns}
 
-## Indexing in crypto
+## No indexing in cryptocurrencies
 
-Most crypto owners only have 1-3 different virtual currencies.
+Most cryptocurrency owners only have 1-3 different virtual currencies.
 
 [comment]: # "include the fomo comment When did you buy Ethereum"
 
 
-# Part II: Why crypto
+# Part II: Why cryptocurrency
 
 ##  The internet of money
 
@@ -129,12 +141,14 @@ Different cryptocurrencies have different use cases, and multiple winners will e
 4. Gold standard: paper backed by gold.
 5. Fiat money: paper without intrinsic value.
 
+Throughout history we have used many forms of money.
+We change whenever it is more convinient.
+
 ##  Properties of money
 
 Definition of money:
 
 > Money is any item (or verifiable record) that is generally accepted as payment for goods and services and repayment of debts.
-> detta är min omskrivning av wikis.
 
 Functions of money:
 
@@ -148,22 +162,25 @@ Functions of money:
 
 ##  Properties of money
 
-Some things are more money than others.
-
 Properties money should have:
 
-* Scarce: The supply of money in circulation ensures values remain relatively constant.
-* Divisible: Can be divided into smaller units of value.
-* Fungible: One unit is viewed as interchangeable with another.
-* Portable: Individuals can carry money with them and transfer it to others.
-* Durable: An item must be able to withstand being used repeatedly.
-* ((Accepted: Everyone must be able to use the money for transactions.))
-* Uniform: All versions of the same denomination must have the same purchasing power.
+- Durable: can withstand repeated use.
+- Divisible: can be divided to make smaller payments.
+- Portbale: can be carried by one person and tranfered to others.
+- Fungible: each unit is interchangeable.
+- Uniform: each unit have the same value.
+- Scarce: limited supply so its value does not fall.
+
+Some things are more money than others.
+
+<!--
+texten ovan är från http://money.visualcapitalist.com/infographic-the-properties-of-money/ skriv om eller korta ner elle rbåda.
+easy to verify. hard to fake.
+
+-->
 
 <!-- accepted är väl mer en konsekvens än en property? om ngt är accepted så är det per defn money. och saker är ju mer money om det är mer accepted. men det känns logiskt tveksamt att inkludera accepted, för det är ett  cirkulärt argument. därtill är det dåligt för vårt crypto case. -->
 
-texten ovan är från http://money.visualcapitalist.com/infographic-the-properties-of-money/ skriv om eller korta ner elle rbåda.
-easy to verify. hard to fake.
 
 
 ##  History of bitcoin
@@ -180,27 +197,34 @@ waitinfor sid
 
 <!-- se properties of money och highlihta där bitcoin excels. -->
 
-Properties money should have that bitcon does have
+Properties money should have that bitcon does have:
 
-* Scarce: Supply is capped at 21 million
-* Low fee: cost 60 cents to move millions of dollars [^bitinfo-fee]
+* Durable: It can be used an infinite amount of times.
+* Divisible: each bitcoin can be divided into 100 million parts. <!-- If 1 BTC costs $99,000 then $0.00099 is the lowest value that can be sent.-->
 * Portable: bitcoin is borderless
-* Divisible: a bitcoin can be divided into 100 million parts. If 1 BTC costs $99,000 then $0.00099 is the lowest value that can be sent.
-* Fungible: Yes
-* Durable: Yes
-* Uniform: Yes
+* Fungible: all units are interchangeable.
+* Uniform: all units have the same value.
+* Scarce: Supply is capped at 21 million
 
-[^bitinfo-fee]: https://bitinfocharts.com/comparison/bitcoin-transactionfees.html
+It is also low fee: costs $0.60 to move millions of dollars.
+
+<!-- source on fee https://bitinfocharts.com/comparison/bitcoin-transactionfees.html -->
 
 ##  Properties of bitcoin
 
-Bonus properties of bitcoin
+Bonus properties of bitcoin:
 
-* Decentralized: Users and miners are spread across the globe, implying that It cannot be shut down as there is no single point of failure => secure.
-* Secure: The blockchain has never been hacked. (Merely exchanges and individual accounts, because storing coins safely is difficult.)
-* Censorship resistant: It is impossible to prevent a person from sending value to someone else.
-* Open source: Actively developed and constantly improving. This improves security since anyone can inspect the code and improve it (or hack it which has not happened)
-* Programmable: New solutions such as micropayments, video streaming by the second or other innovations are possible when money is not static but digital.
+* Decentralized: No single point of failure.
+* Secure: Everybody can see the code, and the bitcoin has never been hacked.
+* Censorship resistant: Anyone can send and recieve value.
+* Open source: Actively developed with new features.
+* Programmable: New solutions such as micropayments, video streaming by the second and other future innovavtions we cannot yet imagine.
+
+<!-- these points connects to each other.
+securty & open source.
+programmable & open source.
+-->
+
 
 <!-- the supply of bitcoins will reach 21 million. Today there are ca 16 million and the supply grows by ca 4%.
 
@@ -211,11 +235,13 @@ censor: impossible to not allow someone to transact
 open source : is actively developed and can be audited
  -->
 
-##  note to self
+##  Note to self
 
 nu har jag nog etablerat att bitcoin kan funka som pengar. nästa steg blir att säga att det finns andra use cases oxå.
 
 ##  Different blockchains
+
+Different use cases and communities.
 
 - Bitcoin: Digital gold and peer-to-peer digital cash.
 - Ethereum: A world computer with smart contracts.
@@ -223,22 +249,37 @@ nu har jag nog etablerat att bitcoin kan funka som pengar. nästa steg blir att 
 - Augur: Decentralized prediction market.
 - Storj: Rent your hard drive.
 
+Which of these will dominate?
+
 <!-- table above illistrate different use cases, they try to solve different provlems.
 
 then I argue that even though two cryptocurrencies try to solve the very same problem (e.g. Bitcoin vs Litecoin or Ethereum vs EOS) there is an equillibrium in which they can co-exists since they differ in their parameters.
 
-lastly i just make a point about communities. btc convervative, ehtereum developers, xrp bank friendly.s
+then i just make a point about communities. btc convervative, ehtereum developers, xrp bank friendly.
+
+lastly i make a point that we do not know who will win
 -->
 
-##  Market in numbers: users, exchanges, etc.
+##  Market in numbers
+
+- Total market capitalization of all cryptocurrencies: qq as of yyyy-mm-dd
+- Nr of users
+- Nr of coins
+- Trading volume for qq largest exchanges during Oct 2018 was USD qq million.
 
 ##  Historical returns
 
 returns vol table. price graph.
 
-##  Trade and trust (den abstrakta grejen).
+todo select table or graph.
 
-vet ej om den platsar.
+##  Trade and trust
+
+Why are cryptocurrencies useful?
+
+1. Trust is needed for trade.
+2. Today we use trusted third parties.
+3. A blockchain digitize trust.
 
 ##  Myths and counter arguments
 
@@ -254,26 +295,68 @@ vet ej om den platsar.
 - Supply of 21 million is not enough
 - Governments can shut it down
 
-addera mer?
-
+<!-- todo addera mer? -->
 
 ## Cryptocurrencies in a traditional portfolio
 
 <!-- ev. discuss portfolio thinking. -->
 
+Low correlation between different cryptocurrencies.    
+Negative correlation between traditional assets and cryptocurrencies.   
+Thus our certificate can diversify a portfolio.
 
-![Low correlation between different cryptocurrencies.    Negative correlation between traditional assets and cryptocurrencies.   Thus our certificate can diversify a portfolio.](figures/corr-trad_coins_fund-monthly-annotFalse_smallsize.png)
+![](figures/corr-trad_coins_fund-monthly-annotFalse_smallsize.png)
 
 <!-- then: discuss expansion of effieint frontier, or include the plot i asked håkan to make. -->
 
 ## Cryptocurrencies in a traditional portfolio
 
+Compare three portfolios:
+
 * TRD: A traditional portfolio with 60% weight in stocks and 40% weights in bonds.
 * BLX: BlockchainX certificate, contains the ten largest cryptocurrencies weighted by market capitalization.
-* BAL: A balanced portfolio of 95% TRD and 5% BLX. Rebalanced whenever weight in BLX go above 7% or below 3%.
+* BAL: A balanced portfolio of 95% TRD and 5% BLX.
+
+<!-- or add the info about rebalancing as a footnote in the retunrs table. -->
 
 ## Cryptocurrencies in a traditional portfolio
 
+\begin{table}[retvol-bal]
+	\begin{tabular}{|l|l|l|l|}
+	\hline
+							 & TRD & BLX & BAL \\ \hline
+	Return       & 1   & 2   & 3   \\ \hline
+	Volatility   & 4   & 5   & 6   \\ \hline
+	Return / Vol & 7   & 8   & 9   \\ \hline
+	\end{tabular}
+\end{table}
+
+Details:
+
+- Time period yyyy-mm to yyyy-mm.
+- BLX is rebalanced monthly.
+- TRD is rebalanced whenever stocks go above 65% or below 55%.
+- BAL is rebalanced whenever BLX go above 7% or below 3%.
+
+## note to self
+
+ang förre sliden.
+
+ha rebalance info antingen här eller där uppe.
+
+kanske ha details ovan i en footnote
+
+## Cryptocurrencies in a traditional portfolio
+
+![](figures/weight_BAL.jpg)
+
+todo decide colors in this one.
+
+## alt
+
+or we have table and plot in same slide, column wise
+
+## Cryptocurrencies in a traditional portfolio
 
 \begin{columns}[onlytextwidth]
 
@@ -300,21 +383,6 @@ addera mer?
 \end{columns}
 
 
-## Cryptocurrencies in a traditional portfolio
-
-\begin{table}[retvol-bal]
-	\begin{tabular}{|l|l|l|l|}
-	\hline
-							 & TRD & BLX & BAL \\ \hline
-	Return       & 1   & 2   & 3   \\ \hline
-	Volatility   & 4   & 5   & 6   \\ \hline
-	Return / Vol & 7   & 8   & 9   \\ \hline
-	\end{tabular}
-\end{table}
-
-\includegraphics{figures/weight_BAL.jpg}
-
-
 ## An emerging asset class
 
 
@@ -323,13 +391,13 @@ addera mer?
 
 ## Problem: Difficult to buy
 
-Long waiting time
+Long waiting time.
 
-Hours of KYC and AML
+Hours of KYC and AML.
 
-Register at several exchanges (to reduce dependency and increase liquidity)
+Register at several exchanges (to reduce dependency and increase liquidity).
 
-Exchanges have different trading rules, fee structures and user interfaces
+Exchanges have different trading rules, fee structures and user interfaces.
 
 <!---
 * they would not allow more customer!
@@ -337,34 +405,34 @@ Exchanges have different trading rules, fee structures and user interfaces
 
 ## Problem:  Difficult to store
 
-Users (not Euroclear) store their digital assets themselves
+Users (not Euroclear) store their digital assets themselves.
 
-Important: -100% return
+Important: -100% return.
 
-Complicated: USD 670 million lost during 2018 Q1
+Complicated: USD 670 million lost during 2018 Q1.
 
 <!-- mention mt gox hack BTC 6k. -->
 
 ## Problem:  Passive investing requires activity
 
 Assume an investor is both bullish on the crypto market and believe in a passive investment strategy.
-What does he have to follow this strategy?
+What does he have to do?
 
-Set up the portfolio:
+To set up the portfolio:
 
-* Choose or define an index
-* Buy coins (on several exchanges)
-* Move coins to cold storage (in different wallets)
+* Choose or define an index.
+* Buy coins (on several exchanges).
+* Move coins to cold storage (in different wallets).
 
 ## Problem:  Passive investing requires activity
 
 To invest a portion of the salary every month:
 
-* Repeat the process of buying and moving to cold storage
+* Repeat the process of buying and moving to cold storage.
 
 To keep his crypto portfolio around 5% of his total portfolio:
 
-* move from cold storage to exchange, sell and move back to cold storage
+* move from cold storage to exchange, sell and move back to cold storage.
 
 ## Problem:  Passive investing requires activity
 
@@ -372,20 +440,20 @@ To rebalance once a month:
 
 <!-- (in order to own the current market and not what it was at the purchasing date?) -->
 
-* Move from cold storage to exchange
-* Buy coins that entered the index
-* Sell coins that exited the index
-* Rebalance other coins due to supply changes (e.g. new bitcoins have been created)
+* Move from cold storage to exchange.
+* Buy coins that entered the index.
+* Sell coins that exited the index.
+* Rebalance other coins due to supply changes (e.g. new bitcoins have been created).
 
 
 To follow the law:
 
-* Log all trades and pay 30% capital gains tax on every trade
+* Log all trades and pay 30% capital gains tax on every trade.
 
 
 ## Problem:  Passive investing requires activity
 
-Doing it yourself is a mess
+Doing it yourself is a mess.
 
 ## Solution: An exchange traded note
 
@@ -405,11 +473,11 @@ I like the phrase "do not bet - invest."
 -->
 
 
-**Simple**: Buy it at your current broker
+**Simple**: Buy it through your existing broker.
 
-**Secure**: No need to worry about loss or theft
+**Secure**: No need to worry about loss or theft, we secure the assets.
 
-**Diverse**: Do not bet on a single project's success - invest in  the market
+**Diverse**: Do not bet on a single project's success - invest in the market.
 
 
 
@@ -455,7 +523,7 @@ Economies of scale
 
 Many investors who cannot buy today \newline
 (for legal or technical reasons) \newline
-will be able to buy the BlockchainX certificate
+will be able to buy the BlockchainX certificate.
 
 ## Benefit 4: Increased trading volume
 
@@ -463,6 +531,7 @@ will be able to buy the BlockchainX certificate
 * New investors
 * Old investors
 
+NASDAQ has an incentive to list our certificate.
 
 ## Product details
 
@@ -504,7 +573,7 @@ For details, read our [Whitepaper][url-whitepaper]
 2. Finansinspektionen
 3. NASDAQ
 
-etc...
+<!-- todo add here -->
 
 ## Ask
 
