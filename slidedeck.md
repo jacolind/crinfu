@@ -22,8 +22,6 @@ as of 20180908:
 
 graph of passive should be done by ous. take the data from the plot.  just a few lines of python.
 
-TODO add logo to figures folder.
-
 make net-flows-1.png on your own in python to make it look good.
 
 select of make table for historical returns.
@@ -32,11 +30,36 @@ todo setup contact@vinter.capital
 
 add details to roadmap
 
-add product details. me / sid / hakan. 
+add product details. me / sid / hakan.
+
+redraw corr plot with BlockchainX not Fund as the name.
+
+---
+
+ha en competitor slide med bitwise, xbt, oss. man kan ju förklara oss som fusionen mellan bitwise och xbt.
+
+team slide kanske ska ligga i slutet. när man pratar om competion vs us och vår roadmap.
+typ 1) competition och vrf vår produkt är bättre 2) road map dvs hur vi ska göra 3) vi som ska utföra roadmap ,dvs vi kan göra det.
+
+jag tror man ska ha en juridisk slide som övertygare path from today to listed at nasdaq.
+varför kommer just vi kunna llista? för att xbt gjort grundjobbet.
+
+---
+
+obesvarade / oklara punkter enligt AL:
+- Hur ni tjänar pengar
+- Hur listas ni?
+- Varför skulle ni listas?
+- Även om ni listas, hur får vi noobs som köper på coinbase nu att köpa vårt cert?
+
 
 ## First slide
 
-![](figures/logo1.png)
+\maketitle
+
+---
+
+\includegraphics{figures/vinterCapitalLogo.jpg}
 
 # Introduction
 
@@ -47,15 +70,15 @@ todo copy from web
 \begin{columns}[onlytextwidth]
 
   \begin{column}{.5\textwidth}
-  image 1, name 1, text 1.
+  1, name 1, text 1.
 
-  image 3, name 3, text 3.
+  3, name 3, text 3.
   \end{column}
 
   \begin{column}{.5\textwidth}
-  image 2, name 2, text 2.
+  2, name 2, text 2.
 
-  image 4, name 4, text 4.
+  4, name 4, text 4.
   \end{column}
 
 \end{columns}
@@ -73,42 +96,23 @@ mabe adjust depth?
 
 ## Money flow
 
-From active funds to passive funds.
-
-![Net flow into index funds](figures/net-flows-1.png)
+![Net flow from active to passive.](figures/net-flows-1.png)
 
 ## Passive beats active
 
-Trying to beat the market is an unprofitable strategy.
+Trying to beat the market is an unprofitable strategy, as shown by academia. 
 
-1. Active investors cannot collectivley beat the market.
-2. Sub-groups do not beat their sub-index.
-3. Winners do not stay winners.
+<!-- kanske ha citat från jensen eller fama. eller har ref till många artiklar. -->
 
 <!-- 1 is logic and math. 2 is empirics, and is intuitive.  3 is empirics, see transition matrix and morningstar plot. -->
 
 ## Markovitz
 
-
-\begin{columns}[onlytextwidth]
-
-  \begin{column}{.5\textwidth}
-
-  Diversification explained.
-
-  \end{column}
-
-  \begin{column}{.5\textwidth}
-
-  \includegraphics{figures/Efficient-Portfolio-Frontier.png}
-
-  \end{column}
-
-\end{columns}
+![Diversification stems from correlation and it increases the risk adjusted returns.](figures/Efficient-Portfolio-Frontier.png)
 
 ## No indexing in cryptocurrencies
 
-Most cryptocurrency owners only have 1-3 different virtual currencies.
+Most cryptocurrency owners only have 1-3 different coins.
 
 [comment]: # "include the fomo comment When did you buy Ethereum"
 
@@ -142,7 +146,6 @@ Different cryptocurrencies have different use cases, and multiple winners will e
 5. Fiat money: paper without intrinsic value.
 
 Throughout history we have used many forms of money.
-We change whenever it is more convinient.
 
 ##  Properties of money
 
@@ -201,12 +204,10 @@ Properties money should have that bitcon does have:
 
 * Durable: It can be used an infinite amount of times.
 * Divisible: each bitcoin can be divided into 100 million parts. <!-- If 1 BTC costs $99,000 then $0.00099 is the lowest value that can be sent.-->
-* Portable: bitcoin is borderless
+* Portable: bitcoin is borderless.
 * Fungible: all units are interchangeable.
 * Uniform: all units have the same value.
 * Scarce: Supply is capped at 21 million
-
-It is also low fee: costs $0.60 to move millions of dollars.
 
 <!-- source on fee https://bitinfocharts.com/comparison/bitcoin-transactionfees.html -->
 
@@ -214,11 +215,12 @@ It is also low fee: costs $0.60 to move millions of dollars.
 
 Bonus properties of bitcoin:
 
+* Low fee: costs $0.60 to move millions of dollars.
 * Decentralized: No single point of failure.
 * Secure: Everybody can see the code, and the bitcoin has never been hacked.
 * Censorship resistant: Anyone can send and recieve value.
 * Open source: Actively developed with new features.
-* Programmable: New solutions such as micropayments, video streaming by the second and other future innovavtions we cannot yet imagine.
+* Programmable: New solutions such as micropayments, video streaming by the second and other future innovations.
 
 <!-- these points connects to each other.
 securty & open source.
@@ -245,7 +247,7 @@ Different use cases and communities.
 
 - Bitcoin: Digital gold and peer-to-peer digital cash.
 - Ethereum: A world computer with smart contracts.
-- XRP: Global remittances, fast and cheap.
+- Ripple: Global remittances, fast and cheap.
 - Augur: Decentralized prediction market.
 - Storj: Rent your hard drive.
 
@@ -260,6 +262,11 @@ then i just make a point about communities. btc convervative, ehtereum developer
 lastly i make a point that we do not know who will win
 -->
 
+
+
+
+
+<!--
 ##  Market in numbers
 
 - Total market capitalization of all cryptocurrencies: qq as of yyyy-mm-dd
@@ -273,6 +280,11 @@ returns vol table. price graph.
 
 todo select table or graph.
 
+-->
+
+
+
+
 ##  Trade and trust
 
 Why are cryptocurrencies useful?
@@ -281,6 +293,7 @@ Why are cryptocurrencies useful?
 2. Today we use trusted third parties.
 3. A blockchain digitize trust.
 
+<!--
 ##  Myths and counter arguments
 
 - Volatile
@@ -295,17 +308,21 @@ Why are cryptocurrencies useful?
 - Supply of 21 million is not enough
 - Governments can shut it down
 
-<!-- todo addera mer? -->
+todo addera mer?
+
+-->
 
 ## Cryptocurrencies in a traditional portfolio
 
 <!-- ev. discuss portfolio thinking. -->
 
-Low correlation between different cryptocurrencies.    
-Negative correlation between traditional assets and cryptocurrencies.   
+<!---
+Low correlation between different cryptocurrencies.
+Negative correlation between traditional assets and cryptocurrencies.
 Thus our certificate can diversify a portfolio.
+-->
 
-![](figures/corr-trad_coins_fund-monthly-annotFalse_smallsize.png)
+![Our certificate is a diversifier.](figures/corr-trad_coins_fund-monthly-annotFalse_smallsize.png)
 
 <!-- then: discuss expansion of effieint frontier, or include the plot i asked håkan to make. -->
 
@@ -313,8 +330,8 @@ Thus our certificate can diversify a portfolio.
 
 Compare three portfolios:
 
-* TRD: A traditional portfolio with 60% weight in stocks and 40% weights in bonds.
-* BLX: BlockchainX certificate, contains the ten largest cryptocurrencies weighted by market capitalization.
+* BLX: Our BlockchainX certificate, contains the 10 largest cryptocurrencies weighted by market capitalization.
+* TRD: A traditional portfolio with of 60% stocks and 40% bonds.
 * BAL: A balanced portfolio of 95% TRD and 5% BLX.
 
 <!-- or add the info about rebalancing as a footnote in the retunrs table. -->
@@ -333,59 +350,19 @@ Compare three portfolios:
 
 Details:
 
-- Time period yyyy-mm to yyyy-mm.
 - BLX is rebalanced monthly.
-- TRD is rebalanced whenever stocks go above 65% or below 55%.
-- BAL is rebalanced whenever BLX go above 7% or below 3%.
-
-## note to self
-
-ang förre sliden.
-
-ha rebalance info antingen här eller där uppe.
-
-kanske ha details ovan i en footnote
-
-## Cryptocurrencies in a traditional portfolio
-
-![](figures/weight_BAL.jpg)
-
-todo decide colors in this one.
-
-## alt
-
-or we have table and plot in same slide, column wise
-
-## Cryptocurrencies in a traditional portfolio
-
-\begin{columns}[onlytextwidth]
-
-  \begin{column}{.4\textwidth}
-
-    \begin{table}[retvol-bal]
-      \begin{tabular}{|l|l|l|l|}
-      \hline
-                   & TRD & BLX & BAL \\ \hline
-      Return       & 1   & 2   & 3   \\ \hline
-      Volatility   & 4   & 5   & 6   \\ \hline
-      Return / Vol & 7   & 8   & 9   \\ \hline
-      \end{tabular}
-    \end{table}
-
-  \end{column}
-
-  \begin{column}{.6\textwidth}
-
-    \includegraphics{figures/weight_BAL.jpg}
-
-  \end{column}
-
-\end{columns}
+- TRD is rebalanced when weight in stocks is >65% or <55%.
+- BAL is rebalanced when weight in BLX  is >7% or <3%.
+- Time period is yyyy-mm to yyyy-mm.
 
 
 ## An emerging asset class
 
+Low corrlation with stocks and bonds.
 
+Value is driven by different fundamentals than other asset classes.
+
+How will it behave during a financial crisis?
 
 # Part III: Our product
 
@@ -475,9 +452,9 @@ I like the phrase "do not bet - invest."
 
 **Simple**: Buy it through your existing broker.
 
-**Secure**: No need to worry about loss or theft, we secure the assets.
+**Secure**: We secure the assets, no need to worry about loss or theft.
 
-**Diverse**: Do not bet on a single project's success - invest in the market.
+**Diverse**: Do not bet on a single asset - invest in the market.
 
 
 
@@ -527,26 +504,23 @@ will be able to buy the BlockchainX certificate.
 
 ## Benefit 4: Increased trading volume
 
-* NASDAQ miss out on the trading volume in coin 3-10
-* New investors
-* Old investors
+Our certificate attracts both new and old investors.
 
-NASDAQ has an incentive to list our certificate.
+NASDAQ miss out on the trading volume in coin 3-10 so they have an incentive to list our product.
 
 ## Product details
 
 below is jus tan outline. i will do slides later after talking with hakan and simon.
 
 * Index
-  * Top 10
-  * Market capializaiton weighted
-    * the weight of each currency is $w_i = m_i / m$ where $m_i$ is the market capitalization of currency $i$ and $m$ is the total market cap for the 10 selected coins
-  * Rebalanced monthly
-  * Publish index value daily frequency
+  * Rebalanced monthly.
+  * Publish index value daily frequency.
+  * Market capializaiton weighted, i.e. the weight of each asset is equal to its market capitalization divided by the total market cap for the 10 selected assets.
 
 ---
 
 * Certificate
+  * Fee 2.5% on asset under management
   * Traded throughout the day
   * Delivered T+2
   * ETN is a promise
@@ -573,7 +547,7 @@ For details, read our [Whitepaper][url-whitepaper]
 2. Finansinspektionen
 3. NASDAQ
 
-<!-- todo add here -->
+todo add here!
 
 ## Ask
 
