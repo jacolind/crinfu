@@ -191,7 +191,7 @@ df_bal.shape != df_trd.shape
 # concat, inner join 
 df_bal_w = pd.concat([df_trd.wA, df_bal.wA], axis=1, join='inner')
 df_bal_w.columns = ['w_stocks_in_trd', 'w_blx_in_bal']
-assert (df_bal_w.w_blx_in_bal == df_bal.wA).all()SS
+assert (df_bal_w.w_blx_in_bal == df_bal.wA).all()
 # weight on stock in balanced pf = weights in TRD * (1 - blx weight)
 df_bal_w['w_stocks_in_bal'] = df_bal_w['w_stocks_in_trd'] * (1 - df_bal_w.w_blx_in_bal)
 # weight in bond is the rest
@@ -199,12 +199,13 @@ df_bal_w['w_bonds_in_bal'] = 1 - df_bal_w.w_blx_in_bal - df_bal_w['w_stocks_in_b
 df_bal_w.columns = ['removecol', 'BLX', 'Stocks', 'Bonds'] # tror det är ordningen
 df_bal_w.drop('removecol', axis=1, inplace=True)
 # plot
-df_bal_w.plot.area(color=[clr_blx, '#ee82ee', '#a020f0'], alpha=0.8)
+df_bal_w.plot.area(color=['#483d8b', '#ee82ee', '#a020f0'], alpha=0.8)
 title4 = 'BAL portfolio: \n 5% to BLX and 95% to 60/40 stocks/bonds'
 title5 = 'BAL portfolio: 5% in BLX and 95% in TRD'
 plt.title(title5)
 plt.ylabel('Allocation in BAL portfolio')
 plt.legend(loc=(1.04,0))
+plt.savefig('output/df_bal_w.png')
 
 """
 todo maybe call it TRD for traditional not LEG for legacy. then we can say traditional 60/40

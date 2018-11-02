@@ -19,7 +19,12 @@ nrcoins = 10
 
 ## choose startdate. used for $100 plot and more.
 
-start1 = '2017-03'
+# start0 is the first day of vcc data
+start1 = start0 + 2*365
+# start1 = '2017-03'
+
+# above this line = user input
+####################################################################
 
 ## create dimensions
 

@@ -45,7 +45,8 @@ assert len(tkr_beeninblx) > 10
 pri_mat.shape[0]
 tkr_sel_2 = ['Stocks', 'Bonds']
 tkr_sel_3 = ['BTC', 'ETH', 'XRP']
-pri_mat.loc['2017':'2018', tkr_sel_2].plot(logy=True)
+price2aum(pri_mat.loc['2016':'2018', tkr_sel_2]).plot()
+price2aum(pri_mat.loc['2016':'2018', tkr_sel_3]).plot(logy=True)
 
 # no infinite returns
 assert np.max(ret_vcc_mat).max() < 98765
@@ -57,7 +58,8 @@ ret_vcc_mat.head()
 
 # distributions look correct?
 ret_vcc_mat.info()
-ret_vcc_mat['BTC'].plot.box()
+if False:
+    ret_vcc_mat['BTC'].plot.box()
 
 volfr_vcc_mat.tail() # check if they dont sum to a too large number
 #volfr_vcc_mat.loc['2013':'2016', tkr_sel_3].plot(title='volume_fraction')

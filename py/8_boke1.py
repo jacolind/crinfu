@@ -10,6 +10,7 @@ from bokeh.models import ColumnDataSource, HoverTool
 from bokeh.io import output_file, show
 
 # 1
+pri_fin_mat.isnull().sum()
 p = figure()
 p.line(pri_fin_mat.index, pri_fin_mat.Stocks, color='blue', line_width=2)
 p.legend.location = 'bottomleft'
@@ -20,8 +21,8 @@ output_file('output/boke/stocks.html', mode='cdn')
 show(p)
 
 # 2
-p2 = Area(pri_fin_mat.Stocks)
-output_file("p2.html)
+p2 = Area(pri_fin_mat.Stocks.fillna(0))
+output_file("output/boke/p2.html")
 show(p2)
 
 # 3
@@ -35,26 +36,45 @@ show(p3)
 
 # 4
 
-tkr_mcafr = tkr_sel + ['Others']
-mcafr_vcc_mat.loc[start2:, tkr_mcafr
-                 ].plot.area()
-mcafr_vcc_mat.loc[start2:, 'BLX'].plot()
-
 # 5 
+tkr_mcafr = tkr_sel + ['Others']
 mcafr_vcc_mat.columns
-p4 = Area(mcafr_vcc_mat.loc[:,tkr_mcafr], 
+mcafr_vcc_mat_mthly = mcafr_vcc_mat.resample('M', convention='start').asfreq()
+mcafr_vcc_mat_mthly = mcafr_vcc_mat_mthly.fillna(method='ffill')
+mcafr_vcc_mat_mthly[tkr_mcafr].isnull().sum()
+mcafr_vcc_mat_mthly.loc['2016':, tkr_mcafr].isnull().sum()
+mcafr_vcc_mat_mthly.loc['2016':, tkr_mcafr]
+mcafr_vcc_mat_mthly.loc['2016':, tkr_mcafr].plot.area()
+p4 = Area(mcafr_vcc_mat_mthly.loc['2016':, tkr_mcafr],
           stack=True, color=['Orange','Green','Grey'])
-p4.line(mcafr_vcc_mat.index, mcafr_vcc_mat.BLX)
+#p4.line(mcafr_vcc_mat_mthly.loc['2016':,'BLX'].index,
+#        mcafr_vcc_mat_mthly.loc['2016':,'BLX'])
+
+hover = HoverTool(tooltips=[('BTC','@BTC'), 
+                            ('ETH', '@ETH'),
+                            ('Others', '@Others')
+                            ])
+p4.add_tools(hover)
+output_file('output/boke/mcafr2.html', mode='cdn')
+show(p4)
+
+# p6 
+mcafr_vcc_mat.columns
+p5 = Area(mcafr_vcc_mat.loc[:,tkr_mcafr], 
+          stack=True, color=['Orange','Green','Grey'])
+p5.line(mcafr_vcc_mat.index, mcafr_vcc_mat.BLX)
 #hover = HoverTool(tooltips=[('BTC','@BTC'), 
 #                            ('ETH', '@ETH'),
 #                            ('Others', '@Others')
 #                            ])
 #p4.add_tools(hover)
-output_file('output/boke/mcafr.html', mode='cdn')
-show(p4)
+output_file('output/boke/mcafr1.html', mode='cdn')
+show(p5)
 
-
-
+test = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+p6 = Area(test, stack=True)
+output_file('output/boke/p6.html', mode='cdn')
+show(p6)
 
 ### bokeh server
 

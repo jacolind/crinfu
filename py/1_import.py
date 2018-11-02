@@ -10,7 +10,11 @@ saves the imported objects in memory as pandas dataframes.
 ## working dir 
 
 cwd = os.getcwd()
+os.chdir('C:\Users\n485800\Documents\spyderw\crinfu')
+os.chdir('C:\Users\n485800\Documents\spyderw\crinfu')
+os.chdir('C:\\Users\\n485800\\Documents\\spyderw\\crinfu')
 print(cwd)
+
 
 ## def re indexing function 
 

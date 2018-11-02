@@ -34,12 +34,13 @@ clr_sel_blx = [clr_btc, clr_eth, clr_blx]
 
 ## current top 10 weights
 
-w_mat.iloc[-2][tkr_top10].sort_values(ascending=True).plot.barh()
+wmc_mat.iloc[-2][tkr_top10].sort_values(ascending=True).plot.barh()
 plt.title('Top ' + str(nrcoins) + ' today')
 plt.xlabel('Weight')
 plt.show()
 
-## prices: $100 investment
+## prices: $100 investment a year ago 
+
 pri_mat.loc[:, tkr_sel_blx_fin].head()
 # todo hakan: no one not start at 100 so fix that
 # maybe manually just add a row before where all are 100. 
@@ -127,6 +128,11 @@ start3 = '2015-04'
 end3 = '2018-04'
 title_corr = 'Correlation matrix - daily data \n from ' + start3 + ' to ' + end3
 
+# by the way, here is a ret mat given this choice 
+returns_vol_tbl(df=ret_mat, assets=tkr_sel_blx, 
+                start=start3, end=end3, 
+                T=252).to_csv('output/returns_vol_tbl.csv')
+
 # define help-function
 def show_corr_plot(cols, start, end, df, title=title_corr):
     """
@@ -140,7 +146,7 @@ def show_corr_plot(cols, start, end, df, title=title_corr):
 
 # todo seaborn does not exists here.
 
-# see corr matrices
+# see corr matricesS
 tkr_corr1 = tkr_top10 + tkr_fin + ['BLX']
 show_corr_plot(tkr_corr1, start3, end3, ret_mat)
 show_corr_plot(tkr_corr1, start3, end3, ret_mat_mthly)
@@ -285,7 +291,7 @@ print(b_mat_mthly[b_mat_mthly>0].iloc[-4,].sort_values()[0:11])
 ## delta weights: how much trading on each rebalancing date
 
 # create
-dw_mat_mthly = w_mat_mthly - w_mat_mthly.shift(1)
+dw_mat_mthly = wmc_mat_mthly - wmc_mat_mthly.shift(1)
 dw_mat_mthly = np.absolute(dw_mat_mthly)
 
 # plot
