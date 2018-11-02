@@ -1,3 +1,8 @@
+---
+title: questions to be answered by the data analysis
+author: sid and jacob
+---
+
 # version 2
 
 is found in the coins2.ipynb (at least as of 2018-04-21)

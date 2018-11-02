@@ -1,13 +1,22 @@
 # next
 
-- upload to github  
-- read plots py file. understand the code. then i will be able to do "web plots" faster.
-- do portfolio turnover
 
 ## index and cols
 
 see the printout of `tranform-check`. it is not very rigourous, some matrices have more cols/rows than others.
 this is due to importing. it can be fixed. i am not sure now how much all results are affected.
+
+## portfolio turnover
+
+it is not calculated correctly now. review the logic. it should be lower.
+
+also, the code now use a simplified index logic. in reality, if coin nr 11 goes into top 10 then we do not include it immediately - we wait (a) for the coin to marketcap = 2x the others, or (b) for the coin to be top 10 two months in a row. i would chose b because it is more logical.
+
+## reduce cols?
+
+it might also be worthwile to let `ret_mat` only contain `tkr_beeninblx` (the tickers that have been in the blx certificate) since it reduces the nr of cols from 1500+ to ca 50. it improves the speed an memory.
+
+that is dony by creating mca matrix, then binary matrix, then creating list of tickers that has been in the fund, then `ret_mat = ret_mat[tkr_beeninblx]`.
 
 ## web plots
 
@@ -24,17 +33,6 @@ mcap over time, with hover = asset_name
 corr matrix, hover visar pair & corr med två digits, samt p värde inom parentes.
 gärna samma färg-schema som existerande plots.
 
-## portfolio turnover
-
-it is not calculated correctly now. review the logic. it should be lower.
-
-also, the code now use a simplified index logic. in reality, if coin nr 11 goes into top 10 then we do not include it immediately - we wait (a) for the coin to marketcap = 2x the others, or (b) for the coin to be top 10 two months in a row. i would chose b because it is more logical.
-
-## reduce cols?
-
-it might also be worthwile to let `ret_mat` only contain `tkr_beeninblx` (the tickers that have been in the blx certificate) since it reduces the nr of cols from 1500+ to ca 50. it improves the speed an memory.
-
-that is dony by creating mca matrix, then binary matrix, then creating list of tickers that has been in the fund, then `ret_mat = ret_mat[tkr_beeninblx]`.
 
 ## aum start at 100
 
