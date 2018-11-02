@@ -1,0 +1,15 @@
+name (stooq.pl ticker)
+------------------------
+SPDR S&P 500 ETF Trust (SPY.US)
+Vanguard Total International Bond ETF (BNDX.US)
+iShares MSCI ACWI ETF (ACWI.US)
+PIMCO 25+ Year Zero Coupon U.S. Treasury Index Exchange-Traded Fund (ZROZ.US)
+iShares iBoxx High Yield Corporate Bond ETF (HYG.US)
+iShares JP Morgan USD Emerging Markets Bond ETF (EMB.US)
+SPDR Gold Trust (2840.HK)
+PIMCO 15+ Year U.S. TIPS Index Exchange-Traded Fund (LTPZ.US)
+iPath Bloomberg Commodity Index Total Return ETN (DJP.US)
+First Trust Dow Jones Internet Index Fund (FDN.US)
+S&P 500 VIX - CBOE (VI.F)
+
+grayscale use 60% iShares MSCI ACWI ETF (ACWI.US) 40% Vanguard Total International Bond ETF (BNDX.US).
