@@ -65,3 +65,4 @@ pd.concat([stds.tolist(), ])
 
 # plot the following:
 # trad.assets ringar, crypto.assets kryss, ifylld triangel pf1 ifylld kvadrat pf2
+

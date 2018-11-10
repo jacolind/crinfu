@@ -16,7 +16,7 @@ import glob
 
 # import stocks
 import datetime
-#import pandas_datareader.data as web
+import pandas_datareader.data as web
 
 # options
 save_large_png = True

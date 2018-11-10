@@ -1,0 +1,4 @@
+,TRD,BLX,BAL
+Return,3%,98%,8%
+Volatility,6%,60%,7%
+Return / Vol,0.55,1.63,1.2

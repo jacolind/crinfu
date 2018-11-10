@@ -48,6 +48,7 @@ tkr_sel_3 = ['BTC', 'ETH', 'XRP']
 price2aum(pri_mat.loc['2016':'2018', tkr_sel_2]).plot()
 price2aum(pri_mat.loc['2016':'2018', tkr_sel_3]).plot(logy=True)
 
+
 # no infinite returns
 assert np.max(ret_vcc_mat).max() < 98765
 

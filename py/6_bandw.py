@@ -105,7 +105,7 @@ A1 = 'Stocks'
 B1 = 'Bonds'
 
 # read and setup
-pri_fin_mat_2 = pd.read_csv(file_pri_fin, index_col = 'Date', parse_dates=True)
+pri_fin_mat_2 = pd.read_csv(file_pri_fin, parse_dates=True)
 pri_fin_mat_2 = re_index_date(pri_fin_mat_2)
 df_trd = setup_df(pri_fin_mat_2, A=A1, B=B1)
 del pri_fin_mat_2

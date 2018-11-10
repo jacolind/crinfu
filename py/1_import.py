@@ -9,11 +9,14 @@ saves the imported objects in memory as pandas dataframes.
 
 ## working dir 
 
-cwd = os.getcwd()
-os.chdir('C:\Users\n485800\Documents\spyderw\crinfu')
-os.chdir('C:\Users\n485800\Documents\spyderw\crinfu')
-os.chdir('C:\\Users\\n485800\\Documents\\spyderw\\crinfu')
-print(cwd)
+#pc = False
+#
+#if pc:
+#    cwd = os.getcwd()
+#    os.chdir('C:\Users\n485800\Documents\spyderw\crinfu')
+#    os.chdir('C:\Users\n485800\Documents\spyderw\crinfu')
+#    os.chdir('C:\\Users\\n485800\\Documents\\spyderw\\crinfu')
+#    print(cwd)
 
 
 ## def re indexing function 
@@ -49,7 +52,7 @@ import_wide_format = not import_long_format
 
 if import_long_format:
     # read 
-    filepath1long = 'input\\CryptoData.csv'
+    filepath1long = 'input/CryptoData.csv'
     dfl_vcc = pd.read_csv(filepath1long, parse_dates=True)
     dfl_vcc.info()
     # select useful cols 
@@ -127,7 +130,7 @@ url_gold = "https://www.nasdaq.com/markets/gold.aspx"
 # https://stooq.pl/q/?s=iau.us is another possibel choihce for gold
 
 # download data either online or offline
-online_download = False
+online_download = True
 offline_download = not online_download
 
 if offline_download:
@@ -155,9 +158,12 @@ if online_download:
     # rename
     pri_fin_mat.columns = tkr_fin
     vol_fin_mat.columns = tkr_fin
+    # re index 
+    pri_fin_mat = re_index_date(pri_fin_mat)
+    vol_fin_mat = re_index_date(vol_fin_mat)
     # save to csv
-    pri_fin_mat.to_csv('pri_fin_mat.csv')
-    vol_fin_mat.to_csv('vol_fin_mat.csv')
+    pri_fin_mat.to_csv('object/pri_fin_mat.csv')
+    vol_fin_mat.to_csv('object/vol_fin_mat.csv')
 
 # create new datetime index, of finance dates (weekdays)
 # dtindex_fin = pri_fin_mat.index
