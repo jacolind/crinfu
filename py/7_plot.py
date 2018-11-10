@@ -18,16 +18,25 @@ tkr_sel_blx_fin = tkr_sel_blx + tkr_fin
 tkr_top10_blx = tkr_top10 + ['BLX']
 tkr_fin_blx = tkr_fin + ['BLX']
 
-# create color list           
+# create color list
 # http://www.discoveryplayground.com/computer-programming-for-kids/rgb-colors/
-#clr_btc = 'xkcd:greyish blue'
-#clr_eth = 'xkcd:slate'
-#clr_oth = 'xkcd:deep sea blue'
-#clr_blx = 'xkcd:sky blue'
-clr_btc = '#0000cd'
-clr_eth = '#006400'
-clr_oth = '#2f4f4f'
-clr_blx = '#483d8b'
+
+# [red, orange, beige, green, blue]. chosen by team.
+clr_vinter = ['#d7191c',
+              '#fdae61',
+              '#ffffbf',
+              '#abdda4',
+              '#2b83ba']
+clr_blx = '#2b83ba' # blue
+clr_eth = '#abdda4' # green
+clr_btc = '#fdae61' # orange
+clr_rest1 = '#d7191c' # red
+clr_rest2 = '#ffffbf' # beige
+
+# clr_btc = '#0000cd'
+# clr_eth = '#006400'
+# clr_oth = '#2f4f4f'
+# clr_blx = '#483d8b'
 alpha_ = 0.80
 clr_sel = [clr_btc, clr_eth]
 clr_sel_blx = [clr_btc, clr_eth, clr_blx]
@@ -39,11 +48,11 @@ plt.title('Top ' + str(nrcoins) + ' today')
 plt.xlabel('Weight')
 plt.show()
 
-## prices: $100 investment a year ago 
+## prices: $100 investment a year ago
 
 pri_mat.loc[:, tkr_sel_blx_fin].head()
 # todo hakan: no one not start at 100 so fix that
-# maybe manually just add a row before where all are 100. 
+# maybe manually just add a row before where all are 100.
 
 
 pri_mat[tkr_sel_blx].plot(logy=True, color=clr_sel_blx, linewidth=3)
@@ -88,13 +97,13 @@ def returns_vol_tbl(df, assets, start, end='2018-04', T=12):
     # calc mean and vol
     ret = df.loc[start:end, assets].mean() * T
     vol = df.loc[start:end, assets].std() * np.sqrt(T)
-    # put into tbl 
+    # put into tbl
     tbl = pd.concat([ret, vol], axis=1)
     # rename
     tbl.columns = ['Return', 'Volatility']
     tbl['Return / Vol'] = tbl['Return'] / tbl['Volatility']
     return tbl.round(2).T
-    
+
 
 # example usage. play around with the numbers and get something interesting
 ret_mat.index.freq # day => T=252, month => T=12
@@ -128,9 +137,9 @@ start3 = '2015-04'
 end3 = '2018-04'
 title_corr = 'Correlation matrix - daily data \n from ' + start3 + ' to ' + end3
 
-# by the way, here is a ret mat given this choice 
-returns_vol_tbl(df=ret_mat, assets=tkr_sel_blx, 
-                start=start3, end=end3, 
+# by the way, here is a ret mat given this choice
+returns_vol_tbl(df=ret_mat, assets=tkr_sel_blx,
+                start=start3, end=end3,
                 T=252).to_csv('output/returns_vol_tbl.csv')
 
 # define help-function

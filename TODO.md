@@ -1,5 +1,46 @@
 # next
 
+## colors
+
+use these colors:
+
+URL:
+http://colorbrewer2.org/?type=diverging&scheme=Spectral&n=5
+
+JavaScript:
+['#d7191c','#fdae61','#ffffbf','#abdda4','#2b83ba']
+[red, orange, beige, green, blue]
+[last_resort, btc, stocks / bonds / xrp / others, eth, blx]
+
+
+## create function with genereal index construction
+
+Python function with input:
+
+- Start date
+- End date
+- Weighting equal or market cap
+- Nr of constituents
+- Smoothing yes no
+- Random rebalance yes no
+- Name of index
+
+Output a pandas series
+
+Then compare a few approaches. e.g top5 equal vs top10 market cap.
+
+that could be converted to a bokeh interface on our website.
+
+## when echange data is present
+
+### hedging with equal weights vs liquidity weighted
+
+if we have order book data we can asses if liquidity weighted would cross the spread more often.
+
+### hedging on 1 vs 3 echanges
+
+see price diff of buying on one exchange vs buying on three. if delta is low then IT barrier.
+
 
 ## index and cols
 
