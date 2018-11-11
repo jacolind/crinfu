@@ -3,6 +3,8 @@
 
 ## colors
 
+do this in a new branch. it will later merge with master at the same time as function is added to master. 
+
 use these colors:
 
 URL:
@@ -15,6 +17,8 @@ JavaScript:
 
 
 ## create function with genereal index construction
+
+do this as a new branch!
 
 Python function with input:
 
