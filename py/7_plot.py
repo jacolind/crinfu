@@ -22,21 +22,20 @@ tkr_fin_blx = tkr_fin + ['BLX']
 # http://www.discoveryplayground.com/computer-programming-for-kids/rgb-colors/
 
 # [red, orange, beige, green, blue]. chosen by team.
-clr_vinter = ['#d7191c',
-              '#fdae61',
-              '#ffffbf',
-              '#abdda4',
-              '#2b83ba']
-clr_blx = '#2b83ba' # blue
-clr_eth = '#abdda4' # green
-clr_btc = '#fdae61' # orange
-clr_rest1 = '#d7191c' # red
-clr_rest2 = '#ffffbf' # beige
+clr_vinter = {'red': '#d7191c',
+               'orange': '#fdae61',
+              'yellow': '#ffffbf',
+              'green' : '#abdda4',
+               'blue': '#2b83ba'
+              }
+clr_blx = clr_vinter['blue']
+clr_eth = clr_vinter['green']
+clr_btc = clr_vinter['orange']
+clr_rest1 = clr_vinter['yellow']
+clr_rest2 = clr_vinter['red']
 
-# clr_btc = '#0000cd'
-# clr_eth = '#006400'
-# clr_oth = '#2f4f4f'
-# clr_blx = '#483d8b'
+# old colors are found in /color_fonts
+
 alpha_ = 0.80
 clr_sel = [clr_btc, clr_eth]
 clr_sel_blx = [clr_btc, clr_eth, clr_blx]
