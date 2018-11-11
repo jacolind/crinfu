@@ -1,5 +1,6 @@
 # next
 
+
 ## colors
 
 use these colors:
@@ -25,11 +26,13 @@ Python function with input:
 - Random rebalance yes no
 - Name of index
 
-Output a pandas series
+Output a pandas series. on that series we will do sharpe, inforatio, sortino ratio. 
 
 Then compare a few approaches. e.g top5 equal vs top10 market cap.
 
 that could be converted to a bokeh interface on our website.
+
+study eos in top5 vs top10.
 
 ## when echange data is present
 
