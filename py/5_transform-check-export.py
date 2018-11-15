@@ -2,6 +2,9 @@
 check that transform.py was done correctly.
 """
 
+# firstly, check
+# --------------
+
 # check if we need to re index 
 # it must be Day or Month in order for plot to show correctly
 
@@ -77,3 +80,46 @@ if False:
 
 # see how many has been top 50 
 len(tkr_beentop50)
+
+
+
+
+# secondly, export 
+# ---------------
+
+# code below written 15 nov. not tested. 
+
+# 
+def export_object(object):
+  file = 'output/' + object + '.csv'
+  return object.to_csv(file)
+
+# list all the important objects in 4_transform.py
+key_objects = [# B and W matrix 
+                bmc_mat,
+                wmc_mat,
+
+                # tickers 
+                tkr_fin,
+                tkr_top10,
+                tkr_beeninblx,
+
+                # blx 
+                pri_blx_vec,
+                ret_blx_vec,
+                vol_blx_vec,
+                mca_blx_vec,
+
+                # ret and vol and mca. comment show their cols. 
+                ret_mat, # vcc + fin + blx 
+                vol_mat, # fin + vcc + blx + Total, Others
+                mca_mat, # vcc cols only (no data yet on vcc)
+
+                # fraciton of vol and mca. 
+                volfr_vcc_mat, # same cols as vol_mat 
+                mcafr_vcc_mat  # same cols as mca_mat 
+                ]
+
+# export all important objects to csv 
+for o in key_objects:
+  export_object(o)
