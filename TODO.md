@@ -1,5 +1,8 @@
 # next
 
+## nr cols = 200 ? 
+
+when going from long to wide, add the option to only keep the coins corresponding to ranknow < 200. speeds up memory a bit. 
 
 ## output key objects to csv 
 
