@@ -1,6 +1,14 @@
 # next
 
 
+## output key objects to csv 
+
+the objects found in `naming-convention-objects.md` can be exported to csv. 
+
+then i can import to R use ggplot instead of `...plot.py` and use shiny to vizualize general index constuction. 
+
+one problem: have to research how to make a nice corr plot which is now done with seaborn. 
+
 ## colors
 
 use these colors:
@@ -15,6 +23,8 @@ JavaScript:
 
 
 ## create function with genereal index construction
+
+mayb in R if it is going to be used with shiny?
 
 Python function with input:
 
