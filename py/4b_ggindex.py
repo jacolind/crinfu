@@ -13,7 +13,11 @@ def function that completes transform, check it is ok, and export to new object.
 transform to new objects and update the objects themselves, using classes (eg an index class).
 """
 
-def create_weights(binary_matrix, marketcap_matrix, weighting_equal):
+def create_weights(binary_matrix, marketcap_matrix, weighting_equal,
+                   weight_max=1, weight_min=0):
+  assert weight_min >= 0
+  assert weight_max <= 1
+  assert weight_max > 0
   # monthly W matrix: B * M (element wise mult; "hadamard product")
   b_times_m = binary_matrix * marketcap_matrix
   if weighting_equal:
@@ -21,6 +25,11 @@ def create_weights(binary_matrix, marketcap_matrix, weighting_equal):
     b_times_m = (b_times_m > 0)
   # normalize so weight sum to 1
   weights_matrix = b_times_m.div(b_times_m.sum(axis=1), axis=0)
+
+  limits_imposed = (weight_max < 1) | (weight_min > 0)
+  if limits_imposed:
+      # todo write function here
+      # impose weight limits.xlsx 
   return weights_matrix
 
 
@@ -65,6 +74,7 @@ def ggindex(marketcap_matrix, returns_matrix, tradingvolume_matrix,
            start, end,
            name, top,
            rebalance_freq='M', random_rebalance=False,
+           weight_max=1, weight_min=0,
            blacklist='', forcelist='',
            weighting_equal=False, smoothing=False,
            export_binarymatrix=False
@@ -85,6 +95,8 @@ def ggindex(marketcap_matrix, returns_matrix, tradingvolume_matrix,
       Forcelist, coins that must be included (even if they do not fulfil criteria of being in the top). including it can make nr of selected coins to be > `top`.
       Smoothing yes no
       Random rebalance yes no
+      weight_max: what the maximum allowed weight is. default 1.
+      weight_min: what the minimimum allowed weight is. default 0.
 
 
   Output:
