@@ -3,32 +3,32 @@ check that transform.py was done correctly.
 """
 
 # firstly, check
-# --------------
+# -----------------------------------------------------------------------------
 
-# check if we need to re index 
+# check if we need to re index
 # it must be Day or Month in order for plot to show correctly
 
-vip_objects = [pri_mat, 
-               ret_mat, 
-               vol_mat, 
-               mca_mat, 
-               bmc_mat, 
-               wmc_mat, 
+vip_objects = [pri_mat,
+               ret_mat,
+               vol_mat,
+               mca_mat,
+               bmc_mat,
+               wmc_mat,
                bmc_mat_mthly
                ]
 
 for d in vip_objects:
     # should be same/similar nr of rows and cols
     print(d.shape)
-    # all should be day or mont 
-    print(d.index.freq) 
+    # all should be day or mont
+    print(d.index.freq)
 
 for d in vip_objects:
-    # should start/end on roughly the same dates 
+    # should start/end on roughly the same dates
     print(d.index[0], d.index[-1])
-        
 
-# see current top 10 and the date 
+
+# see current top 10 and the date
 print("top 10", tkr_top10)
 print("date", bmc_mat_mthly.index[-2])
 
@@ -70,7 +70,7 @@ volfr_vcc_mat.tail() # check if they dont sum to a too large number
 
 # todo: the assert statements in the creation step above can be put here.
 
-# plot fraction of volume 
+# plot fraction of volume
 if False:
     volfr_vcc_mat.tail()
     volfr_vcc_mat['BTC'].plot()
@@ -78,48 +78,51 @@ if False:
     volfr_vcc_mat[['BLX', 'BTC']].tail(500).plot(title='volume_fraction')
 
 
-# see how many has been top 50 
+# see how many has been top 50
 len(tkr_beentop50)
 
 
 
 
-# secondly, export 
-# ---------------
+# secondly, export
+# -----------------------------------------------------------------------------
 
-# code below written 15 nov. not tested. 
+# code below written 15 nov. not tested.
 
-# 
+#
 def export_object(object):
   file = 'output/' + object + '.csv'
   return object.to_csv(file)
 
 # list all the important objects in 4_transform.py
-key_objects = [# B and W matrix 
+most_objects = [# B and W matrix
                 bmc_mat,
                 wmc_mat,
 
-                # tickers 
+                # tickers
                 tkr_fin,
                 tkr_top10,
                 tkr_beeninblx,
 
-                # blx 
+                # blx
                 pri_blx_vec,
                 ret_blx_vec,
                 vol_blx_vec,
                 mca_blx_vec,
 
-                # ret and vol and mca. comment show their cols. 
-                ret_mat, # vcc + fin + blx 
+                # ret and vol and mca. comment show their cols.
+                ret_mat, # vcc + fin + blx
                 vol_mat, # fin + vcc + blx + Total, Others
                 mca_mat, # vcc cols only (no data yet on vcc)
 
-                # fraciton of vol and mca. 
-                volfr_vcc_mat, # same cols as vol_mat 
-                mcafr_vcc_mat  # same cols as mca_mat 
+                # fraciton of vol and mca.
+                volfr_vcc_mat, # same cols as vol_mat
+                mcafr_vcc_mat  # same cols as mca_mat
                 ]
 
-# export all important objects to csv 
-for o in key_objects:
+# key vs vip objects
+print("vip objects", vip_objects)
+
+# export all important objects to csv
+for o in vip_objects:
   export_object(o)
