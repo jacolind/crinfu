@@ -1,5 +1,6 @@
 # next
 
+
 ## nr cols = 200 ? 
 
 when going from long to wide, add the option to only keep the coins corresponding to ranknow < 200. speeds up memory a bit. 
@@ -46,6 +47,8 @@ Then compare a few approaches. e.g top5 equal vs top10 market cap.
 that could be converted to a bokeh interface on our website.
 
 study eos in top5 vs top10.
+
+maybe use a class for this?
 
 ## when echange data is present
 
