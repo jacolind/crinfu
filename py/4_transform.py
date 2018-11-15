@@ -24,7 +24,7 @@ start1 = start0 + 2*365
 # start1 = '2017-03'
 
 # above this line = user input
-####################################################################
+# -----------------------------------------------------------------------------
 
 ## create dimensions
 
@@ -35,8 +35,8 @@ C = pri_vcc_mat.shape[1]
 
 # monthly market cap
 mca_vcc_mat_mthly = mca_vcc_mat.resample('M', convention='start').asfreq()
-# ranked market caps (rmc). 1 is highest market cap. 
-rmc_vcc_mat_mthly = mca_vcc_mat_mthly.rank(axis=1, method='first', 
+# ranked market caps (rmc). 1 is highest market cap.
+rmc_vcc_mat_mthly = mca_vcc_mat_mthly.rank(axis=1, method='first',
                                                ascending=False)
 rmc_vcc_mat_mthly.tail()
 # binary market cap. True if it is in top10. False if it is outside.
@@ -45,39 +45,38 @@ bmc_mat_mthly = rmc_vcc_mat_mthly < 1 + nrcoins
 bmc_mat_mthly.index[-1]
 # compare last day for monthly vs daily freq. todo: problem?
 bmc_mat_mthly.index[-1] < pri_vcc_mat.index[-1]
-# create daily b matrix 
+# create daily b matrix
 bmc_mat = bmc_mat_mthly.reindex(pri_vcc_mat.index, method='ffill')
 
-## create weigth matrix 
+## create weigth matrix
 
 WEIGHTING = 'marketcap'
 
 # monthly W matrix: B * M (element wise mult; "hadamard product")
-b_times_m = bmc_mat_mthly * mca_vcc_mat_mthly 
-
-if WEIGHTING = 'marketcap':            
-    # normalize so weight sum to 1
-    wmc_mat_mthly = b_times_m.div(b_times_m.sum(axis=1), axis=0)
+b_times_m = bmc_mat_mthly * mca_vcc_mat_mthly
 
 if WEIGHTING = 'equal':
-    # if B * M is positive  return 1. else 0.  then divide by n to normalize.
-    wmc_mat_mthly = (b_times_m > 0) / nrcoins
+    # update B * M: if it is positive return 1 else 0.
+    b_times_m = (b_times_m > 0)
+
+# normalize so weight sum to 1
+wmc_mat_mthly = b_times_m.div(b_times_m.sum(axis=1), axis=0)
 
 del b_times_m
 
-# convert freq to daily 
+# convert freq to daily
 wmc_mat = wmc_mat_mthly.reindex(pri_vcc_mat.index, method='ffill')
 
 
 # note
 """
 note that the w mat and b mat have a daily index, not weekdays.
-fin assets trade on weekdays. vcc trade every day. 
+fin assets trade on weekdays. vcc trade every day.
 => when we do an inner join with vcc and end up with an index of weekdays.
 """
 
 
-## create ticker lists  out of columns 
+## create ticker lists  out of columns
 
 # tkr fins is stocks, bonds, gold
 tkr_fin
@@ -87,9 +86,9 @@ assert len(tkr_vcc) > 1000
 # tkr all contain: vcc + fin + blx
 # tkr_finvccblx = pri_mat.columns 3have not created that object yet!
 #  # bmc include cols: vcc, Total, Others
-#assert pri_vcc_mat.shape[1] < bmc_mat.shape[1] 
+#assert pri_vcc_mat.shape[1] < bmc_mat.shape[1]
 #tkr_all = bmc_mat.columns
-#assert len(tkr_all) == len(tkr_vcc) + len(tkr_fin) + 1 
+#assert len(tkr_all) == len(tkr_vcc) + len(tkr_fin) + 1
 
 ## create ticker lists of coins in the fund
 
@@ -104,14 +103,14 @@ tkr_top10
 # coins that has been a member of the index at some date
 tkr_beeninblx = bmc_mat.columns[bmc_mat.sum() > 0]
 
-# coins that has been in top 50 at some point 
+# coins that has been in top 50 at some point
 bmc_top50 = rmc_vcc_mat_mthly < 51
 tkr_beentop50 = bmc_top50.columns[bmc_top50.sum() > 0]
 del bmc_top50
 len(tkr_beentop50)
 
 # todo: maybe use the tkr_beentop50 to slice out and recude nr of cols in ret_mat
-# since it increases efficiency. by cutting out many cols. 
+# since it increases efficiency. by cutting out many cols.
 
 ## create returns from prices, on fin and vcc
 
@@ -208,7 +207,7 @@ mca_mat = mca_vcc_mat
 
 
 
-# get error below i do not know what it means 
+# get error below i do not know what it means
 #==============================================================================
 # C:\Program Files\anaconda2\lib\site-packages\pandas\formats\format.py:2191: RuntimeWarning: invalid value encountered in greater
 #   has_large_values = (abs_vals > 1e6).any()
@@ -217,4 +216,3 @@ mca_mat = mca_vcc_mat
 # C:\Program Files\anaconda2\lib\site-packages\pandas\formats\format.py:2193: RuntimeWarning: invalid value encountered in greater
 #   (abs_vals > 0)).any()
 #==============================================================================
-
