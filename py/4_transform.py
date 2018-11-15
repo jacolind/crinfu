@@ -50,12 +50,22 @@ bmc_mat = bmc_mat_mthly.reindex(pri_vcc_mat.index, method='ffill')
 
 ## create weigth matrix 
 
+WEIGHTING = 'marketcap'
+
 # monthly W matrix: B * M (element wise mult; "hadamard product")
 b_times_m = bmc_mat_mthly * mca_vcc_mat_mthly 
-wmc_mat_mthly = b_times_m.div(b_times_m.sum(axis=1), axis=0)
+
+if WEIGHTING = 'marketcap':            
+    # normalize so weight sum to 1
+    wmc_mat_mthly = b_times_m.div(b_times_m.sum(axis=1), axis=0)
+
+if WEIGHTING = 'equal':
+    # if B * M is positive  return 1. else 0.  then divide by n to normalize.
+    wmc_mat_mthly = (b_times_m > 0) / nrcoins
+
 del b_times_m
 
-# daily W matrix
+# convert freq to daily 
 wmc_mat = wmc_mat_mthly.reindex(pri_vcc_mat.index, method='ffill')
 
 
