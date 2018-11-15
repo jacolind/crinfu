@@ -1,6 +1,5 @@
 # next
 
-
 ## nr cols = 200 ? 
 
 when going from long to wide, add the option to only keep the coins corresponding to ranknow < 200. speeds up memory a bit. 
@@ -48,7 +47,20 @@ that could be converted to a bokeh interface on our website.
 
 study eos in top5 vs top10.
 
-maybe use a class for this?
+maybe use a class for this? see details below.
+
+## classes 
+
+currently i do this:
+- import data from web or long.csv
+- def transform function 
+- tranform to new objects
+
+now i want to do this:
+- import data from web or long.csv 
+- def trasnform and class functions 
+- transform to new objects and update the objects themselves, using classes (eg an index class).
+
 
 ## when echange data is present
 
