@@ -55,6 +55,10 @@ if import_long_format:
     filepath1long = 'input/CryptoData.csv'
     dfl_vcc = pd.read_csv(filepath1long, parse_dates=True)
     dfl_vcc.info()
+    # limit the nr of coins to speed up the computations
+    # theoretically this is <=> define market as "current top 200".
+    max_nrcoins_indata = 200
+    dfl_vcc = dfl_vcc.loc[dfl_vcc.ranknow < max_nrcoins_indata]
     # select useful cols 
     dfl_vcc = dfl_vcc[['symbol', 'date', 'close', 'volume', 'market']]
     dfl_vcc.head()
