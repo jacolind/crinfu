@@ -1,5 +1,20 @@
 # next
 
+## stocks.py
+
+download data, make corr. see details in the file. 
+
+## plotly.py and plotly.R 
+
+see these files. have many todo in R and some in .py 
+
+## ggplot 
+
+use ggplot in R? or in python? see ggplot1.py to try it out. 
+
+in R you can turn ggplot object into plotly object. can you do it in python? 
+however, ggplot requres re-thinking how data is stored - long rather than wide format. 
+
 ## nr cols = 200 ? 
 
 when going from long to wide, add the option to only keep the coins corresponding to ranknow < 200. speeds up memory a bit. 
@@ -48,6 +63,13 @@ that could be converted to a bokeh interface on our website.
 study eos in top5 vs top10.
 
 maybe use a class for this? see details below.
+
+### impose weight limit 
+
+see the xlsx file 
+
+must think about this. 
+
 
 ## classes 
 
