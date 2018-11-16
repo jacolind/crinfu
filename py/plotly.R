@@ -146,8 +146,28 @@ p
 
 ## convert ggplot object to plotly 
 
-# https://plot.ly/ggplot2/user-guide/#modify-ggplot2-figure
 # todo read url and make it 
+
+# https://plot.ly/ggplot2/user-guide/#modify-ggplot2-figure
+dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
+q <- qplot(carat, price, data=dsamp, colour=clarity)
+gp <- ggplotly(q)
+gp
+
+gp %>%
+  layout(dragmode = "pan")
+
+# As mentioned previously, ggplotly() translates each ggplot2 layer into one or more plotly.js traces. In this translation, it is forced to make a number of assumptions about trace attribute values that may or may not be appropriate for the use case. The style() function is useful in this scenario, as it provides a way to modify trace attribute values in a plotly object. Furthermore, you can use the plotly_build() function.
+
+
+?plotly_build
+
+# https://rdrr.io/cran/plotly/man/ggplotly.html
+
+
+
+
+
 
 ## shiny and plotlyt and ggplot
 
@@ -180,6 +200,29 @@ server <- function(input, output) {
 shinyApp(ui, server)
 
 # todo keep on tweaking that example 
+
+
+
+# another shiny example 
+ui <- fluidPage(
+  plotlyOutput("plot"),
+  verbatimTextOutput("event")
+)
+
+server <- function(input, output) {
+  
+  # renderPlotly() also understands ggplot2 objects!
+  output$plot <- renderPlotly({
+    plot_ly(mtcars, x = ~mpg, y = ~wt)
+  })
+  
+  output$event <- renderPrint({
+    d <- event_data("plotly_hover")
+    if (is.null(d)) "Hover on a point!" else d
+  })
+}
+
+shinyApp(ui, server)
 
 ## todo read ref https://plot.ly/r/reference/#scatter
 
