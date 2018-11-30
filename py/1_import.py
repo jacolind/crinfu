@@ -3,6 +3,7 @@ import data from coins, which has previously been extracted using HH's R script.
 saves the imported objects in memory as pandas dataframes.
 """
 
+
 ## working dir
 
 #pc = False
@@ -13,28 +14,28 @@ saves the imported objects in memory as pandas dataframes.
 #    os.chdir('C:\Users\n485800\Documents\spyderw\crinfu')
 #    os.chdir('C:\\Users\\n485800\\Documents\\spyderw\\crinfu')
 #    print(cwd)
-
-
-## def re indexing function
-
 def re_index_date(df):
     """
     input df.
-    output df reindexed with .indexas daily index ffilled.
+    output df reindexed with its .index as daily index ffilled.
 
     todo hakan, this is needed because pandas complained dates are not regular.
     this led the .freq to not be daily which we need!
     please double check the data you gave me
     so that this resampling does not render calculations incorrect.
     """
-    # reindex with the date
-    dtindex0 = pd.to_datetime(df.index)
-    df = df.set_index(dtindex0)
+    # convert index to datetime
+    # assume type(vol_fin_mat.index) is pandas DatetimeIndex
+    start_date= min(df.index)
+    end_date= max(df.index)
     # set index freq to daily
-    dtindex = pd.date_range(df.index[0], df.index[-1], freq='D')
-    df = df.reindex(dtindex, method='ffill')
+    dtindex = pd.date_range(start_date, end_date, freq='D')
+    df_reindexed = df.reindex(dtindex, method='ffill')
     # return
-    return df
+    return df_reindexed
+
+
+
 # test function: two below should have the same length but different freq
 # pri_vcc_mat.index
 
@@ -58,31 +59,30 @@ if import_long_format:
     # select useful cols
     dfl_vcc = dfl_vcc[['symbol', 'date', 'close', 'volume', 'market']]
     dfl_vcc.head()
-    # create price, volume, marketcap matrices: select cols then pivot.
+    # make date column a date. 
+    assert len(dfl_vcc.date) == len(pd.to_datetime(dfl_vcc.date))
+    dfl_vcc.date = pd.to_datetime(dfl_vcc.date)
+    # create date time index object     
+    dtindex = pd.date_range(min(dfl_vcc.date), 
+                            max(dfl_vcc.date), 
+                            freq='D')
+    # create price, volume, marketcap matrices
+    # select cols then pivot and reindex.
     pri_vcc_mat = dfl_vcc[['symbol', 'date',
                            'close']].pivot_table(index='date', columns='symbol',
-                                                 values='close')
+                                          values='close').reindex(index=dtindex)
     vol_vcc_mat = dfl_vcc[['symbol', 'date',
                              'volume']].pivot_table(index='date', columns='symbol',
-                                                 values='volume')
+                                            values='volume').reindex(index=dtindex)
     mca_vcc_mat = dfl_vcc[['symbol', 'date',
                              'market']].pivot_table(index='date', columns='symbol',
-                                                 values='market')
-    # remove df we do not need
-    del dfl_vcc
+                                            values='market').reindex(index=dtindex)
 
-    # re index
-    pri_vcc_mat = re_index_date(pri_vcc_mat)
-    vol_vcc_mat = re_index_date(vol_vcc_mat)
-    mca_vcc_mat = re_index_date(mca_vcc_mat)
+    # check all three have same index 
+    assert (mca_vcc_mat.index == pri_vcc_mat.index).all()
+    assert (vol_vcc_mat.index == pri_vcc_mat.index).all()
 
-    # check
-    assert mca_vcc_mat.shape[1] == pri_vcc_mat.shape[1]
-    pri_vcc_mat.shape
-    pri_vcc_mat.info()
-    pri_vcc_mat.head()
-    pri_vcc_mat.index
-
+coins_top200 = pri_vcc_mat.columns
 
 if import_wide_format:
     # read file
@@ -93,11 +93,8 @@ if import_wide_format:
     # i get an error of mixed types. it is merely a warning however.
     # I tried using pd.read_csv("data.csv", dtype={"CallGuid": np.int64}) but it didnt work
     # index date
-    df_vcc['date'] = pd.to_datetime(df_vcc.date)
     df_vcc.set_index('date', inplace=True)
-    # set index freq to daily
-    dtindex_vcc = pd.date_range(df_vcc.index[0], df_vcc.index[-1], freq='D')
-    df_vcc = df_vcc.reindex(dtindex_vcc, method='ffill')
+    df_vcc = re_index_date(df_vcc)
     # todo hakan, this is needed because pandas complained dates are not regular.
     # this led the .freq to not be daily which we need!
     # please double check the data you gave me so that this resampling does not render calculations incorrect.
