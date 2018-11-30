@@ -1,31 +1,134 @@
+# goal driven data anlaysis "hypotes driven"  
+
+decide what anlaysis to do so i do not get stuck in a explorative loop
+
 # next
 
-## stocks.py
+## change ggindex() 
 
-download data, make corr. see details in the file. 
+either change the f() or use a for loop after it to put stuff info objexts i can use, such as `ret_bsk_mat` and `vol_bsk_mat` to follow naming conventions. 
 
-## plotly.py and plotly.R 
+how to change the f()
 
-see these files. have many todo in R and some in .py 
+### method A 
 
-## ggplot 
+    w1 = g_basket_weight_mat(mca_vcc_mat, params-describing-index...)
+    w2 = g_basket_weight_mat(mca_vcc_mat, params-describing-index...)
+    r1, v1 = g_basket_returns(w1, ret_vcc, vol_vcc)
+    r2, v2 = g_basket_returns(w2, ret_vcc, vol_vcc)
+    ret_bsk_mat = pd.concat([r1, r2], axis=1)
+    vol_bsk_mat = pd.concat([v1, v2], axis=1)
 
-use ggplot in R? or in python? see ggplot1.py to try it out. 
+### method B 
+do like you do now, but let ggindex export the weight matrix if you want, not binary matrix. 
+then use some smart pd.concat maybe:
 
-in R you can turn ggplot object into plotly object. can you do it in python? 
-however, ggplot requres re-thinking how data is stored - long rather than wide format. 
+    basket1 = ggindex(mca, vol, ret, params-...)
+    basket2 = ggindex(mca, vol, ret, params-...)
+    basket3 = and so on 
+    baskets = [basket1, basket2, basket3]
+    ret_bsk_mat = [b['return'] for b in baskets]
+    vol_bsk_mat = [b['volume'] for b in baskets]
+    mca_bsk_mat = [b['mcap'] for b in baskets]
 
-## nr cols = 200 ? 
 
-when going from long to wide, add the option to only keep the coins corresponding to ranknow < 200. speeds up memory a bit. 
+## compare indexes 
 
-## output key objects to csv 
+after fixing ggindex() plot different indexes against each other 
 
-the objects found in `naming-convention-objects.md` can be exported to csv. 
+## dead coins
 
-then i can import to R use ggplot instead of `...plot.py` and use shiny to vizualize general index constuction. 
+out of those ca 50 coins that has been top10, what is their status now? how many are dead? (first, define dead then count the nr of dead.)
 
-one problem: have to research how to make a nice corr plot which is now done with seaborn. 
+## rollcorr
+
+more thought can be put in here, and do fun stat stuff.
+
+    # plot rolling mean with vol bands. good for mcap or rollcorr plot.
+    m = roll.agg(['mean', 'std'])
+    ax = m['mean'].plot()
+    ax.fill_between(m.index, m['mean'] - m['std'], m['mean'] + m['std'],
+                    alpha=.25)
+    plt.tight_layout()
+    plt.ylabel("Close ($)")
+    sns.despine()
+
+## plot krashes 
+
+a famous youtube video "it went all to x, and then it krashed."
+slice out those timeperiods, and make a figure with many plots in it. 
+
+
+## download financial data on sp500  clinux 
+
+see file stocks.py
+
+want marketcap on this as well. 
+
+
+## read hodlbot articles 
+
+read hodlbot data analysis and see what should be included for us. 
+
+
+## marketcap na. how to handle? 
+
+marketcap has na. how should we handle it?
+
+i think na.approx() is best.  
+
+when using .reindex do not fill with zero but with na.approx so that we do not see zero return on days when price is NA. 
+
+
+## calc portfolio turnover
+
+it is not calculated correctly now. review the logic. it should be lower.
+
+the correct logic should be like this 
+
+    # w day 1 grows to day 2 with return between day 1 and 2
+    # compare w day 2 vs what weights is suggested by market cap
+    # the diff needs to be bought 
+    # for small supply changes, small trades must be made. 
+    # for coinswitches, large trades must be made. 
+
+
+if asseet z goes from 11 to 10, then weight in z goes from 0% to, say, 2%. assume previous nr 10 asset k had weight of 1%. then we sell 1% of k and buy 2% of z. what is the portfolio turnover?  
+
+> Portfolio turnover is calculated by taking either the total amount of new securities purchased or the amount of securities sold (whichever is less) over a particular period, divided by the total net asset value (NAV) of the fund. The measurement is usually reported for a 12-month time period.
+> ...
+> If a portfolio begins one year at $10,000 and ends the year at $12,000, add the two together and divide by two to get $11,000. Next, assume the amount of purchases totaled $1,000 and the amount sold was $500. Finally, divide the smaller amount -- buys or sales -- by the average amount of the portfolio. For this example, the smaller amount is the sales. Therefore, divide the $500 sales amount by $11,000 to get the portfolio turnover. In this case, the portfolio turnover is 4.54%.
+> / investopedia  
+
+ 
+     # update weights with return since we have gotten somethign for holding it
+     w = w * return
+     # calc what you bought and sold 
+     bought_sum = sum those with larger w in day 2 than day 1
+     sold_sum = sum those with smaller w in day 2 than day 1 
+     # defn of turnover 
+     turnover = min(bought_sum, sold_sum)
+     # https://www.sapling.com/5885771/calculate-portfolio-turnover 
+      
+
+also, the code now use a simplified index logic. in reality, if coin nr 11 goes into top 10 then we do not include it immediately - we wait (a) for the coin to marketcap = 2x the others, or (b) for the coin to be top 10 two months in a row. i would chose b because it is more logical.
+
+## coin switches
+
+Visualisera nr of coin switches bättre. Både inom fonden och runtikring top 10 Kommentaren är it's difficult to do this yourself so we provide a service. Det som är runtikring top 10 triggar ett trade event för fonden, eftersom förra 10an är såld helt och flrrau11an köps helt. Kolla då hur mkt vikt 10e platsen har vid varje månad (och gör en describe på den för att se median och kvartiler) för ju större vikt 10an hade desto mer ska säljas av, dvs fonden ändras mkt.
+
+
+## rolling corr(entiremarket, top200, top10, top5, top1)
+
+Defn variabeln market som är sum of all coins mcap. Gör rolling Corr på dem och BLX och Bitcoin för att se vilket som fångar hela marinaden bäst och hur bra dom fångar. 
+
+## output key objects to csv
+
+the objects found in `naming-convention-objects.md` can be exported to csv.
+
+then i can import to R use ggplot instead of `...plot.py` and use shiny to vizualize general index constuction.
+
+one problem: have to research how to make a nice corr plot which is now done with seaborn.
 
 ## colors
 
@@ -40,48 +143,38 @@ JavaScript:
 [last_resort, btc, stocks / bonds / xrp / others, eth, blx]
 
 
-## create function with genereal index construction
+## shiny apps
 
-mayb in R if it is going to be used with shiny?
+### learn shiny 
 
-Python function with input:
+learn by doing, but i must also read about how it works. 
 
-- Start date
-- End date
-- Weighting equal or market cap
-- Nr of constituents
-- Smoothing yes no
-- Random rebalance yes no
-- Name of index
+read this doc 
+https://bookdown.org/yihui/rmarkdown/shiny-documents.html
 
-Output a pandas series. on that series we will do sharpe, inforatio, sortino ratio. 
+### index competition with ggindex()
 
-Then compare a few approaches. e.g top5 equal vs top10 market cap.
+use the ggindex function to generate shiny app. plot the aum of usd 100 invesment. show table with return and risk (vol, IR, sharpe, sortino, 95% VaR).
 
-that could be converted to a bokeh interface on our website.
-
-study eos in top5 vs top10.
-
-maybe use a class for this? see details below.
-
-### impose weight limit 
-
-see the xlsx file 
-
-must think about this. 
+input: date, checkbox with prebuilt indexes (top5 EW/mcap, top10 EW/mcap, btc, and their custom built index). OR generate a few different indexes yourself and then compare them (this is harder for me and harder for the user but is more general so have it as a version 2).
 
 
-## classes 
+### corr matrix, giph  
 
-currently i do this:
-- import data from web or long.csv
-- def transform function 
-- tranform to new objects
+input: start date (slider yyyy-mm), length of window (type in nr of months), input selectize type name of tickers. 
+v1 only tickers. v2 tickers AND name will match.   
 
-now i want to do this:
-- import data from web or long.csv 
-- def trasnform and class functions 
-- transform to new objects and update the objects themselves, using classes (eg an index class).
+output: corr plot. 
+
+v3 do a slider so that you can see the colors changing over time.  
+
+### corr over time 
+
+input: 2-6 assets 
+
+output: rollcorr graph.
+
+
 
 
 ## when echange data is present
@@ -100,17 +193,6 @@ see price diff of buying on one exchange vs buying on three. if delta is low the
 see the printout of `tranform-check`. it is not very rigourous, some matrices have more cols/rows than others.
 this is due to importing. it can be fixed. i am not sure now how much all results are affected.
 
-## portfolio turnover
-
-it is not calculated correctly now. review the logic. it should be lower.
-
-also, the code now use a simplified index logic. in reality, if coin nr 11 goes into top 10 then we do not include it immediately - we wait (a) for the coin to marketcap = 2x the others, or (b) for the coin to be top 10 two months in a row. i would chose b because it is more logical.
-
-## reduce cols?
-
-it might also be worthwile to let `ret_mat` only contain `tkr_beeninblx` (the tickers that have been in the blx certificate) since it reduces the nr of cols from 1500+ to ca 50. it improves the speed an memory.
-
-that is dony by creating mca matrix, then binary matrix, then creating list of tickers that has been in the fund, then `ret_mat = ret_mat[tkr_beeninblx]`.
 
 ## web plots
 
@@ -128,17 +210,11 @@ corr matrix, hover visar pair & corr med två digits, samt p värde inom parente
 gärna samma färg-schema som existerande plots.
 
 
-## aum start at 100
-
-ev do a quickfix by prepending a row of 100 for all assets.
-
 ## sifr
 
 https://www.sifrdata.com/category/market-data/ ha med dessa grejer
 
-## choose colors, and plot themes.
-
-### plot style
+## plot style
 
 testa att ha kvar matplotlib men ändra till
 
@@ -152,14 +228,7 @@ try this:
     corr_mat = # some code
     sns.clustermap(corr_mat)
 
-
-## dead coins
-
-out of those ca 50 coins that has been top10, what is their status now? how many are dead? (first, define dead then count the nr of dead.)
-
-## rollcorr
-
-more thought can be put in here, and do fun stat stuff.
+try ggplot theme in matplotlib?  
 
 
 ## B daily
@@ -168,14 +237,6 @@ more thought can be put in here, and do fun stat stuff.
 now i have monthly data for the fund. what if we still use monthly re-weights but keep the data in daily format? then B matrix would have to be replicated 30 times for each row. it is more normal to work with dialy data and by doing so we can see how plots change.
 detta bör göras så att fundret by defn är månatlig. i binarizer kan man välja resample freq. fundera bara igenom vilken ordning det blir dvs det du gjorde i excelfilen med sumproduct, vilken vikt blir var?
 ^^ är detta done?
-
-
-## coin switches
-
-Visualisera nr of coin switches bättre. Både inom fonden och runtikring top 10 Kommentaren är it's difficult to do this yourself so we provide a service. Det som är runtikring top 10 triggar ett trade event för fonden, eftersom förra 10an är såld helt och flrrau11an köps helt. Kolla då hur mkt vikt 10e platsen har vid varje månad (och gör en describe på den för att se median och kvartiler) för ju större vikt 10an hade desto mer ska säljas av, dvs fonden ändras mkt.
-
-
-
 
 
 
@@ -213,6 +274,8 @@ take course and implement learnings in this project.
 AUTOCORR & EDA: titta på vilka sorts grafer du har gjort i thesis. gör dessa för denna data. kolla tex btc och eth först. hur är ACF och PACF? ser vi samma mönster som i finansdata? se snotes "python time-series"
 
 financial data have some properties (google for "stylized facts of asset returns") such as vol clustering, leverage effect, heavy tails, autocorr, etc. do crypto have this as well.
+
+https://tomaugspurger.github.io/modern-7-timeseries
 
 ## fin data
 
