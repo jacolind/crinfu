@@ -204,6 +204,7 @@ def binary2weight(binary_matrix, marketcap_matrix,
   if minmax_weights_imposed:
     weights_matrix = rescale_weights_minmax(weights_matrix,
                                             weight_min, weight_max)
+
   return weights_matrix
 
 ## help functions for binary2weight
@@ -301,11 +302,11 @@ def ggbasket(name,
   # create vectors and matrices
 
   # returns_basket_vector
-  rbv = w * returns_matrix
+  rbv = returns_matrix * w.shift(1).fillna(0) # todo kolla att detta blir korrekt . är ej säker på att det är just här jag ska ha dom. 
   # marketcap_basket_vector
-  mbv = b * marketcap_matrix
+  mbv = marketcap_matrix * b.shift(1).fillna(0)
   # volume_basket_vector
-  vbv = b * volume_matrix
+  vbv = volume_matrix * b.shift(1).fillna(0)
 
   # rename
   rbv.name = name
