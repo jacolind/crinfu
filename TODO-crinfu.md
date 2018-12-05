@@ -2,7 +2,7 @@
 
 decide what anlaysis to do so i do not get stuck in a explorative loop
 
-# next
+# next: before irl meeting
 
 ## change ggindex() 
 
@@ -53,31 +53,17 @@ more thought can be put in here, and do fun stat stuff.
     plt.ylabel("Close ($)")
     sns.despine()
 
-## plot krashes 
-
-a famous youtube video "it went all to x, and then it krashed."
-slice out those timeperiods, and make a figure with many plots in it. 
-
-
-## download financial data on sp500  clinux 
-
-see file stocks.py
-
-want marketcap on this as well. 
 
 
 ## read hodlbot articles 
 
 read hodlbot data analysis and see what should be included for us. 
 
+## download financial data on sp500  clinux 
 
-## marketcap na. how to handle? 
+see file stocks.py
 
-marketcap has na. how should we handle it?
-
-i think na.approx() is best.  
-
-when using .reindex do not fill with zero but with na.approx so that we do not see zero return on days when price is NA. 
+want marketcap on this as well. 
 
 
 ## calc portfolio turnover
@@ -121,6 +107,23 @@ Visualisera nr of coin switches bättre. Både inom fonden och runtikring top 10
 ## rolling corr(entiremarket, top200, top10, top5, top1)
 
 Defn variabeln market som är sum of all coins mcap. Gör rolling Corr på dem och BLX och Bitcoin för att se vilket som fångar hela marinaden bäst och hur bra dom fångar. 
+
+# afer irl meeting 
+
+## plot krashes 
+
+a famous youtube video "it went all to x, and then it krashed."
+slice out those timeperiods, and make a figure with many plots in it. 
+
+
+## marketcap na. how to handle? 
+
+marketcap has na. how should we handle it?
+
+i think na.approx() is best.  
+
+when using .reindex do not fill with zero but with na.approx so that we do not see zero return on days when price is NA. 
+
 
 ## output key objects to csv
 
