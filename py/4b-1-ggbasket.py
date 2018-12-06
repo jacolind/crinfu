@@ -143,7 +143,6 @@ def binary2weight(binary_matrix, marketcap_matrix,
   input two df: marketcap and binary matrices. often daily freq.
   output one df: weight matrix.
 
-  the function ignores frequency so it must be solved earlier.
   the function  does not care about nrtop or blacklist or forcelist,
   that info is contained in binary matrix.
   """
