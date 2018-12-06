@@ -4,22 +4,6 @@ and once it has, 4b-2 will be modified so that is uses ggbasket not ggindex
 
 # todo what to borrow from ggindex.py :
 
-## start end date
-
-```
-## start dates, end dates
-
-# if start and date are empty use default values
-if start=='':
-    start=mcap.index[startafter]
-if end=='':
-    end=mcap.index[-1]
-# slice by dates
-mcap = mcap.loc[start:end]
-ret = ret.loc[start:end]
-volume = volume.loc[start:end]
-```
-
 ## assert input is valid, it is easier now with smaller f()
 
 ```
@@ -39,11 +23,20 @@ assert isinstance(nrtop, int)
 assert isinstance(name, basestring)
 ```
 
-
-
 '''
 
 
+## start end date
+
+def date_slicer(df, start='', end='', startafter=365):
+  # default: start 1y after df first day. end on last day.
+  # override this default using params start and end.
+  if start=='':
+      start = df.index[startafter]
+  if end=='':
+      end = df.index[-1]
+  # slice by dates
+  return df.loc[start:end]
 
 ## mcap2binary
 
@@ -56,7 +49,7 @@ def mcap2binary(marketcap_matrix,
 
   input data
     :param marketcap_matrix:
-  input params regarding the basket rules:
+  input params that decides the basket rules:
     :param nrtop:
     :param rebalance_freq:
     :param blacklist:
@@ -142,11 +135,12 @@ def forcelist_binary(binary_mthly, forcelist, nrtop):
 
 def binary2weight(binary_matrix, marketcap_matrix,
                   # now list all rules
+                   rebalance_freq='M',
                    weighting=['marketcap', 'equal', 'custom'],
                    custom_assets = [], custom_weights=[],
                    weight_max=1, weight_min=0):
   """
-  input two df: marketcap and binary matrices.
+  input two df: marketcap and binary matrices. often daily freq.
   output one df: weight matrix.
 
   the function ignores frequency so it must be solved earlier.
@@ -155,14 +149,22 @@ def binary2weight(binary_matrix, marketcap_matrix,
   """
   # calc weights based on parameter `weighting`
   if weighting == 'marketcap':
-    # monthly W matrix: B * M (element wise mult; "hadamard product")
     if smooth == True:
       # todo write this part
       # http://pandas.pydata.org/pandas-docs/version/0.17.0/generated/pandas.ewma
       marketcap_matrix = pd.ewma(marketcap_matrix, min_periods=30)
-    b_times_m = binary_matrix * marketcap_matrix
+    # convert freq. for example daily to monthly
+    b_mthly = binary_matrix.resample(rebalance_freq,
+                                     convention='start').asfreq()
+    m_mthly = marketcap_matrix.resample(rebalance_freq,
+                                        convention='start').asfreq()
+    # W matrix: B * M (element wise mult; "hadamard product")
+    b_times_m_mthly = b_mthly * m_mthly
     # normalize so weight sum to 1
-    weights_matrix = b_times_m.div(b_times_m.sum(axis=1), axis=0)
+    w_mat_mthly = b_times_m_mthly.div(b_times_m_mthly.sum(axis=1), axis=0)
+    # resample back to same freq as the input mcap matrix
+    weights_matrix = w_mat_mthly.reindex(marketcap_matrix.index,
+                                         method='ffill')
   if weighting == 'equal':
     weights_matrix = binary_matrix.div(binary_matrix.sum(axis=1), axis=0)
   if weighting == 'custom':
@@ -279,7 +281,9 @@ def ggbasket(name,
              # 2weight() params
                weighting=['marketcap', 'equal', 'custom'],
                custom_assets=[], custom_weights=[],
-               weight_max=1, weight_min=0
+               weight_max=1, weight_min=0,
+             # date slicing
+             start='', end='', startafter=365
              ):
   # input data
   # input rules
@@ -307,6 +311,9 @@ def ggbasket(name,
   mbv = marketcap_matrix * b.shift(1).fillna(0)
   # volume_basket_vector
   vbv = volume_matrix * b.shift(1).fillna(0)
+
+  # slice out dates
+  rbv = date_slicer(rbv, start, end, startafter):
 
   # rename
   rbv.name = name
