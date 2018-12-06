@@ -68,31 +68,38 @@ def mcap2binary(marketcap_matrix,
   ranked_mcap_mthly = mcap_mthly.rank(axis=1, method='first', ascending=False)
 
   # binary market cap. 1 for included, 0 for excluded.
-  binary_mthly = ranked_mcap_mthly < 1 + nrtop
-  binary_mthly = int(binary_mthly)
+  binary_mthly = ranked_mcap_mthly < (1 + nrtop)
 
   # blacklist and forcelist:
   # binary matrix zero <=> asset is always excluded
   # binary matrix one <=> asset is always included
-  binary_mthly = blacklist_binary(mcap_mthly, blacklist)
-  binary_mthly = forcelist_binary(mcap_mthly, forcelist)
+  binary_mthly = blacklist_binary(binary_mthly, blacklist)
+  binary_mthly = forcelist_binary(binary_mthly, forcelist, nrtop)
 
   # return binary matrix with same freq as the input
   return binary_mthly.reindex(marketcap_matrix.index, method='ffill')
-
 
 ## help functions for mcap2binary()
 
 def blacklist_binary(binary_mthly, blacklist):
   '''
   the assets in forcelist get a zero in the binary matrix.
-
-  todo add functionality to say "stablecoins" as input. it will create a list of all stablecoins.
-todo not prio: add optionality to force something after a certain date only.
+  input their tickers in the form of a py list.
+  other choices available are: 'stablecoins'.
   '''
   # binary matrix zero <=> asset is always excluded
   if blacklist != '':
     binary_mthly.loc[:, blacklist] = 0
+  if blacklist == 'stablecoins':
+    stablecoins = ['USDT', 'MKR', 'BTS']
+    binary_mthly.loc[:, stablecoins] = 0
+  '''
+  todo add functionality to say ["stablecoins", "LTC"]as input. 
+  todo not prio: add optionality to force something after a certain date only.
+  '''
+
+
+
   return binary_mthly
 
 def forcelist_binary(binary_mthly, forcelist, nrtop):
@@ -135,10 +142,11 @@ def forcelist_binary(binary_mthly, forcelist, nrtop):
 
 def binary2weight(binary_matrix, marketcap_matrix,
                   # now list all rules
-                   rebalance_freq='M',
-                   weighting=['marketcap', 'equal', 'custom'],
-                   custom_assets = [], custom_weights=[],
-                   weight_max=1, weight_min=0):
+                  rebalance_freq,
+                  weighting=['marketcap', 'equal', 'custom'],
+                  smooth=False,
+                  custom_assets = [], custom_weights=[],
+                  weight_max=1, weight_min=0):
   """
   input two df: marketcap and binary matrices. often daily freq.
   output one df: weight matrix.
@@ -146,18 +154,17 @@ def binary2weight(binary_matrix, marketcap_matrix,
   the function  does not care about nrtop or blacklist or forcelist,
   that info is contained in binary matrix.
   """
-  # calc weights based on parameter `weighting`
+  ## calc weights based on parameter `weighting`. three cases can occur.
   if weighting == 'marketcap':
-    if smooth == True:
-      # todo write this part
-      # http://pandas.pydata.org/pandas-docs/version/0.17.0/generated/pandas.ewma
-      marketcap_matrix = pd.ewma(marketcap_matrix, min_periods=30)
+    if smooth:
+      # todo read more on smoothing optoins for my understanding. and maybe let user decide more?
+      marketcap_matrix = marketcap_matrix.ewm(span=30).mean()
     # convert freq. for example daily to monthly
     b_mthly = binary_matrix.resample(rebalance_freq,
                                      convention='start').asfreq()
     m_mthly = marketcap_matrix.resample(rebalance_freq,
                                         convention='start').asfreq()
-    # W matrix: B * M (element wise mult; "hadamard product")
+    # W matrix is normalized B * M
     b_times_m_mthly = b_mthly * m_mthly
     # normalize so weight sum to 1
     w_mat_mthly = b_times_m_mthly.div(b_times_m_mthly.sum(axis=1), axis=0)
@@ -183,7 +190,7 @@ def binary2weight(binary_matrix, marketcap_matrix,
       weights_matrix = 0  #
       weights_matrix.loc[:, custom_assets] = custom_weights/100 # funkar denna broadcast?
     if isinstance(custom_assets, int):
-      assert len(custom_weights =< 10) # only allow up to 10 because i was lazy when coding dictionary
+      assert len(custom_weights < 11) # only allow up to 10 because i was lazy when coding dictionary
       # use rank to know what asset has a certain position
       ranked_mcap = marketcap_matrix.rank(axis=1, method='first', ascending=False)
       #  map from rankings to weight
@@ -201,118 +208,92 @@ def binary2weight(binary_matrix, marketcap_matrix,
                           }
       weights_matrix = ranked_mcap.replace(dict_rank2weight)
 
+  ## rescale weights if min or max is imposed.
   minmax_weights_imposed = (weight_max < 1) | (weight_min > 0)
   if minmax_weights_imposed:
-    weights_matrix = rescale_weights_minmax(weights_matrix,
-                                            weight_min, weight_max)
+    weights_matrix = weights_matrix.apply(rescale_w_minmax, axis=1,
+                                          weight_min=weight_min,
+                                          weight_max=weight_max)
 
   return weights_matrix
 
-## help functions for binary2weight
+## test out the samller f() on real data
+bin1 = mcap2binary(marketcap_matrix=mca_vcc_mat,
+                  nrtop=10, rebalance_freq='M')
+wei1 = binary2weight(bin1, mca_vcc_mat,
+                      rebalance_freq='M',
+                      weighting='marketcap')
+price2return(pri_vcc_mat) * wei1
+vol_vcc_mat * bin1
 
-# two functions. first one truncates, second one both truncates and distributes.
-
-# todo write these two from R to python
-
-def truncate_weights(weights_matrix, weight_min, weight_max):
-  # assert input is valid
-  assert weight_min >= 0
-  assert weight_max <= 1
-  assert weight_max > 0
-
-def rescale_weights_minmax(weights_matrix, weight_min, weight_max):
-  # todo take code from R
-  # functions_1.R
-
-
-
-  w_truncate < - function(weight_original, minimum=0.01, maximum=0.30)
-  {
-    stopifnot(sum(weight_original) == 1)
-  w1 < - if_else(weight_original > maximum,
-                 maximum,
-                 weight_original)
-  w2 < - if_else(w1 < minimum,
-                 minimum,
-                 w1)
-  return (w2)
-  }
-  wexample < - c(0.6, 0.9, 20.5, 50, 28) / 100
-  w_truncate(wexample)
-  w_truncate(wexample) * c(1, 1, 0, 0, 0)
-
-  w_rescale_minmax < - function(weight_original, minimum=0.01, maximum=0.30)
-  {
-  # input: weights, summing to 1.
-  # output: weights with max 30% and min 1%.
-  # how it is done:
-  # distribute leftover percentages to the ones who were not changed
-  # (do it according to previous weight)
-
-  # truncate original weights
-  w_truncated < - w_truncate(weight_original, minimum, maximum)
-
-  # calc what weights are leftovers from truncating.
-  leftover < - 1 - sum(w_truncated)
-  unchanged < - as.integer(weight_original == w_truncated)
-  tot_mcap_unchanged < - sum(w_truncated * unchanged)
-
-  # if changed from the truncation,
-  # take that (so it becomes 30% or 1%)
-  # if unchanged then distribute leftover in accordance with original market cap
-  w_final < - if_else(unchanged == 1,
-                      w_truncated + leftover * weight_original / tot_mcap_unchanged,
-                      w_truncated)
-  stopifnot(1 == sum(w_final))
-  return (w_final)
-
-}
-
+DataFrame.ewm(ignore_na=False,span=30,min_periods=0,adjust=True).mean()
+mca_vcc_mat.ewm(span=30).mean()
 
 ## generate general basket: ggbasket
 
 def ggbasket(name,
-             marketcap_matrix,
-             returns_matrix, volume_matrix,
              # 2binary() params
                 nrtop, rebalance_freq,
                 blacklist='', forcelist='',
              # 2weight() params
                weighting=['marketcap', 'equal', 'custom'],
+               smooth=False,
                custom_assets=[], custom_weights=[],
                weight_max=1, weight_min=0,
              # date slicing
-             start='', end='', startafter=365
-             ):
+             start='', end='', startafter=365,
+             # historical data
+             marketcap_matrix = mca_vcc_mat,
+             returns_matrix = ret_vcc_mat,
+            volume_matrix = vol_vcc_mat):
   # input data
   # input rules
   # output weights and
   # todo write func descr
 
-  # create binary matrix
-  b = mcap2binary(marketcap_matrix,
-                  nrtop, rebalance_freq,
-                  blacklist, forcelist
+  ## clean input
+
+  returns_matrix = returns_matrix.fillna(0)
+  # todo: later, fill with na approx for volume or mcap. for now do ffill
+  marketcap_matrix = marketcap_matrix.fillna(method='ffill')
+  volume_matrix = volume_matrix.fillna(method='ffill')
+
+  ## create binary matrix
+
+  b = mcap2binary(marketcap_matrix=marketcap_matrix,
+                  nrtop=nrtop, rebalance_freq=rebalance_freq,
+                  blacklist=blacklist, forcelist=forcelist
                   )
 
-  # create weight matrix
-  w = binary2weight(b,
-                    weighting,
-                    custom_assets, custom_weights,
-                    weight_max, weight_min
+  ## create weight matrix
+
+  w = binary2weight(binary_matrix=b, marketcap_matrix=marketcap_matrix,
+                    rebalance_freq=rebalance_freq,
+                    weighting=weighting, smooth=smooth,
+                    custom_assets=custom_assets,custom_weights=custom_weights,
+                    weight_max=weight_max, weight_min=weight_min
                     )
 
-  # create vectors and matrices
+
+
+  ## create vectors and matrices
+
+  # todo kolla att detta blir korrekt . är ej säker på att det är just här jag ska ha dom.
 
   # returns_basket_vector
-  rbv = returns_matrix * w.shift(1).fillna(0) # todo kolla att detta blir korrekt . är ej säker på att det är just här jag ska ha dom. 
+  rbv = returns_matrix * w.shift(1).fillna(0)
+  rbv = rbv.sum(axis=1)
   # marketcap_basket_vector
   mbv = marketcap_matrix * b.shift(1).fillna(0)
+  mbv = mbv.sum(axis=1)
   # volume_basket_vector
   vbv = volume_matrix * b.shift(1).fillna(0)
+  vbv = vbv.sum(axis=1)
 
   # slice out dates
-  rbv = date_slicer(rbv, start, end, startafter):
+  rbv = date_slicer(rbv, start=start, end=end, startafter=startafter)
+  mbv = date_slicer(mbv, start=start, end=end, startafter=startafter)
+  vbv = date_slicer(vbv, start=start, end=end, startafter=startafter)
 
   # rename
   rbv.name = name
@@ -321,32 +302,100 @@ def ggbasket(name,
 
   return w, rbv, mbv, vbv
 
-
 # code below will go into 4b-2_transform.py
 # ---------------------------------------------------------------------------------
 
-# naming convention: one letter indicating parameter, then a letter/number indicating answer on that parameter
+# create ret_vcc_mat
+
+ret_vcc_mat = price2return(pri_vcc_mat)
+
+# naming convention: one letter indicating parameter, then a letter/number indicating answer on that parameter. separated by dash.
+
 # top 10, weighted marketcap, rebalanced monthly
 w1, r1, m1, v1 = ggbasket(name='t10-wm-rm',
-                          marketcap_matrix=mca_vcc_mat,
-                          returns_matrix=ret_vcc_mat,
-                          volume_matrix=vol_vcc_mat,
-                          nrtop=10,
-                          rebalance_freq='M',
-                          weighting='marketcap'
-                          )
+                          nrtop=10,             # t10
+                          rebalance_freq='M',   # -rm
+                          weighting='marketcap') # -wm
 # top 10, weighted marketcap smoothed, rebalanced monthly
-w1, r2, m2, v2 = ggbasket(name='t10-wms-rm', )
+w2, r2, m2, v2 = ggbasket(name='t10-wms-rm',
+                          nrtop=10, rebalance_freq='M',
+                          weighting='marketcap',
+                          smooth=True)
+w3, r3, m3, v3, = ggbasket(name='t5-we-rm',
+                           nrtop=5, rebalance_freq='M',
+                           weighting='equal')
+w4, r4, m4, v4 = ggbasket(name='t5-wm-rm',
+                          nrtop=5, rebalance_freq='M',
+                          weighting='marketcap')
+w5, r5, m5, v5 = ggbasket(name='t5-wsm-rm',
+                          nrtop=5,
+                          rebalance_freq='M',
+                          weighting='marketcap',
+                          smooth=True)
+# floor to min weight 1%
+w6,r6,m6,v6 = ggbasket(name='t5-wm-rm-f1',
+                       nrtop=5, rebalance_freq='M',
+                       weighting='marketcap',
+                       weight_min=0.01
+                       )
+# floor 1% cap 30%
+w6,r6,m6,v6 = ggbasket(name='t5-wm-rm-f1c30',
+                       nrtop=5, rebalance_freq='M',
+                       weighting='marketcap',
+                       weight_min=0.01, weight_max=0.30
+                       )
+
+
 # as above but no stablecoins
-ggbasket(name='t10-wms-rm-nostable', )
-# top 10, weighted marketcap smoothed, rebalanced monthly, limits lower 1% upper 30%
-ggbasket(name='t10-wms-rm-l1u30', )
-# top5, weighted equal, rebelanced monthly,
-ggbasket(name='t5-wm-rm', )
+# ggbasket(name='t10-wsm-rm-nostable')
 
 # returns matrix of baskets
-ret_bsk_mat = pd.concat([r1, r2, r3],
-                        axis=0)
+ret_bsk_mat = pd.concat([r1, r2, r3, r4, r5], axis=1)
+
+# dates
+ret_bsk_mat.index[0]
+ret_bsk_mat.index[-1]
 
 # corr
-ret_bsk_mat.cor()
+ret_bsk_mat.loc['2015-04':].corr()
+ret_bsk_mat.loc['2015-04':].corr().to_csv('output/corr.csv')
+
+# sharpe
+sharpe_ret_vol(ret_bsk_mat).round(2)
+
+# price
+return2aum(ret_bsk_mat).plot(logy=True)
+plt.ylabel('Price')
+plt.savefig('output/pri_bsk_a.png')
+
+# effect of smoothing.
+r1.name, r2.name
+w_diff = w1 - w2
+w_diff.plot(legend=False)
+plt.ylabel('Smoothed weight minus raw weight')
+plt.savefig('output/w_smoothing_1.png')
+w_diff_1 = w_diff.abs().mean().sort_values(ascending=False)[0:20]
+w_diff_1.plot.barh()
+plt.show()
+w_diff_1.to_csv('output/w smooth minus w raw, abs(mean()).csv')
+
+# corr over time
+ret_bsk_mat.rolling(90).corr()
+
+# create cor_mat
+cor_bsk_mat = pd.rolling_corr(ret_bsk_mat['t10-wm-rm'],
+                          ret_bsk_mat.drop('t10-wm-rm', axis=1),
+                          window = 360)
+cor_bsk_mat.loc['2015-04':, :].plot(legend=True)
+plt.ylabel('Correlation vs t10-wm-rm')
+plt.title('Rolling 1y correlation \n All vs t10-wm-rm')
+plt.savefig('output/bsk-rollcorr-1.png')
+
+# see corr matrices
+show_rollcorr_plot(tkr_top10_blx, start3, end3)
+show_rollcorr_plot(tkr_sel_blx, start3, end3, legend=True)
+
+# see turnover depending on portf.
+w_bsk = pd.concat([w1,w2,w3,w4,w5], axis=1)
+w1.shape
+w_bsk.shape
