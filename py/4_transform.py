@@ -1,3 +1,5 @@
+# either use this file or use the ones with name 4b- as aprefix
+
 """
 before reading the code, it will help if you have read the file
 naming-convention-objects.md
@@ -52,10 +54,12 @@ bmc_mat = bmc_mat_mthly.reindex(pri_vcc_mat.index, method='ffill')
 
 WEIGHTING = 'marketcap'
 
+WEIGHTING == 'marketcap'
+
 # monthly W matrix: B * M (element wise mult; "hadamard product")
 b_times_m = bmc_mat_mthly * mca_vcc_mat_mthly
 
-if WEIGHTING = 'equal':
+if WEIGHTING == 'equal':
     # update B * M: if it is positive return 1 else 0.
     b_times_m = (b_times_m > 0)
 
@@ -82,7 +86,7 @@ fin assets trade on weekdays. vcc trade every day.
 tkr_fin
 # all vcc tickers, over 1000
 tkr_vcc = pri_vcc_mat.columns
-assert len(tkr_vcc) > 1000
+
 # tkr all contain: vcc + fin + blx
 # tkr_finvccblx = pri_mat.columns 3have not created that object yet!
 #  # bmc include cols: vcc, Total, Others
