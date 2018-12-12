@@ -1,5 +1,5 @@
 '''
-this scriåpt aims to replace 4b-1_ggindex.py
+this scriaapt aims to replace 4b-1_ggindex.py
 and once it has, 4b-2 will be modified so that is uses ggbasket not ggindex
 
 # todo what to borrow from ggindex.py :
@@ -62,6 +62,9 @@ def mcap2binary(marketcap_matrix,
 
   # rebalance frequency
   mcap_mthly = marketcap_matrix.resample(rebalance_freq, convention='start').asfreq()
+  # prövar ny metod nu 12 dec
+  mcap_mthly = marketcap_matrix.resample(rebalance_freq).first()
+
   # object has name _mthly for simplicity, as it is the default value.
 
   # ranked market cap. larget market cap gets 1, second largest 2, etc.
@@ -162,8 +165,10 @@ def binary2weight(binary_matrix, marketcap_matrix,
     # convert freq. for example daily to monthly
     b_mthly = binary_matrix.resample(rebalance_freq,
                                      convention='start').asfreq()
+    b_mthly = binary_matrix.resample(rebalance_freq).first()
     m_mthly = marketcap_matrix.resample(rebalance_freq,
                                         convention='start').asfreq()
+    m_mthly = marketcap_matrix.resample(rebalance_freq).first()
     # W matrix is normalized B * M
     b_times_m_mthly = b_mthly * m_mthly
     # normalize so weight sum to 1
@@ -183,7 +188,7 @@ def binary2weight(binary_matrix, marketcap_matrix,
     '''
     # weighting='custom', custom_assets=['BTC','XRP','LTC'], custom_weight=[50,30,20]
     if isinstance(custom_assets[0], str):
-      # kan man göra så med isinstans str? tog först len > 0 men det är inte korrekt tror jag.
+      # kan man gora saa med isinstans str? tog forst len > 0 men det aar inte korrekt tror jag.
       # all assets not in custom_assets have zero weight.
       # all assets in custom_assets have weight on each date set to custom_weights
       weights_matrix = binary_matrix # to get correct dim and index
@@ -211,23 +216,17 @@ def binary2weight(binary_matrix, marketcap_matrix,
   ## rescale weights if min or max is imposed.
   minmax_weights_imposed = (weight_max < 1) | (weight_min > 0)
   if minmax_weights_imposed:
-    weights_matrix = weights_matrix.apply(rescale_w_minmax, axis=1,
+    weights_matrix = weights_matrix.apply(rescale_w, axis=1,
                                           weight_min=weight_min,
                                           weight_max=weight_max)
 
   return weights_matrix
 
-## test out the samller f() on real data
-bin1 = mcap2binary(marketcap_matrix=mca_vcc_mat,
-                  nrtop=10, rebalance_freq='M')
-wei1 = binary2weight(bin1, mca_vcc_mat,
-                      rebalance_freq='M',
-                      weighting='marketcap')
-price2return(pri_vcc_mat) * wei1
-vol_vcc_mat * bin1
 
-DataFrame.ewm(ignore_na=False,span=30,min_periods=0,adjust=True).mean()
-mca_vcc_mat.ewm(span=30).mean()
+# there must be at least one notnull value
+
+#price2return(pri_vcc_mat) * wei1
+#vol_vcc_mat * bin1
 
 ## generate general basket: ggbasket
 
@@ -244,7 +243,7 @@ def ggbasket(name,
              start='', end='', startafter=365,
              # historical data
              marketcap_matrix = mca_vcc_mat,
-             returns_matrix = ret_vcc_mat,
+             returns_matrix = price2return(pri_vcc_mat),
             volume_matrix = vol_vcc_mat):
   # input data
   # input rules
@@ -270,7 +269,8 @@ def ggbasket(name,
   w = binary2weight(binary_matrix=b, marketcap_matrix=marketcap_matrix,
                     rebalance_freq=rebalance_freq,
                     weighting=weighting, smooth=smooth,
-                    custom_assets=custom_assets,custom_weights=custom_weights,
+                    custom_assets=custom_assets,
+                    custom_weights=custom_weights,
                     weight_max=weight_max, weight_min=weight_min
                     )
 
@@ -278,7 +278,7 @@ def ggbasket(name,
 
   ## create vectors and matrices
 
-  # todo kolla att detta blir korrekt . är ej säker på att det är just här jag ska ha dom.
+  # todo kolla att detta blir korrekt . aar ej saaker paa att det aar just haar jag ska ha dom.
 
   # returns_basket_vector
   rbv = returns_matrix * w.shift(1).fillna(0)
@@ -301,101 +301,3 @@ def ggbasket(name,
   vbv.name = name
 
   return w, rbv, mbv, vbv
-
-# code below will go into 4b-2_transform.py
-# ---------------------------------------------------------------------------------
-
-# create ret_vcc_mat
-
-ret_vcc_mat = price2return(pri_vcc_mat)
-
-# naming convention: one letter indicating parameter, then a letter/number indicating answer on that parameter. separated by dash.
-
-# top 10, weighted marketcap, rebalanced monthly
-w1, r1, m1, v1 = ggbasket(name='t10-wm-rm',
-                          nrtop=10,             # t10
-                          rebalance_freq='M',   # -rm
-                          weighting='marketcap') # -wm
-# top 10, weighted marketcap smoothed, rebalanced monthly
-w2, r2, m2, v2 = ggbasket(name='t10-wms-rm',
-                          nrtop=10, rebalance_freq='M',
-                          weighting='marketcap',
-                          smooth=True)
-w3, r3, m3, v3, = ggbasket(name='t5-we-rm',
-                           nrtop=5, rebalance_freq='M',
-                           weighting='equal')
-w4, r4, m4, v4 = ggbasket(name='t5-wm-rm',
-                          nrtop=5, rebalance_freq='M',
-                          weighting='marketcap')
-w5, r5, m5, v5 = ggbasket(name='t5-wsm-rm',
-                          nrtop=5,
-                          rebalance_freq='M',
-                          weighting='marketcap',
-                          smooth=True)
-# floor to min weight 1%
-w6,r6,m6,v6 = ggbasket(name='t5-wm-rm-f1',
-                       nrtop=5, rebalance_freq='M',
-                       weighting='marketcap',
-                       weight_min=0.01
-                       )
-# floor 1% cap 30%
-w6,r6,m6,v6 = ggbasket(name='t5-wm-rm-f1c30',
-                       nrtop=5, rebalance_freq='M',
-                       weighting='marketcap',
-                       weight_min=0.01, weight_max=0.30
-                       )
-
-
-# as above but no stablecoins
-# ggbasket(name='t10-wsm-rm-nostable')
-
-# returns matrix of baskets
-ret_bsk_mat = pd.concat([r1, r2, r3, r4, r5], axis=1)
-
-# dates
-ret_bsk_mat.index[0]
-ret_bsk_mat.index[-1]
-
-# corr
-ret_bsk_mat.loc['2015-04':].corr()
-ret_bsk_mat.loc['2015-04':].corr().to_csv('output/corr.csv')
-
-# sharpe
-sharpe_ret_vol(ret_bsk_mat).round(2)
-
-# price
-return2aum(ret_bsk_mat).plot(logy=True)
-plt.ylabel('Price')
-plt.savefig('output/pri_bsk_a.png')
-
-# effect of smoothing.
-r1.name, r2.name
-w_diff = w1 - w2
-w_diff.plot(legend=False)
-plt.ylabel('Smoothed weight minus raw weight')
-plt.savefig('output/w_smoothing_1.png')
-w_diff_1 = w_diff.abs().mean().sort_values(ascending=False)[0:20]
-w_diff_1.plot.barh()
-plt.show()
-w_diff_1.to_csv('output/w smooth minus w raw, abs(mean()).csv')
-
-# corr over time
-ret_bsk_mat.rolling(90).corr()
-
-# create cor_mat
-cor_bsk_mat = pd.rolling_corr(ret_bsk_mat['t10-wm-rm'],
-                          ret_bsk_mat.drop('t10-wm-rm', axis=1),
-                          window = 360)
-cor_bsk_mat.loc['2015-04':, :].plot(legend=True)
-plt.ylabel('Correlation vs t10-wm-rm')
-plt.title('Rolling 1y correlation \n All vs t10-wm-rm')
-plt.savefig('output/bsk-rollcorr-1.png')
-
-# see corr matrices
-show_rollcorr_plot(tkr_top10_blx, start3, end3)
-show_rollcorr_plot(tkr_sel_blx, start3, end3, legend=True)
-
-# see turnover depending on portf.
-w_bsk = pd.concat([w1,w2,w3,w4,w5], axis=1)
-w1.shape
-w_bsk.shape
