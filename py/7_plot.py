@@ -18,25 +18,16 @@ tkr_sel_blx_fin = tkr_sel_blx + tkr_fin
 tkr_top10_blx = tkr_top10 + ['BLX']
 tkr_fin_blx = tkr_fin + ['BLX']
 
-# create color list
+# create color list           
 # http://www.discoveryplayground.com/computer-programming-for-kids/rgb-colors/
-
-# [red, orange, beige, green, blue]. chosen by team.
-clr_vinter = ['#d7191c',
-              '#fdae61',
-              '#ffffbf',
-              '#abdda4',
-              '#2b83ba']
-clr_blx = '#2b83ba' # blue
-clr_eth = '#abdda4' # green
-clr_btc = '#fdae61' # orange
-clr_rest1 = '#d7191c' # red
-clr_rest2 = '#ffffbf' # beige
-
-# clr_btc = '#0000cd'
-# clr_eth = '#006400'
-# clr_oth = '#2f4f4f'
-# clr_blx = '#483d8b'
+#clr_btc = 'xkcd:greyish blue'
+#clr_eth = 'xkcd:slate'
+#clr_oth = 'xkcd:deep sea blue'
+#clr_blx = 'xkcd:sky blue'
+clr_btc = '#0000cd'
+clr_eth = '#006400'
+clr_oth = '#2f4f4f'
+clr_blx = '#483d8b'
 alpha_ = 0.80
 clr_sel = [clr_btc, clr_eth]
 clr_sel_blx = [clr_btc, clr_eth, clr_blx]
@@ -48,14 +39,17 @@ plt.title('Top ' + str(nrcoins) + ' today')
 plt.xlabel('Weight')
 plt.show()
 
-## prices: $100 investment a year ago
+## prices: $100 investment a year ago 
 
 pri_mat.loc[:, tkr_sel_blx_fin].head()
 # todo hakan: no one not start at 100 so fix that
-# maybe manually just add a row before where all are 100.
+# maybe manually just add a row before where all are 100. 
 
 
-pri_mat[tkr_sel_blx].plot(logy=True, color=clr_sel_blx, linewidth=3)
+return2aum(ret_mat.loc['2017-09':, tkr_sel_blx]).plot(
+            logy=True, 
+                        color=['Orange', clr_eth, clr_blx], 
+                        linewidth=3)
 # todo: color=clr_sel_blx did not work in the above line
 plt.title('$100 investment a year ago')
 plt.ylabel('Indexed price \n(start at $100)')
@@ -68,41 +62,6 @@ if save_large_png == True:
 
 # see In60 and forward in html
 
-# define function
-def returns_vol_tbl(df, assets, start, end='2018-04', T=12):
-    """start with rr since it contains fund and coins returns.
-    T=12 for monthly data and T=365 for daily data.
-    output returnstable for a certain period.
-    """
-    # calc mean and vol
-    returnstable = df.loc[start:end, assets].apply([np.mean, np.std])
-    # sqrt T rule
-    returnstable = returnstable.multiply([T, np.sqrt(T)], axis=0)
-    # rename
-    returnstable.index = ['Mean return', 'Historical vol']
-    # add sharpe
-    rett = returnstable.T
-    rett['Return / Vol'] = rett['Mean return'] / rett['Historical vol']
-    returnstable = rett.T
-    # round
-    returnstable = returnstable.round(2)
-    # return
-    return returnstable
-
-def returns_vol_tbl(df, assets, start, end='2018-04', T=12):
-    """start with rr since it contains fund and coins returns.
-    T=12 for monthly data and T=365 for daily data.
-    output returnstable for a certain period.
-    """
-    # calc mean and vol
-    ret = df.loc[start:end, assets].mean() * T
-    vol = df.loc[start:end, assets].std() * np.sqrt(T)
-    # put into tbl
-    tbl = pd.concat([ret, vol], axis=1)
-    # rename
-    tbl.columns = ['Return', 'Volatility']
-    tbl['Return / Vol'] = tbl['Return'] / tbl['Volatility']
-    return tbl.round(2).T
 
 
 # example usage. play around with the numbers and get something interesting
@@ -137,21 +96,11 @@ start3 = '2015-04'
 end3 = '2018-04'
 title_corr = 'Correlation matrix - daily data \n from ' + start3 + ' to ' + end3
 
-# by the way, here is a ret mat given this choice
-returns_vol_tbl(df=ret_mat, assets=tkr_sel_blx,
-                start=start3, end=end3,
+# by the way, here is a ret mat given this choice 
+returns_vol_tbl(df=ret_mat, assets=tkr_sel_blx, 
+                start=start3, end=end3, 
                 T=252).to_csv('output/returns_vol_tbl.csv')
 
-# define help-function
-def show_corr_plot(cols, start, end, df, title=title_corr):
-    """
-    input a return matrix df (eg monthly or daily returns)
-    slice the df by startdate, enddate and columns.
-    output a correlation matrix plot.
-    """
-    corrplot(df.loc[start:end, cols].corr())
-    plt.title(title_corr)
-    plt.show()
 
 # todo seaborn does not exists here.
 
@@ -174,14 +123,6 @@ cor_mat = pd.rolling_corr(ret_mat['BTC'],
                           window = 360)
 title_rollcorr = 'Rolling 1y correlation \n All vs BTC'
 
-# def plot help-function
-def show_rollcorr_plot(cols, start, end, df=cor_mat, legend=False, title=title_rollcorr):
-    cor_mat.loc[start:end, cols].plot(legend=legend)
-    plt.ylabel('Correlation vs BTC')
-    plt.title(title_rollcorr)
-    plt.axhline(y=0, color='k', ls='-')
-    plt.show()
-
 # see corr matrices
 show_rollcorr_plot(tkr_top10_blx, start3, end3)
 show_rollcorr_plot(tkr_sel_blx, start3, end3, legend=True)
@@ -203,6 +144,9 @@ mcafr_vcc_mat.loc[start2:, 'BLX'].plot(color=clr_blx)
 plt.title(title_mca)
 plt.ylabel('Fraction of total \n market capitalization')
 plt.savefig('output/vip/mcap-fund_vs_coins_1.png')
+
+# plot _1.1
+mcafr_vcc_mat.loc[start2:, ['BLX', 'BTC']].plot(color=clr_blx)
 
 # plot _2
 mcafr_vcc_mat.loc[start2:, ['BTC', 'ETH', 'BLX']
@@ -258,44 +202,7 @@ plt.savefig('output/vip/volume-fund_vs_coins_3.png')
 
 # todo decide _1 or _2 or _# above? me, jacob, think
 
-## coins in and out of top 10. and position changes within the top 10.
 
-"""
-definition: A coin shift has occured in month t+1 if
-the set of selected coins for month t is not the same as month t+1.
-This is calculated by comparing the B matrix with the lagged B matrix.
-The more coinswitches the harder it would be to do it yourself.
-Main goal is to see how it impacts our trading.
-"""
-
-# create vector measing nr of in/out events
-b_vs_bshift_mat = b_mat_mthly.shift(1) != b_mat_mthly
-nr_inout_vec = b_vs_bshift_mat.sum(axis=1)
-# delete first row
-nr_inout_vec = nr_inout_vec[1:]
-# Coin A in and coin B out is 1 switch not 2.
-nr_inout_vec = nr_inout_vec / 2
-
-# nr of coin switches
-nr_inout_vec.median()
-nr_inout_vec.mean()
-
-# plot
-nr_inout_vec['2014':].plot(style='.')
-plt.title('Nr of coin switches in the fund')
-plt.ylabel('Coin switches')
-plt.savefig('output/vip/coinswitches.png')
-
-# summarystats
-print("Nr of months with an in/out happening:",
-      sum(nr_inout_vec > 0),
-      "out of", len(nr_inout_vec))
-print("Median nr of in/out events during a month:", nr_inout_vec.median())
-
-# check
-print("example of a shift: NEM out, IOTA in")
-print(b_mat_mthly[b_mat_mthly>0].iloc[-3,].sort_values()[0:11])
-print(b_mat_mthly[b_mat_mthly>0].iloc[-4,].sort_values()[0:11])
 
 ## delta weights: how much trading on each rebalancing date
 
@@ -340,4 +247,5 @@ price2aum(pri_mat.loc[:, tkr_beeninblx]).plot(logy=True, legend=False, ylim=(0, 
 plt.axhline(y=100, ls='--')
 plt.title('Coins that have been in BLX')
 plt.ylabel('Price (start at 100)')
+plt.show()
 plt.savefig('output/woobull_2.png')

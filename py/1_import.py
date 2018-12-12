@@ -3,17 +3,24 @@ import data from coins, which has previously been extracted using HH's R script.
 saves the imported objects in memory as pandas dataframes.
 """
 
+## start date for reading in data and doin analysis
+
+# userinputchoice
+START1 = '2015-04'
+END1 = '2018-04'
+
 
 ## working dir
 
-#pc = False
-#
-#if pc:
-#    cwd = os.getcwd()
-#    os.chdir('C:\Users\n485800\Documents\spyderw\crinfu')
-#    os.chdir('C:\Users\n485800\Documents\spyderw\crinfu')
-#    os.chdir('C:\\Users\\n485800\\Documents\\spyderw\\crinfu')
-#    print(cwd)
+pc = True
+if pc:
+    # os.chdir('C:\Users\n485800\Documents\spyderw\crinfu')
+    # os.chdir('C:\Users\n485800\Documents\spyderw\crinfu')
+    # os.chdir('C:\\Users\\n485800\\Documents\\spyderw\\crinfu')
+    print(os.getcwd())
+
+## f() date as index
+
 def re_index_date(df):
     """
     input df.
@@ -35,11 +42,7 @@ def re_index_date(df):
     return df_reindexed
 
 
-
-# test function: two below should have the same length but different freq
-# pri_vcc_mat.index
-
-## virtual currencies
+## import virtual currencies
 
 # choose to import either long or wide format.
 # long is better for sql. wide works for sure.
@@ -59,6 +62,8 @@ if import_long_format:
     # select useful cols
     dfl_vcc = dfl_vcc[['symbol', 'date', 'close', 'volume', 'market']]
     dfl_vcc.head()
+    # slice dates (new!)
+    dfl_vcc = dfl_vcc.loc[dfl_vcc.date > START1]
     # make date column a date. 
     assert len(dfl_vcc.date) == len(pd.to_datetime(dfl_vcc.date))
     dfl_vcc.date = pd.to_datetime(dfl_vcc.date)
@@ -109,7 +114,7 @@ if import_wide_format:
     mca_vcc_mat.columns = tkr_vcc
     vol_vcc_mat.columns = tkr_vcc
 
-## traditional assets
+## import traditional assets
 
 # financial tickers
 tkr_fin = ['Stocks', 'Bonds', 'Gold']
@@ -127,7 +132,7 @@ url_gold = "https://www.nasdaq.com/markets/gold.aspx"
 # https://stooq.pl/q/?s=iau.us is another possibel choihce for gold
 
 # download data either online or offline
-online_download = True
+online_download = False
 offline_download = not online_download
 
 if offline_download:
@@ -139,6 +144,9 @@ if offline_download:
     # re index
     pri_fin_mat = re_index_date(pri_fin_mat)
     vol_fin_mat = re_index_date(vol_fin_mat)
+    # slice date
+    pri_fin_mat = pri_fin_mat.loc[START1:]
+    vol_fin_mat = vol_fin_mat.loc[START1:]
 
 if online_download:
     # download from stooql. example: https://stooq.pl/q/?s=^spx

@@ -28,6 +28,9 @@ for d in vip_objects:
     print(d.index[0], d.index[-1])
 
 
+# nr of cols in matrices 
+print("nr of coins in matrices", len(tkr_vcc))
+
 # see current top 10 and the date
 print("top 10", tkr_top10)
 print("date", bmc_mat_mthly.index[-2])

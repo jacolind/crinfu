@@ -10,7 +10,7 @@ assert (mca_vcc_mat.index == pri_vcc_mat.index).all()
 print("freq", mca_vcc_mat.index.freq)
 print("freq", pri_vcc_mat.index.freq)
 print("freq", pri_fin_mat.index.freq)
-print("freq", pri_vcc_mat.index.freq)
+print(pri_vcc_mat.index.freq)
 
 # and so on... todo e2: more cheks haed and tail to inspect. etc.
 # can look into the ipynb and see what checks are reasonable to include.
