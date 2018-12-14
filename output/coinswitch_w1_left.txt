@@ -1,0 +1,64 @@
+assets entering the index and their weight decrease
+ 
+[Series([], Name: 2015-04-01 00:00:00, dtype: object), Series([], Name: 2015-05-01 00:00:00, dtype: object), Series([], Name: 2015-06-01 00:00:00, dtype: object), Series([], Name: 2015-07-01 00:00:00, dtype: object), symbol
+NXT   -0.00292204
+Name: 2015-08-01 00:00:00, dtype: object, symbol
+PPC   -0.00247434
+Name: 2015-09-01 00:00:00, dtype: object, symbol
+BCN   -0.00260184
+Name: 2015-10-01 00:00:00, dtype: object, symbol
+MAID   -0.00233027
+Name: 2015-11-01 00:00:00, dtype: object, Series([], Name: 2015-12-01 00:00:00, dtype: object), Series([], Name: 2016-01-01 00:00:00, dtype: object), symbol
+BTS   -0.00124677
+NXT   -0.00096483
+Name: 2016-02-01 00:00:00, dtype: object, symbol
+EMC    -0.0014249
+XLM   -0.00138184
+Name: 2016-03-01 00:00:00, dtype: object, symbol
+PPC   -0.00140017
+Name: 2016-04-01 00:00:00, dtype: object, symbol
+BTS   -0.00191393
+FCT    -0.0018762
+Name: 2016-05-01 00:00:00, dtype: object, symbol
+XLM   -0.00124221
+XMR   -0.00131699
+Name: 2016-06-01 00:00:00, dtype: object, symbol
+STEEM   -0.00183443
+Name: 2016-07-01 00:00:00, dtype: object, symbol
+DOGE   -0.00259894
+NXT    -0.00183152
+Name: 2016-08-01 00:00:00, dtype: object, symbol
+LSK   -0.00227835
+Name: 2016-09-01 00:00:00, dtype: object, Series([], Name: 2016-10-01 00:00:00, dtype: object), symbol
+MAID    -0.00352401
+STEEM   -0.00660639
+Name: 2016-11-01 00:00:00, dtype: object, symbol
+WAVES   -0.00253649
+Name: 2016-12-01 00:00:00, dtype: object, symbol
+XEM   -0.00248205
+Name: 2017-01-01 00:00:00, dtype: object, symbol
+STEEM   -0.00227834
+Name: 2017-02-01 00:00:00, dtype: object, Series([], Name: 2017-03-01 00:00:00, dtype: object), Series([], Name: 2017-04-01 00:00:00, dtype: object), symbol
+MAID   -0.00307791
+Name: 2017-05-01 00:00:00, dtype: object, symbol
+GNT   -0.00530013
+REP   -0.00541063
+Name: 2017-06-01 00:00:00, dtype: object, symbol
+STRAT   -0.00667584
+Name: 2017-07-01 00:00:00, dtype: object, symbol
+BTS   -0.00735286
+Name: 2017-08-01 00:00:00, dtype: object, symbol
+ETC      -0.0162586
+STRAT   -0.00609045
+Name: 2017-09-01 00:00:00, dtype: object, Series([], Name: 2017-10-01 00:00:00, dtype: object), Series([], Name: 2017-11-01 00:00:00, dtype: object), symbol
+NEO    -0.011345
+XEM   -0.0103479
+Name: 2017-12-01 00:00:00, dtype: object, symbol
+BTG   -0.0187002
+XMR   -0.0102085
+Name: 2018-01-01 00:00:00, dtype: object, symbol
+DASH    -0.0161998
+MIOTA   -0.0195072
+Name: 2018-02-01 00:00:00, dtype: object, symbol
+XEM   -0.017446
+Name: 2018-03-01 00:00:00, dtype: object, Series([], Name: 2018-04-01 00:00:00, dtype: object)]

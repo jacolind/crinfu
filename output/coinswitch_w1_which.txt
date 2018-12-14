@@ -1,0 +1,122 @@
+what assets are involved in the coinswitch
+ 
+[symbol
+ADA      True
+BCH      True
+BCN      True
+BTG      True
+BTS      True
+DASH     True
+DOGE     True
+EMC      True
+EOS      True
+ETC      True
+         ... 
+NEO      True
+NXT      True
+PPC      True
+REP      True
+STEEM    True
+STRAT    True
+WAVES    True
+XEM      True
+XLM      True
+XMR      True
+Name: 2015-04-01 00:00:00, dtype: bool, Series([], Name: 2015-05-01 00:00:00, dtype: bool), Series([], Name: 2015-06-01 00:00:00, dtype: bool), Series([], Name: 2015-07-01 00:00:00, dtype: bool), symbol
+BCN    True
+NXT    True
+Name: 2015-08-01 00:00:00, dtype: bool, symbol
+ETH    True
+PPC    True
+Name: 2015-09-01 00:00:00, dtype: bool, symbol
+BCN    True
+PPC    True
+Name: 2015-10-01 00:00:00, dtype: bool, symbol
+MAID    True
+NXT     True
+Name: 2015-11-01 00:00:00, dtype: bool, Series([], Name: 2015-12-01 00:00:00, dtype: bool), Series([], Name: 2016-01-01 00:00:00, dtype: bool), symbol
+BTS     True
+EMC     True
+MAID    True
+NXT     True
+Name: 2016-02-01 00:00:00, dtype: bool, symbol
+BTS    True
+EMC    True
+XLM    True
+XMR    True
+Name: 2016-03-01 00:00:00, dtype: bool, symbol
+FCT    True
+PPC    True
+Name: 2016-04-01 00:00:00, dtype: bool, symbol
+BTS    True
+FCT    True
+XEM    True
+XLM    True
+Name: 2016-05-01 00:00:00, dtype: bool, symbol
+LSK      True
+STEEM    True
+XLM      True
+XMR      True
+Name: 2016-06-01 00:00:00, dtype: bool, symbol
+NXT      True
+STEEM    True
+Name: 2016-07-01 00:00:00, dtype: bool, symbol
+DOGE     True
+ETC      True
+NXT      True
+STEEM    True
+Name: 2016-08-01 00:00:00, dtype: bool, symbol
+LSK    True
+XMR    True
+Name: 2016-09-01 00:00:00, dtype: bool, Series([], Name: 2016-10-01 00:00:00, dtype: bool), symbol
+MAID     True
+REP      True
+STEEM    True
+WAVES    True
+Name: 2016-11-01 00:00:00, dtype: bool, symbol
+STEEM    True
+WAVES    True
+Name: 2016-12-01 00:00:00, dtype: bool, symbol
+MAID    True
+XEM     True
+Name: 2017-01-01 00:00:00, dtype: bool, symbol
+STEEM    True
+XEM      True
+Name: 2017-02-01 00:00:00, dtype: bool, Series([], Name: 2017-03-01 00:00:00, dtype: bool), Series([], Name: 2017-04-01 00:00:00, dtype: bool), symbol
+GNT     True
+MAID    True
+Name: 2017-05-01 00:00:00, dtype: bool, symbol
+GNT      True
+MIOTA    True
+REP      True
+STRAT    True
+Name: 2017-06-01 00:00:00, dtype: bool, symbol
+BTS      True
+STRAT    True
+Name: 2017-07-01 00:00:00, dtype: bool, symbol
+BTS      True
+STRAT    True
+Name: 2017-08-01 00:00:00, dtype: bool, symbol
+BCH      True
+ETC      True
+NEO      True
+STRAT    True
+Name: 2017-09-01 00:00:00, dtype: bool, Series([], Name: 2017-10-01 00:00:00, dtype: bool), Series([], Name: 2017-11-01 00:00:00, dtype: bool), symbol
+ADA    True
+BTG    True
+NEO    True
+XEM    True
+Name: 2017-12-01 00:00:00, dtype: bool, symbol
+BTG    True
+XEM    True
+XLM    True
+XMR    True
+Name: 2018-01-01 00:00:00, dtype: bool, symbol
+DASH     True
+EOS      True
+MIOTA    True
+NEO      True
+Name: 2018-02-01 00:00:00, dtype: bool, symbol
+MIOTA    True
+XEM      True
+Name: 2018-03-01 00:00:00, dtype: bool, Series([], Name: 2018-04-01 00:00:00, dtype: bool)]
