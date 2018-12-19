@@ -1,48 +1,117 @@
-# goal driven data anlaysis "hypotes driven"  
+title: todo
+description: we do "goal driven" data anlaysis i.e. not just exploring for the fun of it.
 
-decide what anlaysis to do so i do not get stuck in a explorative loop
+# inbox
+
+it would be fun to make a function that analyzes delta weight in two different index constructions at a certain date. see for example comparrisons between befoore/after caps & floors 1% 30%
+
+kanske ska sätta resample till
+.resample('BMS').first()
+som är första business day of month.
+
+För skojs skull pröva att w bestäms av smoothed trading volume. då får man tims liq index.
+
+
+kör lite bredare streck i vissa grafer
+
+------------------------------------------------------------------------------
+
 
 # next: before irl meeting
 
-## change ggindex() 
+## få alla plottar att funka. är nog 9 wei 9 ret som är problemet
 
-either change the f() or use a for loop after it to put stuff info objexts i can use, such as `ret_bsk_mat` and `vol_bsk_mat` to follow naming conventions. 
+## fil-struktur
 
-how to change the f()
+splitta upp 7 plot filen i flera mindre. tex plot corr. och det är snarare EDA än plot ty tabeller tas fram oxå.
 
-### method A 
+då kan jag lättare felsöka vrf det blir konstig output
 
-    w1 = g_basket_weight_mat(mca_vcc_mat, params-describing-index...)
-    w2 = g_basket_weight_mat(mca_vcc_mat, params-describing-index...)
-    r1, v1 = g_basket_returns(w1, ret_vcc, vol_vcc)
-    r2, v2 = g_basket_returns(w2, ret_vcc, vol_vcc)
-    ret_bsk_mat = pd.concat([r1, r2], axis=1)
-    vol_bsk_mat = pd.concat([v1, v2], axis=1)
+## printa, färger ok?
 
-### method B 
-do like you do now, but let ggindex export the weight matrix if you want, not binary matrix. 
-then use some smart pd.concat maybe:
+## commit and close.
 
-    basket1 = ggindex(mca, vol, ret, params-...)
-    basket2 = ggindex(mca, vol, ret, params-...)
-    basket3 = and so on 
-    baskets = [basket1, basket2, basket3]
-    ret_bsk_mat = [b['return'] for b in baskets]
-    vol_bsk_mat = [b['volume'] for b in baskets]
-    mca_bsk_mat = [b['mcap'] for b in baskets]
-
-
-## compare indexes 
-
-after fixing ggindex() plot different indexes against each other 
 
 ## dead coins
 
 out of those ca 50 coins that has been top10, what is their status now? how many are dead? (first, define dead then count the nr of dead.)
 
-## rollcorr
+
+## read hodlbot articles
+
+read hodlbot data analysis and see what should be included for us.
+
+
+## marketcap na. how to handle?
+
+marketcap has na. how should we handle it?
+
+i think na.approx() is best.  
+
+when using .reindex do not fill with zero but with na.approx so that we do not see zero return on days when price is NA.
+
+
+## drawdown
+
+drawdown(price_matrix, time=365):
+
+## bokeh manual
+
+läs den och testa runt
+
+
+## statsmodel manual
+
+läs
+
+## sns manual
+
+läs seaborn manualen
+
+
+## selection criterias till kod
+
+### tröghet
+
+och sen se hur det blir med tröghet vs ewma
+
+Se crypto market cap Nomics artikeln. Kanske göra ngt av deras.
+
+## wei intra month
+
+the first evey month the weights are re-set.
+if btc has w 50% on day 1 and on day 5 its price has increased by 10% and all other assets are standing still, then portf w in btc will be 55%. if we look at data, how does this appear? see the turnover calculations for details. maybe chat with blechley. they say turnover is minescule for some months.  
+
+
+## printa plots i svartvitt o se hur dom ser ut
+
+
+## att göra enl slides
+
+ska ha denna bild. så gör en vol ret plot av detta.
+
+    ![Increasing choice can only lead to better outcomes.](markovitz plot both top10vcc and TRD assets)
+
+---
+
+![Digital assets exhibit low correlation with traditional assets.](corr matrix. för såväl _vcc_ som _fin_ plotta 5st till 10st och med/utan indexet.)
+10+1+10+1=22 för många cols tror jag
+5+1+5+1=12 st cols är max tror jag
+kanske kör 5+1+1=6st cols så alla vcc men bara sp500.
+ska jag ha sp500 eller bal förresten?
+
+
+## download financial data on sp500  clinux
+
+see file stocks.py
+
+want marketcap on this as well.
+
+
+## rollcorr with +- std.
 
 more thought can be put in here, and do fun stat stuff.
+there is a sns plot for this premade!
 
     # plot rolling mean with vol bands. good for mcap or rollcorr plot.
     m = roll.agg(['mean', 'std'])
@@ -55,83 +124,42 @@ more thought can be put in here, and do fun stat stuff.
 
 
 
-## read hodlbot articles 
 
-read hodlbot data analysis and see what should be included for us. 
+## stat analys på indexes
 
-## download financial data on sp500  clinux 
+https://kurser.math.su.se/pluginfile.php/20130/mod_folder/content/0/Kandidat/2016/2016_04_report.pdf?forcedownload=1
+see plots in that, and measures: nr obcs, nr NA, min mean medin max var vol skew kurt
 
-see file stocks.py
+Alla index, samt "the market" som är sum of the mcap. Dom ska jämföras på ett simpelt sätt.
 
-want marketcap on this as well. 
+Ret vol table
+Corr matrix
+Corr över tid
 
+## stat package
 
-## calc portfolio turnover
+anv ngt stat / trading package för att generera automatiska plots, tex
 
-it is not calculated correctly now. review the logic. it should be lower.
+statsmodels
 
-the correct logic should be like this 
-
-    # w day 1 grows to day 2 with return between day 1 and 2
-    # compare w day 2 vs what weights is suggested by market cap
-    # the diff needs to be bought 
-    # for small supply changes, small trades must be made. 
-    # for coinswitches, large trades must be made. 
-
-
-if asseet z goes from 11 to 10, then weight in z goes from 0% to, say, 2%. assume previous nr 10 asset k had weight of 1%. then we sell 1% of k and buy 2% of z. what is the portfolio turnover?  
-
-> Portfolio turnover is calculated by taking either the total amount of new securities purchased or the amount of securities sold (whichever is less) over a particular period, divided by the total net asset value (NAV) of the fund. The measurement is usually reported for a 12-month time period.
-> ...
-> If a portfolio begins one year at $10,000 and ends the year at $12,000, add the two together and divide by two to get $11,000. Next, assume the amount of purchases totaled $1,000 and the amount sold was $500. Finally, divide the smaller amount -- buys or sales -- by the average amount of the portfolio. For this example, the smaller amount is the sales. Therefore, divide the $500 sales amount by $11,000 to get the portfolio turnover. In this case, the portfolio turnover is 4.54%.
-> / investopedia  
-
- 
-     # update weights with return since we have gotten somethign for holding it
-     w = w * return
-     # calc what you bought and sold 
-     bought_sum = sum those with larger w in day 2 than day 1
-     sold_sum = sum those with smaller w in day 2 than day 1 
-     # defn of turnover 
-     turnover = min(bought_sum, sold_sum)
-     # https://www.sapling.com/5885771/calculate-portfolio-turnover 
-      
-
-also, the code now use a simplified index logic. in reality, if coin nr 11 goes into top 10 then we do not include it immediately - we wait (a) for the coin to marketcap = 2x the others, or (b) for the coin to be top 10 two months in a row. i would chose b because it is more logical.
-
-## coin switches
-
-Visualisera nr of coin switches bättre. Både inom fonden och runtikring top 10 Kommentaren är it's difficult to do this yourself so we provide a service. Det som är runtikring top 10 triggar ett trade event för fonden, eftersom förra 10an är såld helt och flrrau11an köps helt. Kolla då hur mkt vikt 10e platsen har vid varje månad (och gör en describe på den för att se median och kvartiler) för ju större vikt 10an hade desto mer ska säljas av, dvs fonden ändras mkt.
+cufflinks and py-quantmod
+source https://quant.stackexchange.com/questions/30834/quantmod-alternative-for-pandas
+se
+https://github.com/jackluo/py-quantmod
+https://github.com/santosjorge/cufflinks
+  http://nbviewer.jupyter.org/gist/santosjorge/b278ce0ae2448f47c31d
+  http://nbviewer.jupyter.org/gist/santosjorge/aba934a0d20023a136c2
 
 
-## rolling corr(entiremarket, top200, top10, top5, top1)
-
-Defn variabeln market som är sum of all coins mcap. Gör rolling Corr på dem och BLX och Bitcoin för att se vilket som fångar hela marinaden bäst och hur bra dom fångar. 
-
-# afer irl meeting 
-
-## plot krashes 
-
-a famous youtube video "it went all to x, and then it krashed."
-slice out those timeperiods, and make a figure with many plots in it. 
+zipline
+source https://stackoverflow.com/questions/18275306/does-python-has-a-similar-library-like-quantmod-in-r-that-can-download-financial
+dokumenteart bra http://www.zipline.io/index.html
 
 
-## marketcap na. how to handle? 
-
-marketcap has na. how should we handle it?
-
-i think na.approx() is best.  
-
-when using .reindex do not fill with zero but with na.approx so that we do not see zero return on days when price is NA. 
 
 
-## output key objects to csv
+# maybe
 
-the objects found in `naming-convention-objects.md` can be exported to csv.
-
-then i can import to R use ggplot instead of `...plot.py` and use shiny to vizualize general index constuction.
-
-one problem: have to research how to make a nice corr plot which is now done with seaborn.
 
 ## colors
 
@@ -146,13 +174,37 @@ JavaScript:
 [last_resort, btc, stocks / bonds / xrp / others, eth, blx]
 
 
+
+
+
+-----------------------------------------------------------------------------
+
+# afer irl meeting
+
+## plot krashes
+
+a famous youtube video "it went all to x, and then it krashed."
+slice out those timeperiods, and make a figure with many plots in it.
+
+
+
+
+## output key objects to csv
+
+the objects found in `naming-convention-objects.md` can be exported to csv.
+
+then i can import to R use ggplot instead of `...plot.py` and use shiny to vizualize general index constuction.
+
+one problem: have to research how to make a nice corr plot which is now done with seaborn.
+
+
 ## shiny apps
 
-### learn shiny 
+### learn shiny
 
-learn by doing, but i must also read about how it works. 
+learn by doing, but i must also read about how it works.
 
-read this doc 
+read this doc
 https://bookdown.org/yihui/rmarkdown/shiny-documents.html
 
 ### index competition with ggindex()
@@ -164,19 +216,18 @@ input: date, checkbox with prebuilt indexes (top5 EW/mcap, top10 EW/mcap, btc, a
 
 ### corr matrix, giph  
 
-input: start date (slider yyyy-mm), length of window (type in nr of months), input selectize type name of tickers. 
+input: start date (slider yyyy-mm), length of window (type in nr of months), input selectize type name of tickers.
 v1 only tickers. v2 tickers AND name will match.   
 
-output: corr plot. 
+output: corr plot.
 
 v3 do a slider so that you can see the colors changing over time.  
 
-### corr over time 
+### corr over time
 
-input: 2-6 assets 
+input: 2-6 assets
 
 output: rollcorr graph.
-
 
 
 
