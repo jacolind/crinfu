@@ -19,18 +19,11 @@ kör lite bredare streck i vissa grafer
 
 # next: before irl meeting
 
-## få alla plottar att funka. är nog 9 wei 9 ret som är problemet
+## pull on clinux
 
-## fil-struktur
-
-splitta upp 7 plot filen i flera mindre. tex plot corr. och det är snarare EDA än plot ty tabeller tas fram oxå.
-
-då kan jag lättare felsöka vrf det blir konstig output
-
-## printa, färger ok?
-
-## commit and close.
-
+- delete everthing in /output/ that is not in a folder 
+- rename py2/ to py/
+- create sns plots and upload to github 
 
 ## dead coins
 
