@@ -1,0 +1,21 @@
+  Collateral - backed:
+    IOU
+    Tether
+    TrueUSD
+    Arccy
+    Stably
+  Collateral - backed on - chain:
+    BitShares
+    Maker
+    Sweetbridge
+    Havven
+    Augmint
+  Seigniorage:
+    Shares
+    Basecoin
+    Fragments
+    Carbon
+    Kowala
+
+searched on all these on coinmarketcap and only found hits on these tickers:
+['USDT', 'MKR', 'BTS']
