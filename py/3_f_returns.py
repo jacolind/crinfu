@@ -6,6 +6,14 @@ corrplot
 and others.
 """
 
+## files and folders
+
+def text_export(object, file, description='', folder='output/'):
+  filepath = folder + file + '.txt'
+  with open(filepath, "w") as text_file:
+    text_file.write(description + "\n \n" + str(object))
+
+
 ## modify price and returns  for df
 
 def price2return(prices, fill_na_0=True):
@@ -36,6 +44,8 @@ def return2aum(returns, startvalue=100):
   r[0] = 0
   # formula: indexed price serie = exp(cumsum(return_series))
   aum = startvalue * np.exp(r.cumsum())
+  if isinstance(aum, pd.DataFrame):
+    aum = aum.drop(0, axis=1)
   return aum
 
 def price2aum(prices, fill_na=True, startvalue=100):
@@ -46,6 +56,8 @@ def price2aum(prices, fill_na=True, startvalue=100):
   r = price2return(prices, fill_na_0=fill_na)
   #r[0] = 0
   aum = startvalue * np.exp(r.cumsum())
+  if isinstance(aum, pd.DataFrame):
+    aum = aum.drop(0, axis=1)
   return aum
 
 ## risk/return measures
@@ -84,25 +96,66 @@ def sharpe(returns_mat, freq='daily', showall=False,
   return output.round(decimals)
 
 # and old function. need not be used.
-def returns_vol_tbl(df, assets, start, end='2018-04', T=12):
+# def returns_vol_tbl(df, assets, start, end='2018-04', T=365):
+#   """start with rr since it contains fund and coins returns.
+#   T=12 for monthly data and T=365 for daily data.
+#   output returnstable for a certain period.
+#   """
+#   # calc mean and vol
+#   ret = df.loc[start:end, assets].mean() * T
+#   vol = df.loc[start:end, assets].std() * np.sqrt(T)
+#   # put into tbl
+#   tbl = pd.concat([ret, vol], axis=1)
+#   # rename
+#   tbl.columns = ['Return', 'Volatility']
+#   tbl['Return / Vol'] = tbl['Return'] / tbl['Volatility']
+#   return tbl.round(2).T
+
+def retvol(retmat):
+  ret = retmat.mean() * 365
+  vol = retmat.std() * np.sqrt(365)
+  df_ret_vol = pd.concat([ret, vol], axis=1)
+  df_ret_vol.columns = ['Return', 'Volatility']
+  return df_ret_vol
+
+
+def returns_interval(returns_matrix, assets='', T=365):
   """start with rr since it contains fund and coins returns.
   T=12 for monthly data and T=365 for daily data.
   output returnstable for a certain period.
   """
+  # default choice
+  if assets=='':
+    assets = returns_matrix.columns
   # calc mean and vol
-  ret = df.loc[start:end, assets].mean() * T
-  vol = df.loc[start:end, assets].std() * np.sqrt(T)
+  ret = returns_matrix.mean() * T
+  vol = returns_matrix.std() * np.sqrt(T)
   # put into tbl
-  tbl = pd.concat([ret, vol], axis=1)
+  tbl = pd.concat([ret - 2*vol,
+                   ret,
+                   ret + 2*vol],
+                  axis=1)
   # rename
-  tbl.columns = ['Return', 'Volatility']
-  tbl['Return / Vol'] = tbl['Return'] / tbl['Volatility']
-  return tbl.round(2).T
+  tbl.columns = ['Mean-2*vol', 'Mean', 'Mean+2*vol']
+  return tbl.round(4)
 
-# def sortino():
-#   # todo
-#
-def information_ratio(returns_mat, benchmark='BTC',
+def sortino_vec(ret_vec, target=0, T=365):
+   '''
+   input pandas series and target annual return. output its sortino ratio.
+   https://en.wikipedia.org/wiki/Sortino_ratio
+   '''
+
+   mean = ret_vec.mean() * T - target
+   vol = ret_vec[ret_vec < target].std() * np.sqrt(T)
+   sortino_ratio = mean / vol
+   return sortino_ratio
+
+def sortino(ret_mat, target=0, T=365):
+  # do this f() so the usage is congruent with sharpe()
+  return ret_mat.apply(sortino_vec, target=target, T=T)
+
+
+def information_ratio(returns_mat, benchmark,
                       freq='daily', showall=False,
                       riskfree=0, decimals=4):
   '''
@@ -127,7 +180,7 @@ def information_ratio(returns_mat, benchmark='BTC',
   out = out.fillna(0)
   return out
 
-def tracking_error(returns_mat, benchmark='BTC',
+def tracking_error(returns_mat, benchmark,
                    freq='daily', decimals=4):
   '''
   https://en.wikipedia.org/wiki/Tracking_error
@@ -154,6 +207,26 @@ price2return(pri_vcc_mat.iloc[0:900, 0:10]).quantile(0.95)
 retex1 = price2return(pri_vcc_mat.iloc[0:900, 0:10])
 retex1.quantile(0.05)
 value_at_risk(retex1, alpha=0.95)
+
+# beta function taken from
+# https://stackoverflow.com/questions/39501277/efficient-python-pandas-stock-beta-calculation-on-many-dataframes
+def beta(df):
+  # first column is the market
+  X = df.values[:, [0]]
+  # prepend a column of ones for the intercept
+  X = np.concatenate([np.ones_like(X), X], axis=1)
+  # matrix algebra
+  b = np.linalg.pinv(X.T.dot(X)).dot(X.T).dot(df.values[:, 1:])
+  return pd.Series(b[1], df.columns[1:], name='Beta')
+
+
+
+# sketch as of now
+def drawdown(price_mat, window):
+  pri_mat_roll = price_mat.rolling(price_mat)
+  pridiff_mat_roll = pri_mat_roll.first() - pri_mat_roll.roll.last()
+  return pridiff_mat_roll
+
 
 ## correlation plots
 
@@ -185,8 +258,10 @@ def corrplot(corr, annot=False):
 # define help-function
 txt_daterange = START1 + ' to ' + END1
 title_corr = 'Correlation matrix - daily data \n from ' + txt_daterange
-def show_corr_plot(df, start='', end='',
-                   cols='', title=title_corr):
+
+def show_corr_plot(df,
+                   start='', end='',
+                   cols='', title=''):
     """
     input a return matrix df (eg monthly or daily returns)
     slice the df by startdate, enddate and columns.
@@ -200,15 +275,16 @@ def show_corr_plot(df, start='', end='',
     # default cols
     if cols=='':
       cols = df.columns
+    if title=='':
+      'Correlation matrix on daily data'
     # plot
-    corrplot(df.loc[start:end, cols].corr())
-    plt.title(title_corr)
+    corr_mat = df.loc[start:end, cols].corr()
+    corrplot(corr_mat)
+    plt.title(title)
     plt.show()
 
-def show_rollcorr_plot(cols, start, end,
-                       cor_mat, legend=False,
-                       title=''):
-    cor_mat.loc[start:end, cols].plot(legend=legend)
+def show_rollcorr_plot(cor_mat, cols, legend=False, title=''):
+    cor_mat[cols].plot(legend=legend)
     plt.ylabel('Correlation vs BTC')
     plt.title(title)
     plt.axhline(y=0, color='k', ls='-')

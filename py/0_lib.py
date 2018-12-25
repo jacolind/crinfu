@@ -5,6 +5,9 @@ import os
 import pandas as pd
 import numpy as np
 
+# dates
+from pandas.tseries.offsets import *
+
 # plotting
 import matplotlib.pyplot as plt
 import matplotlib.backends as pltb
@@ -21,6 +24,10 @@ import glob
 import datetime
 #import pandas_datareader.data as web
 
+# statistical modelling
+import statsmodels.api as sm
+import scipy.stats as stats
+
 # options
-save_large_png = True
+save_large_png = False
 pd.options.display.max_rows = 20

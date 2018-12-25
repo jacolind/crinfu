@@ -49,7 +49,7 @@ len(ut)
 len(arow)
 sum(ut.isnull())
 sum(arow.isnull())
-arow.fillna(0) # fattar ej vrf fillna inte påverkar någoting!
+arow.fillna(0) # fattar ej vrf fillna doe snot affect anything
 
 # apply f on a matrix
 arow
@@ -59,12 +59,12 @@ wei2adj = wei2.apply(rescale_w, axis=1,
                      weight_min=0.05, weight_max=.50)
 
 # see a certain date
-wei2.loc['2017-01-01'].sort_values(ascending=False)[0:10]
-wei2adj.loc['2017-01-01'].sort_values(ascending=False)[0:10]
+wei2.loc['2017-01-01'].nlargest(10)
+wei2adj.loc['2017-01-01'].nlargest(10)
 
 # see before vs after
-pd.concat([wei2adj.iloc[0, :].sort_values(ascending=False)[0:10],
-           wei2.iloc[0, :].sort_values(ascending=False)[0:10]],
+pd.concat([wei2adj.iloc[0, :].nlargest(10),
+           wei2.iloc[0, :].nlargest(10)],
           axis=1)
 
 # area plot, before vs after
@@ -76,6 +76,6 @@ if show_plot_before_vs_after:
 # study differences cap vs no cap, by asset.
 weidiff = wei2adj - wei2
 weidiff_bycoin = weidiff.mean(axis=0)
-weidiff_bycoin[weidiff_bycoin!=0].sort_values()[0:20]
+weidiff_bycoin[weidiff_bycoin!=0]..nlargest(20)
 abs(weidiff).mean(axis=0).sort_values(ascending=False)
 

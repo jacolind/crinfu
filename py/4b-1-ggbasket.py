@@ -62,7 +62,7 @@ def mcap2binary(marketcap_matrix,
 
   # rebalance frequency
   mcap_mthly = marketcap_matrix.resample(rebalance_freq, convention='start').asfreq()
-  # prövar ny metod nu 12 dec
+  # provar ny metod nu 12 dec
   mcap_mthly = marketcap_matrix.resample(rebalance_freq).first()
 
   # object has name _mthly for simplicity, as it is the default value.
@@ -294,10 +294,12 @@ def ggbasket(name,
   rbv = date_slicer(rbv, start=start, end=end, startafter=startafter)
   mbv = date_slicer(mbv, start=start, end=end, startafter=startafter)
   vbv = date_slicer(vbv, start=start, end=end, startafter=startafter)
+  w = date_slicer(w, start=start, end=end, startafter=startafter)
 
   # rename
   rbv.name = name
   mbv.name = name
   vbv.name = name
+  w.name = name
 
   return w, rbv, mbv, vbv

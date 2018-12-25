@@ -44,9 +44,10 @@ def random_portfolio(returns):
 
 n_portfolios = 500
 means, stds = np.column_stack([
-    random_portfolio(return_vec)
+    random_portfolio(return_vec) 
     for _ in xrange(n_portfolios)
 ])
+
 
 fig = plt.figure()
 plt.plot(stds, means, 'o', markersize=5)
@@ -61,8 +62,4 @@ np.savetxt('output/stds.csv', stds, delimiter=",")
 pd.concat([stds.tolist(), ])
 #py.iplot_mpl(fig, filename='mean_std', strip_style=True)
 
-## plot
-
-# plot the following:
-# trad.assets ringar, crypto.assets kryss, ifylld triangel pf1 ifylld kvadrat pf2
-
+means

@@ -119,6 +119,8 @@ len(tkr_beentop50)
 ## create returns from prices, on fin and vcc
 
 ret_vcc_mat = price2return(pri_vcc_mat)
+pri_vcc_mat.to_csv('object/pri_vcc_mat.csv')
+ret_vcc_mat.to_csv('object/ret_vcc_mat.csv')
 ret_fin_mat = price2return(pri_fin_mat)
 
 ## create vector for our ETN: market cap, return, price, volume

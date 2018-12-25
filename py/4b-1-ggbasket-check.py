@@ -7,8 +7,8 @@ wei1 = binary2weight(bin1, mca_vcc_mat,
 wei1.sum(axis=1)
 wei1cf1 = wei1.loc['2018':].apply(rescale_w, axis=1,
                      weight_min=0.02, weight_max=0.30)
-wei1.loc['2018-02-01'].sort_values(ascending=False)[0:11]
-wei1cf1.loc['2018-02-01'].sort_values(ascending=False)[0:11]
+wei1.loc['2018-02-01'].nlargest(11)
+wei1cf1.loc['2018-02-01'].nlargest(11)
 # this should be equivalent to the above. take much more time with minmax weights.
 wei2 = binary2weight(bin1.iloc[300:400, :],
                      mca_vcc_mat.iloc[300:400, :],
